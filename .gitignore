@@ -1,0 +1,10 @@
+certificates/
+build/
+dist/
+
+.idea/
+
+.coverage
+*.pyc
+
+
