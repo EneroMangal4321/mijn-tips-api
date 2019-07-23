@@ -1,9 +1,5 @@
---extra-index-url https://nexus.secure.amsterdam.nl/repository/pypi-hosted/simple
-
 flask
 Flask-Testing
-
-tma_saml>=0.3.1
 
 flake8
 coverage
