@@ -20,5 +20,10 @@ def hello_world():
     return 'Hello World!'
 
 
+@app.route('/status/health')
+def health_check():
+    return 'OK'
+
+
 if __name__ == '__main__':
     app.run()
