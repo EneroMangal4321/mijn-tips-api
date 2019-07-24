@@ -21,7 +21,10 @@ def get_fixture():
         wmo = json.load(wmo_file)
 
     return {
-        "brp": brp,
-        "focus": focus,
-        "wmo": wmo,
+        "optin": False,
+        "data": {
+            "brp": brp,
+            "focus": focus,
+            "wmo": wmo,
+        }
     }

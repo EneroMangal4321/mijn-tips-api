@@ -1,0 +1,80 @@
+[
+  {
+    "active": true,
+    "priority": 50,
+    "datePublished": "2019-07-24",
+    "title": "Geen telefoon op de fiets",
+    "description": "Het is sinds 1 juli niet meer toegestaan om met een telefoon in de hand te fietsen.",
+    "link": {
+      "title": "Vraag direct aan",
+      "to": "https://www.rijksoverheid.nl/onderwerpen/fiets/vraag-en-antwoord/mag-ik-bellen-en-naar-muziek-luisteren-op-de-fiets"
+    }
+  },
+  {
+    "active": true,
+    "priority": 20,
+    "datePublished": "2019-07-24",
+    "title": "Vrijwilliger worden?",
+    "description": "Word een vrijwilligger in Amsterdam",
+    "link": {
+      "title": "Vrijwilliger worden",
+      "to": "https://www.vrijwilligerapp.nl/"
+    }
+  },
+  {
+    "active": true,
+    "priority": 25,
+    "datePublished": "2019-07-24",
+    "title": "Grofvuil",
+    "description": "Op een Afvalpunt kunt u gratis uw grofvuil, klein chemisch afval en kringloopgoederen kwijt",
+    "link": {
+      "title": "Bekijk",
+      "to": "https://www.amsterdam.nl/afval/grofvuil/grofvuil-wegbrengen/"
+    }
+  },
+  {
+    "active": true,
+    "priority": 20,
+    "datePublished": "2019-07-24",
+    "title": "Geveltuin aanleggen",
+    "description": "Bekijk hoe u gratis een geveltuin kunt aanvragen bij uw stadsdeel.",
+    "link": {
+      "title": "Bekijk",
+      "to": "https://www.amsterdam.nl/veelgevraagd/?productid=%7B2214F853-B9F5-41F6-934B-B1616D8E0949%7D#%7B7E4E60A9-F809-4FC9-B7EB-9C06B3DB4513%7D"
+    }
+  },
+  {
+    "active": true,
+    "priority": 20,
+    "datePublished": "2019-07-24",
+    "title": "Vaccinaties",
+    "description": "Gaat u op reis naar verre oorden? Kijk welke vaccinaties u nodig heeft",
+    "link": {
+      "title": "Meer informatie",
+      "to": "https://www.ggd.amsterdam.nl/ggd/contact/reizigersvaccinatie/"
+    }
+  },
+  {
+    "active": true,
+    "priority": 40,
+    "datePublished": "2019-07-24",
+    "title": "Nieuwe aansluiting",
+    "description": "De aansluiting belastingen is toegevoegd aan mijn amsterdam",
+    "conditional": "datetime.now() < datetime(2019, 9, 1) ",
+    "link": {
+      "title": "Meer informatie",
+      "to": "https://mijn.amsterdam.nl"
+    }
+  },
+  {
+    "active": true,
+    "priority": 20,
+    "datePublished": "2019-07-24",
+    "title": "Kom regelmatig terug",
+    "description": "Wij zijn constant bezig met nieuw gemeentelijke diensten aan te sluiten!",
+    "link": {
+      "title": "Meer informatie",
+      "to": "https://mijn.amsterdam.nl"
+    }
+  }
+]

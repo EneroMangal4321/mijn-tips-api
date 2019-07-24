@@ -1,7 +1,8 @@
 import sentry_sdk
-from flask import Flask
+from flask import Flask, request
 from sentry_sdk.integrations.flask import FlaskIntegration
 
+from tips.api.tip_generator import tips_generator
 from tips.config import SENTRY_DSN
 
 app = Flask(__name__)
@@ -15,9 +16,10 @@ if SENTRY_DSN:
     )
 
 
-@app.route('/')
+@app.route('/gettips', methods=['POST'])
 def hello_world():
-    return 'Hello World!'
+    tips_data = tips_generator(request.get_json())
+    return tips_data
 
 
 @app.route('/status/health')
