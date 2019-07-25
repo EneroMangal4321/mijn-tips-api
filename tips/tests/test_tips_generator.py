@@ -77,6 +77,7 @@ class ConditionalTest(TestCase):
         self.assertEqual(ids, [tip2_mock['id'], tip3_mock['id']])
 
     def test_conditional_exception(self):
+        """ Test that invalid conditional is ignored. Probably not the best idea... """
         tip1_mock = self.get_tip()
         tip1_mock['conditional'] = "syntax error"
         tip2_mock = self.get_tip()
@@ -88,5 +89,15 @@ class ConditionalTest(TestCase):
         # make sure the other is in there
         self.assertEqual(len(tips), 1)
         self.assertEqual(tips[0]['id'], tip2_mock['id'])
+
+    def test_conditional_invalid(self):
+        """ Test that it errors on completely wrong conditional. """
+        tip1_mock = self.get_tip()
+        tip1_mock['conditional'] = True
+        tip2_mock = self.get_tip()
+
+        tips_pool = [tip1_mock, tip2_mock]
+        with self.assertRaises(TypeError):
+            tips_generator(self.get_client_data(), tips_pool)
 
 
