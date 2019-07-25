@@ -21,5 +21,4 @@ class ApiTests(TestCase):
 
     def test_tips(self):
         response = self.client.post('/gettips', json=self.get_client_data())
-        pprint(json.loads(response.data))
-        print(response.mimetype)
+        # TODO:
