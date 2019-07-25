@@ -16,8 +16,9 @@ class TipsGeneratorTest(TestCase):
         tips = tips_generator(self.get_client_data())
         pprint(tips)
 
-    def test_refreshing_tips_pool(self):
-        pass
+
+    # def test_refreshing_tips_pool(self):
+    #     pass
 
 
 class ConditionalTest(TestCase):
