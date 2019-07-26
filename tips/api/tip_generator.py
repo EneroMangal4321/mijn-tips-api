@@ -54,7 +54,7 @@ def tip_filterer(tip, userdata):
     except TypeError:  # Input must be a string. If its anything else, the tip conditional is malformed
         raise
     except Exception as e:
-        print("!! Error", e)
+        print("!! Conditional exception: ", e)
         return False
 
 

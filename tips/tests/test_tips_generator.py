@@ -1,4 +1,3 @@
-from pprint import pprint
 from unittest import TestCase
 
 from tips.api.tip_generator import tips_generator
@@ -116,5 +115,3 @@ class ConditionalTest(TestCase):
         tips_pool = [tip1_mock, tip2_mock]
         with self.assertRaises(TypeError):
             tips_generator(self.get_client_data(), tips_pool)
-
-

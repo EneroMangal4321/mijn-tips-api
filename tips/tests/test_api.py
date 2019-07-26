@@ -1,5 +1,3 @@
-import json
-from pprint import pprint
 
 from flask_testing import TestCase
 

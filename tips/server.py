@@ -3,14 +3,14 @@ from flask import Flask, request
 from sentry_sdk.integrations.flask import FlaskIntegration
 
 from tips.api.tip_generator import tips_generator
-from tips.config import SENTRY_DSN
+from tips.config import get_sentry_dsn
 
 app = Flask(__name__)
 
 
-if SENTRY_DSN:
+if get_sentry_dsn():
     sentry_sdk.init(
-        dsn=SENTRY_DSN,
+        dsn=get_sentry_dsn(),
         integrations=[FlaskIntegration()],
         with_locals=True
     )
