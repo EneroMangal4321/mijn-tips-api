@@ -15,6 +15,7 @@ RUN apt-get update \
 
 WORKDIR /app
 COPY requirements.txt /app/
+COPY test.sh /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY .flake8 /app/

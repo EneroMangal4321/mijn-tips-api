@@ -8,7 +8,7 @@ from tips.config import get_sentry_dsn
 app = Flask(__name__)
 
 
-if get_sentry_dsn():
+if get_sentry_dsn():  # pragma: no cover
     sentry_sdk.init(
         dsn=get_sentry_dsn(),
         integrations=[FlaskIntegration()],
@@ -27,5 +27,5 @@ def health_check():
     return 'OK'
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     app.run()

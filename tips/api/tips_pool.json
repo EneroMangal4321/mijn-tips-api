@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "active": true,
     "priority": 50,
     "datePublished": "2019-07-24",
@@ -11,6 +12,7 @@
     }
   },
   {
+    "id": 2,
     "active": true,
     "priority": 20,
     "datePublished": "2019-07-24",
@@ -22,6 +24,7 @@
     }
   },
   {
+    "id": 3,
     "active": true,
     "priority": 25,
     "datePublished": "2019-07-24",
@@ -33,6 +36,7 @@
     }
   },
   {
+    "id": 4,
     "active": true,
     "priority": 20,
     "datePublished": "2019-07-24",
@@ -44,6 +48,7 @@
     }
   },
   {
+    "id": 5,
     "active": true,
     "priority": 20,
     "datePublished": "2019-07-24",
@@ -55,6 +60,7 @@
     }
   },
   {
+    "id": 6,
     "active": true,
     "priority": 40,
     "datePublished": "2019-07-24",
@@ -67,6 +73,7 @@
     }
   },
   {
+    "id": 7,
     "active": true,
     "priority": 20,
     "datePublished": "2019-07-24",

@@ -93,7 +93,7 @@ class ConditionalTest(TestCase):
         self.assertEqual(ids, [tip2_mock['id'], tip3_mock['id']])
 
     def test_conditional_exception(self):
-        """ Test that invalid conditional is ignored. Probably not the best idea... """
+        """ Test that invalid conditional is (silently) ignored. Probably not the best idea... """
         tip1_mock = get_tip()
         tip1_mock['conditional'] = "syntax error"
         tip2_mock = get_tip()

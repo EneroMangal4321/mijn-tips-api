@@ -1,3 +1,4 @@
+from pprint import pprint
 
 from flask_testing import TestCase
 
@@ -19,4 +20,8 @@ class ApiTests(TestCase):
 
     def test_tips(self):
         response = self.client.post('/gettips', json=self.get_client_data())
-        # TODO:
+
+        data = response.get_json()
+        tips = data['tips']
+
+        self.assertEqual(len(tips), 7)
