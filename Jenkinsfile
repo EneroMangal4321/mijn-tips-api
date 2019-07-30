@@ -25,8 +25,8 @@ node {
     stage('Test') {
         tryStep "test", {
             docker.withRegistry('https://repo.secure.amsterdam.nl','docker-registry') {
-                docker.build("mijnams/tips:${env.BUILD_NUMBER}")
-                sh "docker run --rm mijnams/tips:${env.BUILD_NUMBER} /app/test.sh"
+                docker.build("mijnams/mijn-tips:${env.BUILD_NUMBER}")
+                sh "docker run --rm mijnams/mijn-tips:${env.BUILD_NUMBER} /app/test.sh"
             }
         }
     }
@@ -34,7 +34,7 @@ node {
     stage("Build image") {
         tryStep "build", {
             docker.withRegistry("${DOCKER_REGISTRY}",'docker-registry') {
-                def image = docker.build("mijnams/tips:${env.BUILD_NUMBER}", ".")
+                def image = docker.build("mijnams/mijn-tips:${env.BUILD_NUMBER}", ".")
                 image.push()
             }
         }
@@ -49,7 +49,7 @@ if (BRANCH == "master") {
         stage('Push acceptance image') {
             tryStep "image tagging", {
                 docker.withRegistry("${DOCKER_REGISTRY}",'docker-registry') {
-                    def image = docker.image("mijnams/tips:${env.BUILD_NUMBER}")
+                    def image = docker.image("mijnams/mijn-tips:${env.BUILD_NUMBER}")
                     image.pull()
                     image.push("acceptance")
                 }
@@ -78,7 +78,7 @@ if (BRANCH == "master") {
         stage('Push production image') {
             tryStep "image tagging", {
                 docker.withRegistry("${DOCKER_REGISTRY}",'docker-registry') {
-                    def image = docker.image("mijnams/tips:${env.BUILD_NUMBER}")
+                    def image = docker.image("mijnams/mijn-tips:${env.BUILD_NUMBER}")
                     image.pull()
                     image.push("production")
                     image.push("latest")
