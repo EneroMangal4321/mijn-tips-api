@@ -24,10 +24,10 @@ node {
 
     stage('Test') {
         tryStep "test", {
-            docker.withRegistry("${DOCKER_REGISTRY}",'docker-registry') {
-                docker.build("mijnams/tips:${env.BUILD_NUMBER}", ".")
-                sh "docker run --rm mijnams/tips:${env.BUILD_NUMBER} /app/docker-test.sh"
-            }
+            sh "docker-compose -p focus -f tips/jenkins/test/docker-compose.yml build && " +
+               "docker-compose -p focus -f tips/jenkins/test/docker-compose.yml run -u root --rm test"
+        }, {
+            sh "docker-compose -p focus -f tips/jenkins/test/docker-compose.yml down"
         }
     }
 
