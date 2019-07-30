@@ -1,5 +1,3 @@
-from pprint import pprint
-
 from flask_testing import TestCase
 
 from tips.server import app
