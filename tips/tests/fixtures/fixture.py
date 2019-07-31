@@ -26,5 +26,6 @@ def get_fixture():
             "brp": brp,
             "focus": focus,
             "wmo": wmo,
+            "erfpacht": True,
         }
     }
