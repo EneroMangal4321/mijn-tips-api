@@ -17,7 +17,7 @@ class ApiTests(TestCase):
         self.assertEqual(response.data, b"OK")
 
     def test_tips(self):
-        response = self.client.post('/gettips', json=self.get_client_data())
+        response = self.client.post('/tips/gettips', json=self.get_client_data())
 
         data = response.get_json()
         tips = data['tips']

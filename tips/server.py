@@ -12,11 +12,11 @@ if get_sentry_dsn():  # pragma: no cover
     sentry_sdk.init(
         dsn=get_sentry_dsn(),
         integrations=[FlaskIntegration()],
-        with_locals=True
+        with_locals=False
     )
 
 
-@app.route('/gettips', methods=['POST'])
+@app.route('/tips/gettips', methods=['POST'])
 def hello_world():
     tips_data = tips_generator(request.get_json())
     return tips_data
