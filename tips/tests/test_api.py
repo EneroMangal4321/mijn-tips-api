@@ -20,6 +20,6 @@ class ApiTests(TestCase):
         response = self.client.post('/tips/gettips', json=self.get_client_data())
 
         data = response.get_json()
-        tips = data['tips']
+        tips = data['items']
 
         self.assertEqual(len(tips), 7)

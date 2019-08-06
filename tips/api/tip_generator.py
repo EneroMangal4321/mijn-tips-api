@@ -67,5 +67,6 @@ def tips_generator(user_data, tips=None):
     tips.sort(key=lambda t: t['priority'], reverse=True)
 
     return {
-        "tips": tips
+        "items": tips,
+        "total": len(tips),
     }
