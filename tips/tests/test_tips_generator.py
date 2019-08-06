@@ -43,7 +43,7 @@ class TipsGeneratorTest(TestCase):
         # add them out of order to test the ordering
         tips_pool = [tip1, tip0, tip2, tip3]
         result = tips_generator(self.get_client_data(), tips_pool)
-        tips = result['tips']
+        tips = result['items']
 
         self.assertEqual(len(tips), 4)
 
@@ -68,7 +68,7 @@ class ConditionalTest(TestCase):
         tips_pool = [tip1_mock, tip2_mock]
 
         result = tips_generator(self.get_client_data(), tips_pool)
-        tips = result['tips']
+        tips = result['items']
         self.assertEqual(len(tips), 1)
 
         # Test if the correct ones are accepted
@@ -85,7 +85,7 @@ class ConditionalTest(TestCase):
 
         tips_pool = [tip1_mock, tip2_mock, tip3_mock]
         result = tips_generator(self.get_client_data(), tips_pool)
-        tips = result['tips']
+        tips = result['items']
         self.assertEqual(len(tips), 2)
 
         # Test if the correct ones are accepted
@@ -100,7 +100,7 @@ class ConditionalTest(TestCase):
 
         tips_pool = [tip1_mock, tip2_mock]
         result = tips_generator(self.get_client_data(), tips_pool)
-        tips = result['tips']
+        tips = result['items']
 
         # make sure the other is in there
         self.assertEqual(len(tips), 1)
