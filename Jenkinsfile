@@ -24,7 +24,7 @@ node {
 
     stage('Test') {
         tryStep "test", {
-            docker.withRegistry('https://repo.secure.amsterdam.nl','docker-registry') {
+            docker.withRegistry('${DOCKER_REGISTRY}','docker-registry') {
                 docker.build("mijnams/mijn-tips:${env.BUILD_NUMBER}")
                 sh "docker run --rm mijnams/mijn-tips:${env.BUILD_NUMBER} /app/test.sh"
             }
