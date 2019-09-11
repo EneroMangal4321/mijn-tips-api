@@ -55,8 +55,8 @@ class TipsGeneratorTest(TestCase):
 
 
 class ConditionalTest(TestCase):
-    def get_client_data(self):
-        return get_fixture()
+    def get_client_data(self, optin=False):
+        return get_fixture(optin)
 
     def test_active(self):
         """ Add one active and one inactive tip. """
@@ -115,3 +115,22 @@ class ConditionalTest(TestCase):
         tips_pool = [tip1_mock, tip2_mock]
         with self.assertRaises(TypeError):
             tips_generator(self.get_client_data(), tips_pool)
+
+    def test_data_based_tip(self):
+        """
+        Test whether a tip works correctly when based on user data.
+        """
+        tip1_mock = get_tip()
+        tip1_mock['conditional'] = "data['erfpacht'] == True"
+        tip2_mock = get_tip()
+        tips_pool = [tip1_mock, tip2_mock]
+
+        client_data = self.get_client_data(optin=True)
+
+        result = tips_generator(client_data, tips_pool)
+        tips = result['items']
+
+        # make sure the other is in there
+        self.assertEqual(len(tips), 2)
+        from pprint import pprint
+        pprint(tips)

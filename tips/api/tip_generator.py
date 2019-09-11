@@ -21,6 +21,8 @@ from tips.config import PROJECT_PATH
 
 TIPS_POOL_FILE = os.path.join(PROJECT_PATH, 'api', 'tips_pool.json')
 
+FRONT_END_TIP_KEYS = ['datePublished', 'description', 'id', 'link', 'title', 'priority']
+
 
 tips_pool = []
 
@@ -47,7 +49,17 @@ def tip_filterer(tip, userdata):
         return tip
     try:
         print("trying ", conditional)
-        if eval(conditional, EVAL_GLOBALS, {}):
+        eval_locals = {}
+        print("optin", userdata['optin'])
+        if userdata['optin']:
+            eval_locals['data'] = userdata['data']
+
+        # from pprint import pprint
+        # print("--------------")
+        # print(conditional)
+        # pprint(eval_locals)
+
+        if eval(conditional, EVAL_GLOBALS, eval_locals):
             return tip
         else:
             return False
@@ -58,11 +70,17 @@ def tip_filterer(tip, userdata):
         return False
 
 
+def clean_tip(tip):
+    """ Only select the relevant frontend fields. """
+    return {k: v for (k, v) in tip.items() if k in FRONT_END_TIP_KEYS}
+
+
 def tips_generator(user_data, tips=None):
     """ Generate tips. """
     if tips is None:
         tips = tips_pool
     tips = [tip for tip in tips if tip_filterer(tip, user_data)]
+    tips = [clean_tip(tip) for tip in tips]
 
     tips.sort(key=lambda t: t['priority'], reverse=True)
 

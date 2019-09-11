@@ -83,5 +83,18 @@
       "title": "Meer informatie",
       "to": "https://mijn.amsterdam.nl"
     }
+  },
+  {
+    "id": 8,
+    "active": true,
+    "priority": 70,
+    "datePublished": "2019-07-24",
+    "title": "Koop je erfpacht af",
+    "description": "Tot het eind van 2019 kan je met korting erfpacht afkopen",
+    "conditional": "datetime.now() < datetime(2020, 1, 1) and persoon.erfpacht == True",
+    "link": {
+      "title": "Bekijk aanbieding",
+      "to": "https://mijn.amsterdam.nl"
+    }
   }
 ]

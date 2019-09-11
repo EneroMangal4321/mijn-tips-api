@@ -10,7 +10,7 @@ FOCUS = os.path.join(_FIXTURE_PATH, "focus.json")
 WMO = os.path.join(_FIXTURE_PATH, "brp.json")
 
 
-def get_fixture():
+def get_fixture(optin=False):
     with open(BRP) as brp_file:
         brp = json.load(brp_file)
 
@@ -21,7 +21,7 @@ def get_fixture():
         wmo = json.load(wmo_file)
 
     return {
-        "optin": False,
+        "optin": optin,
         "data": {
             "brp": brp,
             "focus": focus,
