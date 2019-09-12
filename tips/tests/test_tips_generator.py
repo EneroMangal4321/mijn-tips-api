@@ -132,5 +132,21 @@ class ConditionalTest(TestCase):
 
         # make sure the other is in there
         self.assertEqual(len(tips), 2)
-        from pprint import pprint
-        pprint(tips)
+
+    def test_data_based_tip_path(self):
+        tip1_mock = get_tip()
+        tip1_mock['conditional'] = "value_of(data, 'erfpacht') == True"
+        tip2_mock = get_tip()
+        # 18 or older
+        tip2_mock['conditional'] = "before(value_of(data, 'brp.persoon.geboortedatum'), years=18)"
+        tips_pool = [tip1_mock, tip2_mock]
+
+        client_data = self.get_client_data(optin=True)
+
+        result = tips_generator(client_data, tips_pool)
+        tips = result['items']
+
+        # make sure the other is in there
+        self.assertEqual(len(tips), 2)
+        self.assertEqual(tips[0]['id'], 0)
+        self.assertEqual(tips[1]['id'], 1)

@@ -5,3 +5,5 @@ flake8
 coverage
 
 sentry-sdk[flask]
+
+python-dateutil
