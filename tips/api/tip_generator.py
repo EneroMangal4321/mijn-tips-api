@@ -45,18 +45,22 @@ def value_of(data: dict, path: str, default=None):
     for part in path_sep:
         # print("getting", part, "from", value)
         # breakpoint()
-        value = value.get(part)
-        # todo: if not value? except?
+        try:
+            value = value[part]
+        except KeyError:
+            return default
 
     print("value", [value])
     return value
 
 
 def to_date(value: str):
-    """ Converts a string containing a date to a datetime object. """
+    """ Converts a string containing an iso8601 date to a datetime object. """
     # 1950-01-01T00:00:00Z
-    print("date", [dateutil.parser.isoparse(value)])
-    return dateutil.parser.isoparse(value)
+    date = dateutil.parser.isoparse(value)
+
+    breakpoint()
+    return date
 
 
 # TODO: better name
@@ -69,6 +73,9 @@ def before(value: datetime.datetime, **kwargs):
     """
     if type(value) == str:
         value = to_date(value)
+
+    if type(value) != datetime.datetime:
+        return False
 
     now = datetime.datetime.now(datetime.timezone.utc)
     delta = dateutil.relativedelta.relativedelta(**kwargs)

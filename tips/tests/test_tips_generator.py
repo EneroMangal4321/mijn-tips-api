@@ -1,6 +1,7 @@
+import datetime
 from unittest import TestCase
 
-from tips.api.tip_generator import tips_generator
+from tips.api.tip_generator import tips_generator, to_date
 from tips.tests.fixtures.fixture import get_fixture
 
 _counter = 0
@@ -22,6 +23,22 @@ def get_tip(priority=50):
         },
         'title': 'Tip title %i' % counter
     }
+
+
+class HelperFunctionsTests(TestCase):
+    def test_to_date(self):
+        # valid
+        result = to_date('1950-01-01T00:00:00Z')
+        self.assertEqual(result, datetime.datetime(year=1950, month=1, day=1, tzinfo=datetime.timezone.utc))
+
+        # valid
+        result = to_date('1950-01-01')
+        self.assertEqual(result, datetime.datetime(year=1950, month=1, day=1))
+
+        # invalid
+        with self.assertRaises(ValueError):
+            result = to_date('not a date')
+            self.assertEqual(result, datetime.datetime(year=1950, month=1, day=1, tzinfo=datetime.timezone.utc))
 
 
 class TipsGeneratorTest(TestCase):
