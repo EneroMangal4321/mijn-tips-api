@@ -1,7 +1,9 @@
 import datetime
 from unittest import TestCase
 
-from tips.api.tip_generator import tips_generator, to_date
+from dateutil.relativedelta import relativedelta
+
+from tips.api.tip_generator import tips_generator, to_date, value_of, before
 from tips.tests.fixtures.fixture import get_fixture
 
 _counter = 0
@@ -39,6 +41,37 @@ class HelperFunctionsTests(TestCase):
         with self.assertRaises(ValueError):
             result = to_date('not a date')
             self.assertEqual(result, datetime.datetime(year=1950, month=1, day=1, tzinfo=datetime.timezone.utc))
+
+    def test_value_of(self):
+        test_dict = {
+            'a': {
+                'b': {
+                    'c': 1
+                }
+            },
+            'aa': {
+                'bb': 2
+            },
+            'c': 3
+        }
+
+        self.assertEqual(value_of(test_dict, 'c'), 3)
+        self.assertEqual(value_of(test_dict, 'a.b.c'), 1)
+        self.assertEqual(value_of(test_dict, 'aa.bb'), 2)
+        self.assertEqual(value_of(test_dict, 'doesnotexist'), None)
+        self.assertEqual(value_of(test_dict, 'doesnotexist', 3), 3)
+        self.assertEqual(value_of(test_dict, 'a.doesnotexist'), None)
+
+    def test_before(self):
+        now = datetime.datetime.now()
+        one_month = relativedelta(month=1)
+        one_year = relativedelta(years=1)
+
+        self.assertFalse(before(now - one_month), years=1)
+        self.assertTrue(before(datetime.datetime(year=2018, month=9, day=12), years=1))
+
+        self.assertFalse(before(datetime.datetime(year=2018, month=9, day=12), years=1))
+        self.assertFalse(before(datetime.datetime(year=2018, month=9, day=12), years=1))
 
 
 class TipsGeneratorTest(TestCase):

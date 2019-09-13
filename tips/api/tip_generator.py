@@ -38,19 +38,15 @@ def value_of(data: dict, path: str, default=None):
     :return: The value of path when found, otherwise default.
 
     TODO: how to deal with lists?
-    TODO: also do something with the default
     """
     path_sep = path.split('.')
     value = data
     for part in path_sep:
-        # print("getting", part, "from", value)
-        # breakpoint()
         try:
             value = value[part]
         except KeyError:
             return default
 
-    print("value", [value])
     return value
 
 
@@ -59,7 +55,6 @@ def to_date(value: str):
     # 1950-01-01T00:00:00Z
     date = dateutil.parser.isoparse(value)
 
-    breakpoint()
     return date
 
 
@@ -67,21 +62,22 @@ def to_date(value: str):
 def before(value: datetime.datetime, **kwargs):
     """
     Check if the value is before the specified timedelta values.
-    the keyword arguments are fed into a dateutils relative timedelta
+    The keyword arguments are fed into a dateutils relative timedelta
     https://dateutil.readthedocs.io/en/stable/relativedelta.html
 
     """
     if type(value) == str:
         value = to_date(value)
-
-    if type(value) != datetime.datetime:
-        return False
-
     now = datetime.datetime.now(datetime.timezone.utc)
     delta = dateutil.relativedelta.relativedelta(**kwargs)
 
+    # TODO: set utz for dates which have no timezone
+    if value.tzinfo is None:
+        breakpoint()
+
+    # print(">>>", value, now - delta)
     result = value < now - delta
-    print("ago", result)
+    # print("ago", result)
     return result
 
 
