@@ -3,7 +3,7 @@ from unittest import TestCase
 
 from dateutil.relativedelta import relativedelta
 
-from tips.api.tip_generator import tips_generator, to_date, value_of, before
+from tips.api.tip_generator import tips_generator, to_date, value_of, before_or_on, is_18
 from tips.tests.fixtures.fixture import get_fixture
 
 _counter = 0
@@ -28,6 +28,7 @@ def get_tip(priority=50):
 
 
 class HelperFunctionsTests(TestCase):
+
     def test_to_date(self):
         # valid
         result = to_date('1950-01-01T00:00:00Z')
@@ -62,16 +63,29 @@ class HelperFunctionsTests(TestCase):
         self.assertEqual(value_of(test_dict, 'doesnotexist', 3), 3)
         self.assertEqual(value_of(test_dict, 'a.doesnotexist'), None)
 
-    def test_before(self):
+    def test_before_or_on(self):
         now = datetime.datetime.now()
-        one_month = relativedelta(month=1)
+        today = datetime.date.today()
+        one_month = relativedelta(months=1)
         one_year = relativedelta(years=1)
 
-        self.assertFalse(before(now - one_month), years=1)
-        self.assertTrue(before(datetime.datetime(year=2018, month=9, day=12), years=1))
+        # test datetimes
+        self.assertFalse(before_or_on(now - one_month, years=1))
+        self.assertTrue(before_or_on(now - (one_year + one_month), years=1))
 
-        self.assertFalse(before(datetime.datetime(year=2018, month=9, day=12), years=1))
-        self.assertFalse(before(datetime.datetime(year=2018, month=9, day=12), years=1))
+        # test date
+        self.assertTrue(before_or_on(today - one_year, years=1))
+        self.assertTrue(before_or_on(today - (one_year + one_month), years=1))
+        self.assertFalse(before_or_on(today - (one_year - one_month), years=1))
+
+    def test_is_18(self):
+        today = datetime.date.today()
+        one_month = relativedelta(months=1)
+        eighteen_year = relativedelta(years=18)
+
+        self.assertTrue(is_18(today - eighteen_year))
+        self.assertTrue(is_18(today - (eighteen_year + one_month)))
+        self.assertFalse(is_18(today - (eighteen_year - one_month)))
 
 
 class TipsGeneratorTest(TestCase):

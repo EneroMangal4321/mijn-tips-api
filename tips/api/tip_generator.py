@@ -1,8 +1,10 @@
 import datetime
 import json
 import os
+from typing import Union
 
 import dateutil.parser
+import pytz
 
 from tips.config import PROJECT_PATH
 """
@@ -58,33 +60,43 @@ def to_date(value: str):
     return date
 
 
+def is_18(value: Union[datetime.date, datetime.datetime]):
+    return before_or_on(value, years=18)
+
+
 # TODO: better name
-def before(value: datetime.datetime, **kwargs):
+def before_or_on(value: datetime.datetime, **kwargs):
     """
-    Check if the value is before the specified timedelta values.
+    Check if the value is before or on the specified timedelta values.
     The keyword arguments are fed into a dateutils relative timedelta
     https://dateutil.readthedocs.io/en/stable/relativedelta.html
 
     """
-    if type(value) == str:
-        value = to_date(value)
-    now = datetime.datetime.now(datetime.timezone.utc)
     delta = dateutil.relativedelta.relativedelta(**kwargs)
 
-    # TODO: set utz for dates which have no timezone
-    if value.tzinfo is None:
-        breakpoint()
+    if type(value) == str:
+        value = to_date(value)
 
-    # print(">>>", value, now - delta)
-    result = value < now - delta
-    # print("ago", result)
-    return result
+    if type(value) == datetime.datetime:
+        now = datetime.datetime.now(datetime.timezone.utc)
+
+        # Set utz for dates which have no timezone
+        if value.tzinfo is None:
+            value = pytz.UTC.localize(value)
+
+        result = value <= now - delta
+        return result
+    elif type(value) == datetime.date:
+        # Date has no timezone
+        today = datetime.date.today()
+        result = value <= today - delta
+        return result
 
 
 EVAL_GLOBALS = {
     "datetime": datetime.datetime,
     "timedelta": dateutil.relativedelta.relativedelta,
-    "before": before,
+    "before_or_on": before_or_on,
     "value_of": value_of,
     "to_date": to_date,
     "len": len,
