@@ -9,7 +9,8 @@
     "link": {
       "title": "Vraag direct aan",
       "to": "https://www.rijksoverheid.nl/onderwerpen/fiets/vraag-en-antwoord/mag-ik-bellen-en-naar-muziek-luisteren-op-de-fiets"
-    }
+    },
+    "imgUrl": "/tips/static/tip_images/bellenopfiets.jpg"
   },
   {
     "id": 2,
@@ -21,7 +22,8 @@
     "link": {
       "title": "Vrijwilliger worden",
       "to": "https://www.vrijwilligerapp.nl/"
-    }
+    },
+    "imgUrl": "/tips/static/tip_images/vrijwilliger.jpg"
   },
   {
     "id": 3,
@@ -33,7 +35,8 @@
     "link": {
       "title": "Bekijk",
       "to": "https://www.amsterdam.nl/afval/grofvuil/grofvuil-wegbrengen/"
-    }
+    },
+    "imgUrl": "/tips/static/tip_images/grofvuil.jpg"
   },
   {
     "id": 4,
@@ -45,7 +48,8 @@
     "link": {
       "title": "Bekijk",
       "to": "https://www.amsterdam.nl/veelgevraagd/?productid=%7B2214F853-B9F5-41F6-934B-B1616D8E0949%7D#%7B7E4E60A9-F809-4FC9-B7EB-9C06B3DB4513%7D"
-    }
+    },
+    "imgUrl": "/tips/static/tip_images/geveltuin.jpg"
   },
   {
     "id": 5,
@@ -56,8 +60,9 @@
     "description": "Gaat u op reis naar verre oorden? Kijk welke vaccinaties u nodig heeft",
     "link": {
       "title": "Meer informatie",
-      "to": "https://www.ggd.amsterdam.nl/ggd/contact/reizigersvaccinatie/"
-    }
+      "to": "https://www.ggd.amsterdam.nl/ggd/contact/reizigersvaccinatie/vaccinaties.jpg"
+    },
+    "imgUrl": "/tips/static/tip_images/vaccinaties.jpg"
   },
   {
     "id": 6,
@@ -70,7 +75,8 @@
     "link": {
       "title": "Meer informatie",
       "to": "https://mijn.amsterdam.nl"
-    }
+    },
+    "imgUrl": "/tips/static/tip_images/nieuweaansluiting.jpg"
   },
   {
     "id": 7,
@@ -82,7 +88,8 @@
     "link": {
       "title": "Meer informatie",
       "to": "https://mijn.amsterdam.nl"
-    }
+    },
+    "imgUrl": "/tips/static/tip_images/nieuweaansluiting.jpg"
   },
   {
     "id": 8,
@@ -95,6 +102,7 @@
     "link": {
       "title": "Bekijk aanbieding",
       "to": "https://mijn.amsterdam.nl"
-    }
+    },
+    "imgUrl": "/tips/static/tip_images/erfpacht.jpg"
   }
 ]
