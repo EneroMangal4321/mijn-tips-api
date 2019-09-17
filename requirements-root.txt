@@ -7,3 +7,4 @@ coverage
 sentry-sdk[flask]
 
 python-dateutil
+pytz
