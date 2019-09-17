@@ -25,7 +25,7 @@ from tips.config import PROJECT_PATH
 
 TIPS_POOL_FILE = os.path.join(PROJECT_PATH, 'api', 'tips_pool.json')
 
-FRONT_END_TIP_KEYS = ['datePublished', 'description', 'id', 'link', 'title', 'priority']
+FRONT_END_TIP_KEYS = ['datePublished', 'description', 'id', 'link', 'title', 'priority', 'imgUrl']
 
 
 tips_pool = []
