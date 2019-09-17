@@ -54,4 +54,3 @@ class ApiStaticFiles(TestCase):
             response = self.client.get('/tips/static/tip_images/../../config.py')
             self.assert404(response)
             self.assertNotEqual(response.data, fh.read())
-
