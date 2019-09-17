@@ -48,7 +48,6 @@ def value_of(data: dict, path: str, default=None):
             value = value[part]
         except KeyError:
             return default
-
     return value
 
 
@@ -99,6 +98,7 @@ EVAL_GLOBALS = {
     "before_or_on": before_or_on,
     "value_of": value_of,
     "to_date": to_date,
+    "is_18": is_18,
     "len": len,
 }
 
@@ -120,18 +120,14 @@ def tip_filterer(tip, userdata):
     if conditional is None:
         return tip
     try:
-        print("trying ", conditional)
         eval_locals = {}
-        print("optin", userdata['optin'])
         if userdata['optin']:
             eval_locals['data'] = userdata['data']
-
-        # from pprint import pprint
-        # print("--------------")
-        # print(conditional)
-        # pprint(eval_locals)
+        # print("\n------\noptin", userdata['optin'])
+        # print("trying ", conditional)
 
         if eval(conditional, EVAL_GLOBALS, eval_locals):
+            # print("True")
             return tip
         else:
             return False

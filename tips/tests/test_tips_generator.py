@@ -202,7 +202,7 @@ class ConditionalTest(TestCase):
         tip1_mock['conditional'] = "value_of(data, 'erfpacht') == True"
         tip2_mock = get_tip()
         # 18 or older
-        tip2_mock['conditional'] = "before(value_of(data, 'brp.persoon.geboortedatum'), years=18)"
+        tip2_mock['conditional'] = "is_18(value_of(data, 'brp.persoon.geboortedatum'))"
         tips_pool = [tip1_mock, tip2_mock]
 
         client_data = self.get_client_data(optin=True)
@@ -212,5 +212,5 @@ class ConditionalTest(TestCase):
 
         # make sure the other is in there
         self.assertEqual(len(tips), 2)
-        self.assertEqual(tips[0]['id'], 0)
-        self.assertEqual(tips[1]['id'], 1)
+        self.assertEqual(tips[0]['id'], tip1_mock['id'])
+        self.assertEqual(tips[1]['id'], tip2_mock['id'])

@@ -22,4 +22,4 @@ class ApiTests(TestCase):
         data = response.get_json()
         tips = data['items']
 
-        self.assertEqual(len(tips), 7)
+        self.assertEqual(len(tips), 6)
