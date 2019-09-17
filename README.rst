@@ -26,5 +26,5 @@ Direct dependencies are specified in `requirements-root.txt`. These should not h
 This works best with a new/temporary virtualenv.
 
 * :code:`pip install -r requirements-root.txt`
-* :code:`requirements.txt && pip freeze >> requirements.txt`
+* :code:`pip freeze > requirements.txt`
 
