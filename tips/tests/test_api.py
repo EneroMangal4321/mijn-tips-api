@@ -30,7 +30,9 @@ class ApiTests(TestCase):
 
     def test_images(self):
         for tip in tips_pool:
-            response = self.client.get(tip['imgUrl'])
+            url = tip['imgUrl']
+            url = url.lstrip('/api')  # api is from the load balancer, not this api
+            response = self.client.get(url)
             self.assert200(response)
 
 
