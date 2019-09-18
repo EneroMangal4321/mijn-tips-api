@@ -3,7 +3,7 @@ from unittest import TestCase
 
 from dateutil.relativedelta import relativedelta
 
-from tips.api.tip_generator import tips_generator, to_date, value_of, before_or_on, is_18
+from tips.api.tip_generator import tips_generator, to_date, value_of, before_or_on, is_18, object_where
 from tips.tests.fixtures.fixture import get_fixture
 
 _counter = 0
@@ -23,7 +23,8 @@ def get_tip(priority=50):
             'title': 'Tip link title %i' % counter,
             'to': 'https://amsterdam.nl/'
         },
-        'title': 'Tip title %i' % counter
+        'title': 'Tip title %i' % counter,
+        'imgUrl': '/api/tips/static/tip_images/erfpacht.jpg'
     }
 
 
@@ -87,6 +88,49 @@ class HelperFunctionsTests(TestCase):
         self.assertTrue(is_18(today - (eighteen_year + one_month)))
         self.assertFalse(is_18(today - (eighteen_year - one_month)))
 
+    def test_object_where(self):
+        test_dict = {
+            "focus": [
+                {
+                    "name": "a",
+                    "_id": "0-0"
+                },
+                {
+                    "name": "b",
+                    "_id": "0-1"
+                }
+            ]
+        }
+
+        expected = {
+            "name": "a",
+            "_id": "0-0"
+        }
+
+        # One to match
+        result = object_where(test_dict['focus'], {"name": "a"})
+        self.assertEqual(result, expected)
+
+        # Two to match
+        result = object_where(test_dict['focus'], {"name": "a", "_id": "0-0"})
+        self.assertEqual(result, expected)
+
+        # Second item should match on both
+        result = object_where(test_dict['focus'], {"name": "b", "_id": "0-1"})
+        self.assertEqual(result, None)
+
+        # First query param is a match for item 0. Second is not
+        result = object_where(test_dict['focus'], {"name": "a", "_id": "0-1"})
+        self.assertEqual(result, None)
+
+        # Partial matches for both second and first, but reversed
+        result = object_where(test_dict['focus'], {"name": "b", "_id": "0-0"})
+        self.assertEqual(result, None)
+
+        # Key does not exist
+        result = object_where(test_dict['focus'], {"does not exist": "a"})
+        self.assertEqual(result, None)
+
 
 class TipsGeneratorTest(TestCase):
     def setUp(self) -> None:
@@ -94,6 +138,21 @@ class TipsGeneratorTest(TestCase):
 
     def get_client_data(self):
         return get_fixture()
+
+    def test_allow_listed_fields(self):
+        tip1_mock = get_tip()
+        tip2_mock = get_tip()
+        tips_pool = [tip1_mock, tip2_mock]
+
+        result = tips_generator(self.get_client_data(), tips_pool)
+        tips = result['items']
+
+        # only these fields are allowed
+        allow_list = ['datePublished', 'description', 'id', 'link', 'title', 'priority', 'imgUrl'].sort()
+
+        for tip in tips:
+            fields = list(tip.keys()).sort()
+            self.assertEqual(allow_list, fields)
 
     def test_generator(self):
         tip0 = get_tip(10)
@@ -214,3 +273,15 @@ class ConditionalTest(TestCase):
         self.assertEqual(len(tips), 2)
         self.assertEqual(tips[0]['id'], tip1_mock['id'])
         self.assertEqual(tips[1]['id'], tip2_mock['id'])
+
+    def test_data_based_tip_with_list(self):
+        tip1_mock = get_tip()
+        tip1_mock['conditional'] = "value_of(object_where(value_of(data, 'focus'), {'_id': '0-0'}), 'processtappen.aanvraag._id') == 0 "
+        tips_pool = [tip1_mock]
+
+        client_data = self.get_client_data(optin=True)
+        result = tips_generator(client_data, tips_pool)
+        tips = result['items']
+
+        self.assertEqual(len(tips), 1)
+        self.assertEqual(tips[0]['id'], tip1_mock['id'])

@@ -34,7 +34,7 @@ tips_pool = []
 def value_of(data: dict, path: str, default=None):
     """
     Try to get the value of path '.' with as separator. When not possible, return the default.
-    :param data: data in which to search for
+    :param data: data in which to search
     :param path: . separated path to the nested data
     :param default: value which is returned when path is not found
     :return: The value of path when found, otherwise default.
@@ -51,6 +51,28 @@ def value_of(data: dict, path: str, default=None):
     return value
 
 
+def object_where(data: list, query: dict):
+    """
+    Select the first object that matches the query
+    :param data: data in which to search
+    :param query:
+    :return: the first object that matches  # TODO: is the first a good idea?
+    """
+    for i in data:
+        if type(i) == dict:
+            try:
+                for field_name, field_value in query.items():
+                    if i[field_name] != field_value:
+                        return None
+
+                return i
+            except:
+                return None
+
+        else:
+            return None
+
+
 def to_date(value: str):
     """ Converts a string containing an iso8601 date to a datetime object. """
     # 1950-01-01T00:00:00Z
@@ -64,7 +86,7 @@ def is_18(value: Union[datetime.date, datetime.datetime]):
 
 
 # TODO: better name
-def before_or_on(value: datetime.datetime, **kwargs):
+def before_or_on(value: Union[datetime.date, datetime.datetime], **kwargs):
     """
     Check if the value is before or on the specified timedelta values.
     The keyword arguments are fed into a dateutils relative timedelta
@@ -97,6 +119,7 @@ EVAL_GLOBALS = {
     "timedelta": dateutil.relativedelta.relativedelta,
     "before_or_on": before_or_on,
     "value_of": value_of,
+    "object_where": object_where,
     "to_date": to_date,
     "is_18": is_18,
     "len": len,
