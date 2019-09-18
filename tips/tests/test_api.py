@@ -13,7 +13,7 @@ class ApiTests(TestCase):
         return app
 
     def get_client_data(self):
-        return get_fixture()
+        return get_fixture(optin=True)
 
     def test_status(self):
         response = self.client.get('/status/health')
@@ -26,7 +26,7 @@ class ApiTests(TestCase):
         data = response.get_json()
         tips = data['items']
 
-        self.assertEqual(len(tips), 6)
+        self.assertEqual(len(tips), 8)
 
     def test_images(self):
         for tip in tips_pool:

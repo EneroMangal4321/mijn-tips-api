@@ -98,11 +98,39 @@
     "datePublished": "2019-07-24",
     "title": "Koop je erfpacht af",
     "description": "Tot het eind van 2019 kan je met korting erfpacht afkopen",
-    "conditional": "datetime.now() < datetime(2020, 1, 1) and value_of(erfpacht) == True",
+    "conditional": "datetime.now() < datetime(2020, 1, 1) and value_of(data, 'erfpacht') == True",
     "link": {
       "title": "Bekijk aanbieding",
       "to": "https://mijn.amsterdam.nl"
     },
     "imgUrl": "api/tips/static/tip_images/erfpacht.jpg"
+  },
+  {
+    "id": 9,
+    "active": true,
+    "priority": 60,
+    "datePublished": "2019-08-18",
+    "title": "Bekijk de afvalpunten in de buurt ",
+    "description": "Kijk op Mijn Buurt voor afvalpunten en andere gemeentelijke informatie in uw nieuwe buurt.",
+    "conditional": "",
+    "link": {
+      "title": "Bekijk kaart",
+      "to": "https://mijn.acc.amsterdam.nl/buurt"
+    },
+    "imgUrl": "/api/tips/static/tip_images/afvalpunt.jpg"
+  },
+  {
+    "id": 10,
+    "active": true,
+    "priority": 70,
+    "datePublished": "2019-08-18",
+    "title": "Bekijk de afvalpunten in de buurt ",
+    "description": "Kijk op Mijn Buurt voor afvalpunten en andere gemeentelijke informatie in uw nieuwe buurt.",
+    "conditional": "after(value_of(data, 'brp.adres.begindatumVerblijf'), months=3)",
+    "link": {
+      "title": "Bekijk kaart",
+      "to": "https://mijn.acc.amsterdam.nl/buurt"
+    },
+    "imgUrl": "/api/tips/static/tip_images/afvalpunt.jpg"
   }
 ]

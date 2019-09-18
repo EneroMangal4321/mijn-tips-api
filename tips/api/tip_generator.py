@@ -66,7 +66,7 @@ def object_where(data: list, query: dict):
                         return None
 
                 return i
-            except:
+            except KeyError:
                 return None
 
         else:
@@ -81,12 +81,16 @@ def to_date(value: str):
     return date
 
 
-def is_18(value: Union[datetime.date, datetime.datetime]):
+def is_18(value: Union[datetime.date, datetime.datetime, str]):
     return before_or_on(value, years=18)
 
 
+def after(value: Union[datetime.date, datetime.datetime, str], **kwargs):
+    return not before_or_on(value, **kwargs)
+
+
 # TODO: better name
-def before_or_on(value: Union[datetime.date, datetime.datetime], **kwargs):
+def before_or_on(value: Union[datetime.date, datetime.datetime, str], **kwargs):
     """
     Check if the value is before or on the specified timedelta values.
     The keyword arguments are fed into a dateutils relative timedelta
@@ -118,6 +122,7 @@ EVAL_GLOBALS = {
     "datetime": datetime.datetime,
     "timedelta": dateutil.relativedelta.relativedelta,
     "before_or_on": before_or_on,
+    "after": after,
     "value_of": value_of,
     "object_where": object_where,
     "to_date": to_date,
@@ -140,7 +145,7 @@ def tip_filterer(tip, userdata):
     if not tip['active']:
         return False
     conditional = tip.get("conditional", None)
-    if conditional is None:
+    if conditional is None or conditional == '':
         return tip
     try:
         eval_locals = {}
@@ -149,10 +154,14 @@ def tip_filterer(tip, userdata):
         # print("\n------\noptin", userdata['optin'])
         # print("trying ", conditional)
 
+        # breakpoint()
+
         if eval(conditional, EVAL_GLOBALS, eval_locals):
             # print("True")
+            # breakpoint()
             return tip
         else:
+            # print("false")
             return False
     except TypeError:  # Input must be a string. If its anything else, the tip conditional is malformed
         raise
