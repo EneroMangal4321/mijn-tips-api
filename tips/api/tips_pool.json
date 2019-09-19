@@ -5,9 +5,9 @@
     "priority": 50,
     "datePublished": "2019-07-24",
     "title": "Geen telefoon op de fiets",
-    "description": "Het is sinds 1 juli niet meer toegestaan om met een telefoon in de hand te fietsen.",
+    "description": "U mag geen telegoon meer vasthouden op de fiets",
     "link": {
-      "title": "Vraag direct aan",
+      "title": "Meer informatie",
       "to": "https://www.rijksoverheid.nl/onderwerpen/fiets/vraag-en-antwoord/mag-ik-bellen-en-naar-muziek-luisteren-op-de-fiets"
     },
     "imgUrl": "api/tips/static/tip_images/bellenopfiets.jpg"
@@ -18,10 +18,10 @@
     "priority": 20,
     "datePublished": "2019-07-24",
     "title": "Vrijwilliger worden?",
-    "description": "Word een vrijwilligger in Amsterdam",
+    "description": "Er is altijd vrijwilligerswerk dat bij u past\nBekijk de vacature",
     "link": {
-      "title": "Vrijwilliger worden",
-      "to": "https://www.vrijwilligerapp.nl/"
+      "title": "Vrijwilligerscentrale Amsterdam",
+      "to": "https://www.vca.nu/vacaturebank/"
     },
     "imgUrl": "api/tips/static/tip_images/vrijwilliger.jpg"
   },
@@ -31,9 +31,9 @@
     "priority": 25,
     "datePublished": "2019-07-24",
     "title": "Grofvuil",
-    "description": "Op een Afvalpunt kunt u gratis uw grofvuil, klein chemisch afval en kringloopgoederen kwijt",
+    "description": "Op een Afvalpunt kunt u uw grofvuil, klein chemisch afval en tweedehands spullen inleveren",
     "link": {
-      "title": "Bekijk",
+      "title": "Adressen Afvalpunten",
       "to": "https://www.amsterdam.nl/afval/grofvuil/grofvuil-wegbrengen/"
     },
     "imgUrl": "api/tips/static/tip_images/grofvuil.jpg"
@@ -43,10 +43,10 @@
     "active": true,
     "priority": 20,
     "datePublished": "2019-07-24",
-    "title": "Geveltuin aanleggen",
-    "description": "Bekijk hoe u gratis een geveltuin kunt aanvragen bij uw stadsdeel.",
+    "title": "Geveltuin",
+    "description": "Bekijk hoe u gratis een geveltuin kunt aanvragen bij uw stadsdeel. Of hoe u de geveltuin kunt laten verwijderen.",
     "link": {
-      "title": "Bekijk",
+      "title": "Meer informatie",
       "to": "https://www.amsterdam.nl/veelgevraagd/?productid=%7B2214F853-B9F5-41F6-934B-B1616D8E0949%7D#%7B7E4E60A9-F809-4FC9-B7EB-9C06B3DB4513%7D"
     },
     "imgUrl": "api/tips/static/tip_images/geveltuin.jpg"
@@ -57,7 +57,7 @@
     "priority": 20,
     "datePublished": "2019-07-24",
     "title": "Vaccinaties",
-    "description": "Gaat u op reis naar verre oorden? Kijk welke vaccinaties u nodig heeft",
+    "description": "De GGD geeft advies en alle vaccinaties die u nodig hebt voor uw vakantie naar het buitenland",
     "link": {
       "title": "Meer informatie",
       "to": "https://www.ggd.amsterdam.nl/ggd/contact/reizigersvaccinatie/vaccinaties.jpg"
@@ -69,12 +69,12 @@
     "active": true,
     "priority": 40,
     "datePublished": "2019-07-24",
-    "title": "Nieuwe aansluiting",
-    "description": "De aansluiting belastingen is toegevoegd aan mijn amsterdam",
+    "title": "Nieuw in Mijn Amsterdam",
+    "description": "U vindt nu ook gemeentelijke belastinginformatie in Mijn Amsterdam",
     "conditional": "datetime.now() < datetime(2019, 9, 1) ",
     "link": {
-      "title": "Meer informatie",
-      "to": "https://mijn.amsterdam.nl"
+      "title": "Naar Mijn Belastingen",
+      "to": "/"
     },
     "imgUrl": "api/tips/static/tip_images/nieuweaansluiting.jpg"
   },
@@ -83,11 +83,11 @@
     "active": true,
     "priority": 20,
     "datePublished": "2019-07-24",
-    "title": "Kom regelmatig terug",
-    "description": "Wij zijn constant bezig met nieuw gemeentelijke diensten aan te sluiten!",
+    "title": "Kom snel terug",
+    "description": "U vindt hier steeds weer nieuwe onderwerpen! Bekijk de nieuwe onderwerpen",
     "link": {
-      "title": "Meer informatie",
-      "to": "https://mijn.amsterdam.nl"
+      "title": "Bekijk de nieuwe onderwerpen",
+      "to": "/"
     },
     "imgUrl": "api/tips/static/tip_images/nieuweaansluiting.jpg"
   },
@@ -96,26 +96,26 @@
     "active": true,
     "priority": 70,
     "datePublished": "2019-07-24",
-    "title": "Koop je erfpacht af",
-    "description": "Tot het eind van 2019 kan je met korting erfpacht afkopen",
+    "title": "Koop uw erfpacht af",
+    "description": "Tot eind 2019 krijgt u korting als u uw erfpacht afkoopt",
     "conditional": "datetime.now() < datetime(2020, 1, 1) and value_of(data, 'erfpacht') == True",
     "link": {
-      "title": "Bekijk aanbieding",
-      "to": "https://mijn.amsterdam.nl"
+      "title": "Bekijk uw aanbieding",
+      "to": "/"
     },
     "imgUrl": "api/tips/static/tip_images/erfpacht.jpg"
   },
   {
     "id": 9,
     "active": true,
-    "priority": 60,
+    "priority": 40,
     "datePublished": "2019-08-18",
-    "title": "Bekijk de afvalpunten in de buurt ",
-    "description": "Kijk op Mijn Buurt voor afvalpunten en andere gemeentelijke informatie in uw nieuwe buurt.",
+    "title": "Mijn buurt",
+    "description": "Kijk waar het dichtstbijzijnde Afvalpunt is. En welke vergunningen de gemeente heeft uitgegeven in uw buurt",
     "conditional": "",
     "link": {
-      "title": "Bekijk kaart",
-      "to": "https://mijn.acc.amsterdam.nl/buurt"
+      "title": "Kijk op de kaart",
+      "to": "/buurt"
     },
     "imgUrl": "/api/tips/static/tip_images/afvalpunt.jpg"
   },
@@ -125,11 +125,11 @@
     "priority": 70,
     "datePublished": "2019-08-18",
     "title": "Bekijk de afvalpunten in de buurt ",
-    "description": "Kijk op Mijn Buurt voor afvalpunten en andere gemeentelijke informatie in uw nieuwe buurt.",
+    "description": "Kijk waar het dichtstbijzijnde Afvalpunt is. En welke vergunningen de gemeente heeft uitgegeven in uw buurt",
     "conditional": "after(value_of(data, 'brp.adres.begindatumVerblijf'), months=3)",
     "link": {
-      "title": "Bekijk kaart",
-      "to": "https://mijn.acc.amsterdam.nl/buurt"
+      "title": "Kijk op de kaart",
+      "to": "/buurt"
     },
     "imgUrl": "/api/tips/static/tip_images/afvalpunt.jpg"
   }
