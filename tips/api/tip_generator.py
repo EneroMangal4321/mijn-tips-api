@@ -73,7 +73,7 @@ def object_where(data: list, query: dict):
             return None
 
 
-def to_date(value: str):
+def to_datetime(value: str):
     """ Converts a string containing an iso8601 date to a datetime object. """
     # 1950-01-01T00:00:00Z
     date = dateutil.parser.isoparse(value)
@@ -93,6 +93,7 @@ def after(value: Union[datetime.date, datetime.datetime, str], **kwargs):
 def before_or_on(value: Union[datetime.date, datetime.datetime, str], **kwargs):
     """
     Check if the value is before or on the specified timedelta values.
+    # TODO: Improve docstring
     The keyword arguments are fed into a dateutils relative timedelta
     https://dateutil.readthedocs.io/en/stable/relativedelta.html
 
@@ -100,7 +101,7 @@ def before_or_on(value: Union[datetime.date, datetime.datetime, str], **kwargs):
     delta = dateutil.relativedelta.relativedelta(**kwargs)
 
     if type(value) == str:
-        value = to_date(value)
+        value = to_datetime(value)
 
     if type(value) == datetime.datetime:
         now = datetime.datetime.now(datetime.timezone.utc)
@@ -125,7 +126,7 @@ EVAL_GLOBALS = {
     "after": after,
     "value_of": value_of,
     "object_where": object_where,
-    "to_date": to_date,
+    "to_datetime": to_datetime,
     "is_18": is_18,
     "len": len,
 }
