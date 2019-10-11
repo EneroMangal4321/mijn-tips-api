@@ -4,12 +4,14 @@ from flask_testing import TestCase
 
 from tips.api.tip_generator import tips_pool
 from tips.config import PROJECT_PATH
-from tips.server import app
+from tips.server import application
 from tips.tests.fixtures.fixture import get_fixture
 
 
 class ApiTests(TestCase):
     def create_app(self):
+        app = application
+        app.config['TESTING'] = True
         return app
 
     def get_client_data(self):
@@ -38,6 +40,8 @@ class ApiTests(TestCase):
 
 class ApiStaticFiles(TestCase):
     def create_app(self):
+        app = application
+        app.config['TESTING'] = True
         return app
 
     def test_get_valid(self):

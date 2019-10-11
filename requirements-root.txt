@@ -1,5 +1,6 @@
 flask
 Flask-Testing
+connexion[swagger-ui]
 
 flake8
 coverage
