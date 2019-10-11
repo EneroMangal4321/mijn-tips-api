@@ -1,6 +1,6 @@
 import connexion
 import sentry_sdk
-from flask import Flask, request, send_from_directory
+from flask import request, send_from_directory
 from sentry_sdk.integrations.flask import FlaskIntegration
 
 from tips.api.tip_generator import tips_generator
