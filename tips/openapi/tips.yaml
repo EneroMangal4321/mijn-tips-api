@@ -1,0 +1,53 @@
+openapi: 3.0.1
+info:
+  title: Tips makelaar
+  description: Provides tips services for Mijn-Amsterdam
+  version: 1.0.0
+  contact:
+    name: Datapunt
+    url: https://data.amsterdam.nl
+    email: datapunt@amsterdam.nl
+
+paths:
+  /tips/gettips:
+    post:
+      description: Endpoint to get a list of tips. This is a post because the body may contain data to base the tips on.
+      responses:
+        200:
+          description: "list of tips"
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/tips'
+
+components:
+  schemas:
+    tips:
+      type: array
+      items:
+        $ref: '#/components/schemas/tip'
+    tip:
+      type: object
+      properties:
+        title:
+          type: string
+        subtitle:
+          type: string
+        description:
+          type: string
+        datePublished:
+          type: string
+          format: date
+        priority:
+          type: integer
+          maximum: 100
+          minimum: 0
+        link:
+          type: object
+          properties:
+            title:
+              type: string
+              description: "An optional title for the linking button"
+            to:
+              type: string
+              description: "An optional link for more information"
