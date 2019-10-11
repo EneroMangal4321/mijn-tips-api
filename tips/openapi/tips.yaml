@@ -11,6 +11,7 @@ info:
 paths:
   /tips/gettips:
     post:
+      operationId: tips.server.get_tips
       description: Endpoint to get a list of tips. This is a post because the body may contain data to base the tips on.
       responses:
         200:
