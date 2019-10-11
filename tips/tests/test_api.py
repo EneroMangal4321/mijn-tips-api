@@ -40,7 +40,9 @@ class ApiTests(TestCase):
 
 class ApiStaticFiles(TestCase):
     def create_app(self):
-        return application
+        app = application
+        app.config['TESTING'] = True
+        return app
 
     def test_get_valid(self):
         with open(os.path.join(PROJECT_PATH, "static/tip_images/afvalpunt.jpg"), 'rb') as img:
