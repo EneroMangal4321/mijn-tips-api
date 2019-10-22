@@ -5,7 +5,7 @@
     "priority": 50,
     "datePublished": "2019-07-24",
     "title": "Geen telefoon op de fiets",
-    "description": "U mag geen telegoon meer vasthouden op de fiets",
+    "description": "U mag geen telefoon meer vasthouden op de fiets",
     "link": {
       "title": "Meer informatie",
       "to": "https://www.rijksoverheid.nl/onderwerpen/fiets/vraag-en-antwoord/mag-ik-bellen-en-naar-muziek-luisteren-op-de-fiets"
@@ -18,7 +18,7 @@
     "priority": 20,
     "datePublished": "2019-07-24",
     "title": "Vrijwilliger worden?",
-    "description": "Er is altijd vrijwilligerswerk dat bij u past\nBekijk de vacature",
+    "description": "Er is altijd vrijwilligerswerk dat bij u past\nBekijk de vacatures",
     "link": {
       "title": "Vrijwilligerscentrale Amsterdam",
       "to": "https://www.vca.nu/vacaturebank/"
@@ -126,7 +126,7 @@
     "datePublished": "2019-08-18",
     "title": "Bekijk de afvalpunten in de buurt ",
     "description": "Kijk waar het dichtstbijzijnde Afvalpunt is. En welke vergunningen de gemeente heeft uitgegeven in uw buurt",
-    "conditional": "after(value_of(data, 'brp.adres.begindatumVerblijf'), months=3)",
+    "conditional": "before_or_on(value_of(data, 'brp.adres.begindatumVerblijf'), months=3)",
     "link": {
       "title": "Kijk op de kaart",
       "to": "/buurt"
