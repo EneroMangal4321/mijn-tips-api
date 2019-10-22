@@ -143,7 +143,7 @@
     "conditional": "object_where(value_of(data, 'focus'), {'soortProduct': 'Minimafonds'})",
     "link": {
       "title": "Bekijk de aanbiedingen",
-      "to": "/"
+      "to": "https://www.amsterdam.nl/toerisme-vrije-tijd/stadspas/"
     },
     "imgUrl": "/api/tips/static/tip_images/stadspas.jpg"
   }
