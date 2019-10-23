@@ -60,7 +60,7 @@
     "description": "De GGD geeft advies en alle vaccinaties die u nodig hebt voor uw vakantie naar het buitenland",
     "link": {
       "title": "Meer informatie",
-      "to": "https://www.ggd.amsterdam.nl/ggd/contact/reizigersvaccinatie/vaccinaties.jpg"
+      "to": "https://www.ggd.amsterdam.nl/infectieziekten/reizigersvaccinatie/"
     },
     "imgUrl": "api/tips/static/tip_images/vaccinaties.jpg"
   },
