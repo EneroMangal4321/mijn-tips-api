@@ -5,7 +5,7 @@
     "priority": 50,
     "datePublished": "2019-07-24",
     "title": "Geen telefoon op de fiets",
-    "description": "U mag geen telegoon meer vasthouden op de fiets",
+    "description": "U mag geen telefoon meer vasthouden op de fiets",
     "link": {
       "title": "Meer informatie",
       "to": "https://www.rijksoverheid.nl/onderwerpen/fiets/vraag-en-antwoord/mag-ik-bellen-en-naar-muziek-luisteren-op-de-fiets"
@@ -18,7 +18,7 @@
     "priority": 20,
     "datePublished": "2019-07-24",
     "title": "Vrijwilliger worden?",
-    "description": "Er is altijd vrijwilligerswerk dat bij u past\nBekijk de vacature",
+    "description": "Er is altijd vrijwilligerswerk dat bij u past\nBekijk de vacatures",
     "link": {
       "title": "Vrijwilligerscentrale Amsterdam",
       "to": "https://www.vca.nu/vacaturebank/"
@@ -60,7 +60,7 @@
     "description": "De GGD geeft advies en alle vaccinaties die u nodig hebt voor uw vakantie naar het buitenland",
     "link": {
       "title": "Meer informatie",
-      "to": "https://www.ggd.amsterdam.nl/ggd/contact/reizigersvaccinatie/vaccinaties.jpg"
+      "to": "https://www.ggd.amsterdam.nl/infectieziekten/reizigersvaccinatie/"
     },
     "imgUrl": "api/tips/static/tip_images/vaccinaties.jpg"
   },
@@ -132,5 +132,19 @@
       "to": "/buurt"
     },
     "imgUrl": "/api/tips/static/tip_images/afvalpunt.jpg"
+  },
+  {
+    "id": 11,
+    "active": true,
+    "priority": 70,
+    "datePublished": "2019-10-22",
+    "title": "Wat kan ik doen met mijn Stadspas?",
+    "description": "U hebt een Stadspas met een groene stip",
+    "conditional": "object_where(value_of(data, 'focus'), {'soortProduct': 'Minimafonds'})",
+    "link": {
+      "title": "Bekijk de aanbiedingen",
+      "to": "https://www.amsterdam.nl/toerisme-vrije-tijd/stadspas/"
+    },
+    "imgUrl": "/api/tips/static/tip_images/stadspas.jpg"
   }
 ]
