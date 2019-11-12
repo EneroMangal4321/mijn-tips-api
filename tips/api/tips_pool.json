@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "mijn-1",
     "active": true,
     "priority": 50,
     "datePublished": "2019-07-24",
@@ -13,7 +13,7 @@
     "imgUrl": "api/tips/static/tip_images/bellenopfiets.jpg"
   },
   {
-    "id": 2,
+    "id": "mijn-2",
     "active": true,
     "priority": 20,
     "datePublished": "2019-07-24",
@@ -26,7 +26,7 @@
     "imgUrl": "api/tips/static/tip_images/vrijwilliger.jpg"
   },
   {
-    "id": 3,
+    "id": "mijn-3",
     "active": true,
     "priority": 25,
     "datePublished": "2019-07-24",
@@ -39,7 +39,7 @@
     "imgUrl": "api/tips/static/tip_images/grofvuil.jpg"
   },
   {
-    "id": 4,
+    "id": "mijn-4",
     "active": true,
     "priority": 20,
     "datePublished": "2019-07-24",
@@ -52,7 +52,7 @@
     "imgUrl": "api/tips/static/tip_images/geveltuin.jpg"
   },
   {
-    "id": 5,
+    "id": "mijn-5",
     "active": true,
     "priority": 20,
     "datePublished": "2019-07-24",
@@ -65,7 +65,7 @@
     "imgUrl": "api/tips/static/tip_images/vaccinaties.jpg"
   },
   {
-    "id": 6,
+    "id": "mijn-6",
     "active": false,
     "priority": 40,
     "datePublished": "2019-07-24",
@@ -79,7 +79,7 @@
     "imgUrl": "api/tips/static/tip_images/nieuweaansluiting.jpg"
   },
   {
-    "id": 7,
+    "id": "mijn-7",
     "active": false,
     "priority": 20,
     "datePublished": "2019-07-24",
@@ -92,7 +92,7 @@
     "imgUrl": "api/tips/static/tip_images/nieuweaansluiting.jpg"
   },
   {
-    "id": 8,
+    "id": "mijn-8",
     "active": true,
     "priority": 70,
     "datePublished": "2019-07-24",
@@ -106,7 +106,7 @@
     "imgUrl": "api/tips/static/tip_images/erfpacht.jpg"
   },
   {
-    "id": 9,
+    "id": "mijn-9",
     "active": false,
     "priority": 40,
     "datePublished": "2019-08-18",
@@ -120,7 +120,7 @@
     "imgUrl": "/api/tips/static/tip_images/afvalpunt.jpg"
   },
   {
-    "id": 10,
+    "id": "mijn-10",
     "active": true,
     "priority": 70,
     "datePublished": "2019-08-18",
@@ -134,7 +134,7 @@
     "imgUrl": "/api/tips/static/tip_images/afvalpunt.jpg"
   },
   {
-    "id": 11,
+    "id": "mijn-11",
     "active": true,
     "priority": 70,
     "datePublished": "2019-10-22",
