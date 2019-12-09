@@ -96,13 +96,13 @@
     "active": true,
     "priority": 70,
     "datePublished": "2019-07-24",
-    "title": "Koop uw erfpacht af",
-    "description": "Tot eind 2019 krijgt u korting als u uw erfpacht afkoopt",
+    "title": "Eeuwigdurende erfpacht",
+    "description": "Tot 1 januari 2020 kunt u gebruik maken van de gunstige voorwaarden",
     "conditional": "datetime.now() < datetime(2020, 1, 1) and value_of(data, 'erfpacht') == True",
     "isPersonalized": true,
     "link": {
-      "title": "Bekijk uw aanbieding",
-      "to": "https://www.amsterdam.nl/veelgevraagd/?productid=%7BD7C52681-9C97-4058-A6CE-EE00183300FA%7D"
+      "title": "Ga naar het overstapportaal",
+      "to": "https://www.amsterdam.nl/kenjeerfpacht/overstapportaal/"
     },
     "imgUrl": "api/tips/static/tip_images/erfpacht.jpg"
   },
