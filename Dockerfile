@@ -15,6 +15,7 @@ RUN apt-get update \
 
 WORKDIR /app
 COPY requirements.txt /app/
+COPY uwsgi.ini /app/
 COPY test.sh /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
@@ -22,4 +23,4 @@ COPY .flake8 /app/
 
 COPY tips /app/tips
 USER datapunt
-CMD uwsgi
+CMD uwsgi --ini /app/uwsgi.ini
