@@ -1,9 +1,6 @@
-import datetime
 from unittest import TestCase
 
-from dateutil.relativedelta import relativedelta
-
-from tips.api.tip_generator import tips_generator, to_datetime, value_of, before_or_on, is_18, object_where, fix_id, \
+from tips.api.tip_generator import tips_generator, fix_id, \
     format_tip, get_tips_from_user_data
 from tips.tests.fixtures.fixture import get_fixture
 
@@ -29,108 +26,11 @@ def get_tip(priority=50):
     }
 
 
-class HelperFunctionsTests(TestCase):
-
-    def test_to_datetime(self):
-        # valid
-        result = to_datetime('1950-01-01T00:00:00Z')
-        self.assertEqual(result, datetime.datetime(year=1950, month=1, day=1, tzinfo=datetime.timezone.utc))
-
-        # valid
-        result = to_datetime('1950-01-01')
-        self.assertEqual(result, datetime.datetime(year=1950, month=1, day=1))
-
-        # invalid
-        with self.assertRaises(ValueError):
-            result = to_datetime('not a date')
-            self.assertEqual(result, datetime.datetime(year=1950, month=1, day=1, tzinfo=datetime.timezone.utc))
-
-    def test_value_of(self):
-        test_dict = {
-            'a': {
-                'b': {
-                    'c': 1
-                }
-            },
-            'aa': {
-                'bb': 2
-            },
-            'c': 3
-        }
-
-        self.assertEqual(value_of(test_dict, 'c'), 3)
-        self.assertEqual(value_of(test_dict, 'a.b.c'), 1)
-        self.assertEqual(value_of(test_dict, 'aa.bb'), 2)
-        self.assertEqual(value_of(test_dict, 'doesnotexist'), None)
-        self.assertEqual(value_of(test_dict, 'doesnotexist', 3), 3)
-        self.assertEqual(value_of(test_dict, 'a.doesnotexist'), None)
-
-    def test_before_or_on(self):
-        now = datetime.datetime.now()
-        today = datetime.date.today()
-        one_month = relativedelta(months=1)
-        one_year = relativedelta(years=1)
-
-        # test datetimes
-        self.assertFalse(before_or_on(now - one_month, years=1))
-        self.assertTrue(before_or_on(now - (one_year + one_month), years=1))
-
-        # test date
-        self.assertTrue(before_or_on(today - one_year, years=1))
-        self.assertTrue(before_or_on(today - (one_year + one_month), years=1))
-        self.assertFalse(before_or_on(today - (one_year - one_month), years=1))
-
-    def test_is_18(self):
-        today = datetime.date.today()
-        one_month = relativedelta(months=1)
-        eighteen_year = relativedelta(years=18)
-
-        self.assertTrue(is_18(today - eighteen_year))
-        self.assertTrue(is_18(today - (eighteen_year + one_month)))
-        self.assertFalse(is_18(today - (eighteen_year - one_month)))
-
-    def test_object_where(self):
-        test_dict = {
-            "focus": [
-                {
-                    "name": "a",
-                    "_id": "0-0"
-                },
-                {
-                    "name": "b",
-                    "_id": "0-1"
-                }
-            ]
-        }
-
-        expected = {
-            "name": "a",
-            "_id": "0-0"
-        }
-
-        # One to match
-        result = object_where(test_dict['focus'], {"name": "a"})
-        self.assertEqual(result, expected)
-
-        # Two to match
-        result = object_where(test_dict['focus'], {"name": "a", "_id": "0-0"})
-        self.assertEqual(result, expected)
-
-        # Second item should match on both
-        result = object_where(test_dict['focus'], {"name": "b", "_id": "0-1"})
-        self.assertEqual(result, None)
-
-        # First query param is a match for item 0. Second is not
-        result = object_where(test_dict['focus'], {"name": "a", "_id": "0-1"})
-        self.assertEqual(result, None)
-
-        # Partial matches for both second and first, but reversed
-        result = object_where(test_dict['focus'], {"name": "b", "_id": "0-0"})
-        self.assertEqual(result, None)
-
-        # Key does not exist
-        result = object_where(test_dict['focus'], {"does not exist": "a"})
-        self.assertEqual(result, None)
+def new_rule(rule: str):
+    return {
+        "type": "rule",
+        "rule": rule
+    }
 
 
 class TipsGeneratorTest(TestCase):
@@ -162,10 +62,10 @@ class TipsGeneratorTest(TestCase):
         tip3 = get_tip(40)
         tip4 = get_tip(50)
 
-        tip4['conditional'] = "False"
+        tip4['rules'] = [new_rule("False")]
 
         # add them out of order to test the ordering
-        tips_pool = [tip1, tip0, tip2, tip3]
+        tips_pool = [tip1, tip0, tip2, tip3, tip4]
         result = tips_generator(self.get_client_data(), tips_pool)
         tips = result['items']
 
@@ -205,9 +105,9 @@ class ConditionalTest(TestCase):
     def test_conditional(self):
         """ Test one passing conditional, one failing and one without (the default) """
         tip1_mock = get_tip()
-        tip1_mock['conditional'] = "False"
+        tip1_mock['rules'] = [new_rule("false")]
         tip2_mock = get_tip()
-        tip2_mock['conditional'] = "True"
+        tip2_mock['rules'] = [new_rule("true")]
         tip3_mock = get_tip()
 
         tips_pool = [tip1_mock, tip2_mock, tip3_mock]
@@ -222,7 +122,7 @@ class ConditionalTest(TestCase):
     def test_conditional_exception(self):
         """ Test that invalid conditional is (silently) ignored. Probably not the best idea... """
         tip1_mock = get_tip()
-        tip1_mock['conditional'] = "syntax error"
+        tip1_mock['rules'] = [new_rule("@")]
         tip2_mock = get_tip()
 
         tips_pool = [tip1_mock, tip2_mock]
@@ -236,7 +136,7 @@ class ConditionalTest(TestCase):
     def test_conditional_invalid(self):
         """ Test that it errors on completely wrong conditional. """
         tip1_mock = get_tip()
-        tip1_mock['conditional'] = True
+        tip1_mock['rules'] = new_rule('true')
         tip2_mock = get_tip()
 
         tips_pool = [tip1_mock, tip2_mock]
@@ -248,7 +148,7 @@ class ConditionalTest(TestCase):
         Test whether a tip works correctly when based on user data.
         """
         tip1_mock = get_tip()
-        tip1_mock['conditional'] = "data['erfpacht'] == True"
+        tip1_mock['rule'] = [new_rule('$.erfpacht is true')]
         tip2_mock = get_tip()
         tips_pool = [tip1_mock, tip2_mock]
 
@@ -262,10 +162,12 @@ class ConditionalTest(TestCase):
 
     def test_data_based_tip_path(self):
         tip1_mock = get_tip()
-        tip1_mock['conditional'] = "value_of(data, 'erfpacht') == True"
+        tip1_mock['rules'] = [new_rule("$.erfpacht is true")]
+        tip1_mock['isPersonalized'] = True
         tip2_mock = get_tip()
         # 18 or older
-        tip2_mock['conditional'] = "is_18(value_of(data, 'brp.persoon.geboortedatum'))"
+        tip2_mock['rules'] = [{"type": "ref", "ref_id": "2"}]
+        tip2_mock['isPersonalized'] = True
         tips_pool = [tip1_mock, tip2_mock]
 
         client_data = self.get_client_data(optin=True)
@@ -276,11 +178,13 @@ class ConditionalTest(TestCase):
         # make sure the other is in there
         self.assertEqual(len(tips), 3)
         self.assertEqual(tips[0]['id'], tip1_mock['id'])
+        self.assertEqual(tips[0]['isPersonalized'], True)
         self.assertEqual(tips[1]['id'], tip2_mock['id'])
+        self.assertEqual(tips[0]['isPersonalized'], True)
 
     def test_data_based_tip_with_list(self):
         tip1_mock = get_tip()
-        tip1_mock['conditional'] = "value_of(object_where(value_of(data, 'focus'), {'_id': '0-0'}), 'processtappen.aanvraag._id') == 0 "
+        tip1_mock['rules'] = [new_rule("$.focus[@._id is '0-0' and @.processtappen.aanvraag._id is 0]")]
         tip1_mock['isPersonalized'] = True
         tips_pool = [tip1_mock]
 
@@ -294,11 +198,11 @@ class ConditionalTest(TestCase):
 
     def test_is_personalized(self):
         tip1_mock = get_tip()
-        tip1_mock['conditional'] = "True"
+        tip1_mock['rules'] = [new_rule("True")]
         tip1_mock['isPersonalized'] = True
 
         tip2_mock = get_tip()
-        tip2_mock['conditional'] = "True"
+        tip2_mock['rules'] = [new_rule("True")]
         # do not add isPersonalized to tip 2. It should default to False
         tips_pool = [tip1_mock, tip2_mock]
 
@@ -320,7 +224,9 @@ class SourceTipsTests(TestCase):
                 'tips': [
                     {
                         'id': 'source1-1',
-                        'conditional': 'True',
+                        'rules': [
+                            'true',
+                        ],
                     }
                 ]
             },
@@ -328,7 +234,7 @@ class SourceTipsTests(TestCase):
                 'tips': [
                     {
                         'id': 'foo-1',
-                        'conditional': 'print("something")'
+                        'rules': [new_rule('print("something")')]
                     },
                     {
                         'id': 'foo-2',
@@ -344,9 +250,9 @@ class SourceTipsTests(TestCase):
         self.assertEqual(result[2]['id'], 'foo-2')
 
         # make sure the conditional is removed
-        self.assertNotIn('conditional', result[0])
-        self.assertNotIn('conditional', result[1])
-        self.assertNotIn('conditional', result[2])
+        self.assertNotIn('rules', result[0])
+        self.assertNotIn('rules', result[1])
+        self.assertNotIn('rules', result[2])
 
     def test_format_tip(self):
         # test all the fill cases
