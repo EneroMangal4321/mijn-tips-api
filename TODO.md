@@ -1,3 +1,6 @@
+# TODO Lijst
+---
+---
 ## ~~Tests laten draaien~~
 ---
 ## ~~Toegang tot design van de omgeving die gebouwd wordt~~
