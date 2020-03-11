@@ -22,7 +22,7 @@
     "rules": [
       {
         "type": "rule",
-        "rule": "$.persoon.mokum is true"
+        "rule": "$.brp.persoon.mokum is true"
       }
     ]
   },
@@ -31,7 +31,25 @@
     "rules": [
       {
         "type": "rule",
-        "rule": "$.kinderen is true"
+        "rule": "$.brp.kinderen is true"
+      }
+    ]
+  },
+  "5": {
+    "name": "Is ingeschreven in Amsterdam",
+    "rules": [
+      {
+        "type": "rule",
+        "rule" : "$.brp@gemeentenaamInschrijving is Amsterdam"
+      }
+    ]
+  },
+  "6": {
+    "name": "Kind is tussen 2 en 18 jaar",
+    "rules": [
+      {
+        "type": "rule",
+        "rule": "dateTime($.brp.kinderen.geboortedatum) - timeDelta(2, 0, 0, 0, 0, 0) >= now() and dateTime($.brp.kinderen.geboortedatum) - timeDelta(18, 0, 0, 0, 0, 0) <= now()"
       }
     ]
   }

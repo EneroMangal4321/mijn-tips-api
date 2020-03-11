@@ -1,7 +1,7 @@
 
 [
     {
-    "id": "mijn-10",
+    "id": "pio-1",
     "active": true,
     "priority": 70,
     "datePublished": "2019-08-18",
@@ -11,6 +11,142 @@
       {
         "type": "ref",
         "ref_id": "3"
+      }
+    ],
+    "isPersonalized": true,
+    "link": {
+      "title": "Kijk op de kaart",
+      "to": "/buurt"
+    },
+    "imgUrl": "/api/tips/static/tip_images/afvalpunt.jpg"
+  },
+  {
+    "id": "pio-2",
+    "active": true,
+    "priority": 70,
+    "datePublished": "2019-08-18",
+    "title": "Tegemoetkoming aanvullend OV",
+    "description": "Tegemoetkoming aanvullend OV is extra geld voor mensen met AOW en een pas voor aanvullend openbaar vervoer (AOV).",
+    "rules": [
+      {
+        "type": "ref",
+        "ref_id": "3"
+      }
+    ],
+    "isPersonalized": true,
+    "link": {
+      "title": "Kijk op de kaart",
+      "to": "/buurt"
+    },
+    "imgUrl": "/api/tips/static/tip_images/afvalpunt.jpg"
+  },
+  {
+    "id": "pio-3",
+    "active": true,
+    "priority": 70,
+    "datePublished": "2019-08-18",
+    "title": "Gratis OV voor ouderen",
+    "description": "Gratis openbaar vervoer voor ouderen met AOW en een laag inkomen.",
+    "rules": [
+      {
+        "type": "ref",
+        "ref_id": "3"
+      }
+    ],
+    "isPersonalized": true,
+    "link": {
+      "title": "Kijk op de kaart",
+      "to": "/buurt"
+    },
+    "imgUrl": "/api/tips/static/tip_images/afvalpunt.jpg"
+  },
+  {
+    "id": "pio-4",
+    "active": true,
+    "priority": 70,
+    "datePublished": "2019-08-18",
+    "title": "Gratis laptop of tablet voor middelbare school",
+    "description": "Een gratis laptop of tablet voor uw kind op de middelbare school",
+    "rules": [
+      {
+        "type": "rule",
+        "rule": "dateTime($.brp.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(2020, 9, 30, 0, 0, 0)" 
+      },
+      {
+          "type": "ref",
+          "ref_id": "3"
+      }
+    ],
+    "isPersonalized": true,
+    "link": {
+      "title": "Kijk op de kaart",
+      "to": "/buurt"
+    },
+    "imgUrl": "/api/tips/static/tip_images/afvalpunt.jpg"
+  },
+  {
+    "id": "pio-5",
+    "active": true,
+    "priority": 70,
+    "datePublished": "2019-08-18",
+    "title": "Gratis laptop of tablet basisschool",
+    "description": "Een gratis laptop of tablet voor uw kind  van 10, 11 of 12 jaar op de basisschool.",
+    "rules": [
+      {
+        "type": "rule",
+        "rule": "now() - dateTime($.brp.kinderen.geboortedatum) = 10 or now() - dateTime($.brp.kinderen.geboortedatum) = 11 or now() - dateTime($.brp.kinderen.geboortedatum) = 12 "
+      },
+      {
+          "type": "ref",
+          "ref_id": "3"
+      }
+    ],
+    "isPersonalized": true,
+    "link": {
+      "title": "Kijk op de kaart",
+      "to": "/buurt"
+    },
+    "imgUrl": "/api/tips/static/tip_images/afvalpunt.jpg"
+  },
+  {
+    "id": "pio-6",
+    "active": true,
+    "priority": 70,
+    "datePublished": "2019-08-18",
+    "title": "OV-vergoeding voor mantelzorgers",
+    "description": "Zorgt u voor een familielid of vriend(in)? OV-vergoeding voor mantelzorgers is extra geld voor de kosten van het openbaar vervoer.",
+    "rules": [
+      {
+        "type": "ref",
+        "ref_id": "2"
+      },
+      {
+          "type": "ref",
+          "ref_id": "3"
+      }
+    ],
+    "isPersonalized": true,
+    "link": {
+      "title": "Kijk op de kaart",
+      "to": "/buurt"
+    },
+    "imgUrl": "/api/tips/static/tip_images/afvalpunt.jpg"
+  },
+  {
+    "id": "pio-7",
+    "active": true,
+    "priority": 70,
+    "datePublished": "2019-08-18",
+    "title": "Reiskostenvergoeding voor scholieren",
+    "description": "Reiskostenvergoeding voor scholieren die 3 of meer zones met het openbaar vervoer reizen naar school.",
+    "rules": [
+      {
+        "type": "ref",
+        "ref_id": "2"
+      },
+      {
+          "type": "ref",
+          "ref_id": "3"
       }
     ],
     "isPersonalized": true,
@@ -51,6 +187,26 @@
       {
         "type": "rule",
         "rule": "dateTime($.brp.persoon.geboortedatum) - timeDelta(21, 0, 0, 0, 0, 0) <= now()"
+      }
+    ],
+    "isPersonalized": true,
+    "link": {
+      "title": "Kijk op de kaart",
+      "to": "/buurt"
+    },
+    "imgUrl": "/api/tips/static/tip_images/afvalpunt.jpg"
+  },
+  {
+    "id": "mijn-13",
+    "active": true,
+    "priority": 70,
+    "datePublished": "2019-08-18",
+    "title": "Gratis identiteitskaart",
+    "description": "De identiteitskaart (ID-kaart) is gratis voor Amsterdammers met een Stadspas met groene stip. Ook uw kinderen tot 18 jaar kunnen een gratis ID-kaart krijgen.",
+    "rules": [
+      {
+        "type": "rule",
+        "rule": "$.brp.persoon.nationaliteiten@omschrijving is Nederlandse"
       }
     ],
     "isPersonalized": true,
