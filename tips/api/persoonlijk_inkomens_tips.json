@@ -1,0 +1,43 @@
+
+[
+    {
+    "id": "mijn-10",
+    "active": true,
+    "priority": 70,
+    "datePublished": "2019-08-18",
+    "title": "Bekijk de afvalpunten in de buurt ",
+    "description": "Kijk waar het dichtstbijzijnde Afvalpunt is. En welke vergunningen de gemeente heeft uitgegeven in uw buurt",
+    "rules": [
+      {
+        "type": "ref",
+        "ref_id": "3"
+      }
+    ],
+    "isPersonalized": true,
+    "link": {
+      "title": "Kijk op de kaart",
+      "to": "/buurt"
+    },
+    "imgUrl": "/api/tips/static/tip_images/afvalpunt.jpg"
+  },
+  {
+    "id": "mijn-11",
+    "active": true,
+    "priority": 70,
+    "datePublished": "2019-08-18",
+    "title": "Aanvullende inkomensvoorziening ouderen ",
+    "description": "Hebt u een korting op uw AOW en hebt u weinig vermogen? Dan kunt u extra geld krijgen. Dit extra geld heet een aanvulling.",
+    "rules": [
+      {
+        "type": "rule",
+        "rule": "dateTime(brp.persoon.geboortedatum) - timeDelta(66, 4, 0, 0, 0, 0) <= now()"
+      }
+    ],
+    "isPersonalized": true,
+    "link": {
+      "title": "Kijk op de kaart",
+      "to": "/buurt"
+    },
+    "imgUrl": "/api/tips/static/tip_images/afvalpunt.jpg"
+  }
+]

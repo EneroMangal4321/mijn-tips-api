@@ -23,6 +23,12 @@ def get_tips():
     tips_data = tips_generator(request.get_json())
     return tips_data
 
+def get_income_tips():
+    # This is a POST because the user data gets sent in the body.
+    # This data is too large and inappropriate for a GET, also because of privacy reasons
+    tips_data = tips_generator(request.get_json())
+    return tips_data
+
 
 @app.route('/tips/static/tip_images/<path:filename>')
 def download_file(filename):

@@ -25,7 +25,8 @@
     "omschrijvingGeslachtsaanduiding": "Man",
     "opgemaakteNaam": "W. Beemsterboer",
     "voornamen": "Wesley",
-    "voorvoegselGeslachtsnaam": null
+    "voorvoegselGeslachtsnaam": null,
+    "mokum": true
   },
   "verbintenis": {
     "datumOntbinding": null,

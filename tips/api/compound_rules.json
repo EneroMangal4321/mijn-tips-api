@@ -16,5 +16,23 @@
         "rule": "dateTime($.brp.persoon.geboortedatum) - timeDelta(18, 0, 0, 0, 0, 0) <= now()"
       }
     ]
+  },
+  "3": {
+    "name": "Woont in gemeente Amsterdam",
+    "rules": [
+      {
+        "type": "rule",
+        "rule": "$.persoon.mokum is true"
+      }
+    ]
+  },
+  "4": {
+    "name": "Heeft kinderen",
+    "rules": [
+      {
+        "type": "rule",
+        "rule": "$.kinderen is true"
+      }
+    ]
   }
 }
