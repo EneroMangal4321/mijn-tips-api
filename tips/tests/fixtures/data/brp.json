@@ -16,6 +16,7 @@
     "geboorteplaatsnaam": "Lochem",
     "gemeentenaamInschrijving": "Amsterdam",
     "geslachtsnaam": "Beemsterboer",
+    "mokum": true,
     "nationaliteiten": [
       {
         "omschrijving": "Nederlandse"
@@ -25,8 +26,7 @@
     "omschrijvingGeslachtsaanduiding": "Man",
     "opgemaakteNaam": "W. Beemsterboer",
     "voornamen": "Wesley",
-    "voorvoegselGeslachtsnaam": null,
-    "mokum": true
+    "voorvoegselGeslachtsnaam": null
   },
   "verbintenis": {
     "datumOntbinding": null,

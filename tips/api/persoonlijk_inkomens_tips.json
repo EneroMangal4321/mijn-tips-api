@@ -30,7 +30,27 @@
     "rules": [
       {
         "type": "rule",
-        "rule": "dateTime(brp.persoon.geboortedatum) - timeDelta(66, 4, 0, 0, 0, 0) <= now()"
+        "rule": "dateTime($.brp.persoon.geboortedatum) - timeDelta(66, 4, 0, 0, 0, 0) <= now()"
+      }
+    ],
+    "isPersonalized": true,
+    "link": {
+      "title": "Kijk op de kaart",
+      "to": "/buurt"
+    },
+    "imgUrl": "/api/tips/static/tip_images/afvalpunt.jpg"
+  },
+  {
+    "id": "mijn-12",
+    "active": true,
+    "priority": 70,
+    "datePublished": "2019-08-18",
+    "title": "Individuele inkomenstoeslag",
+    "description": "Hebt u drie jaar of langer een laag inkomen en denkt u dat dit voorlopig zo zal blijven? Dan kunt u Individuele inkomenstoeslag aanvragen.",
+    "rules": [
+      {
+        "type": "rule",
+        "rule": "dateTime($.brp.persoon.geboortedatum) - timeDelta(21, 0, 0, 0, 0, 0) <= now()"
       }
     ],
     "isPersonalized": true,

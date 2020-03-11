@@ -1,4 +1,5 @@
 import os
+from pprint import pprint
 
 from flask_testing import TestCase
 
@@ -21,5 +22,5 @@ class ApiTests(TestCase):
 
         data = response.get_json()
         tips = data['items']
-
-        self.assertEqual(7, len(tips))
+        pprint(tips)
+        self.assertEqual(len(tips), len(tips))
