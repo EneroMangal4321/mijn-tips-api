@@ -70,7 +70,7 @@
     "rules": [
       {
         "type": "rule",
-        "rule": "dateTime($.brp.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(2020, 9, 30, 0, 0, 0)" 
+        "rule": "dateTime($.brp.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) <= dateTime([2020, 9, 30, 0, 0, 0])" 
       },
       {
           "type": "ref",
