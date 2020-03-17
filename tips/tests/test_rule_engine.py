@@ -1,8 +1,10 @@
+#codinhg: pythonql
 from unittest import TestCase
 
 import objectpath
 
 from tips.generator.rule_engine import apply_rules, _apply_rule
+
 
 
 def get_fixture_stadspas():
@@ -249,12 +251,14 @@ class RuleEngineTest(TestCase):
             apply_rules(self.test_data, rules, compound_rules)
 
     def test_date(self):
+        print("HALLO", self.user_data)
         rule = {
             "type": "rule",
             # "rule": "dateTime($.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(2020, 9, 30, 0, 0, 0)"
-            "rule": "$.kinderen[(dateTime(@.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0))]"
+            "rule": "dateTime(2020, 9, 30, 0, 0, 0, '%Y-%m-%w') - dateTime(kinderen .// geboortedatum, '%Y-%m-%w') <= 18"
         }
         rules = [rule]
-        dingetje = list(_apply_rule(self.user_data, rule, compound_rules))
-        print("hdfneifwrn", dingetje)
+        print("HALLO", _apply_rule(self.user_data, rule, compound_rules))
+        dingetje = _apply_rule(self.user_data, rule, compound_rules)
+        
         
