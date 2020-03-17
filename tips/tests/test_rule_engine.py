@@ -255,7 +255,7 @@ class RuleEngineTest(TestCase):
         rule = {
             "type": "rule",
             # "rule": "dateTime($.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(2020, 9, 30, 0, 0, 0)"
-            "rule": "dateTime(2020, 9, 30, 0, 0, 0, '%Y-%m-%w') - dateTime(kinderen .// geboortedatum, '%Y-%m-%w') <= 18"
+            "rule": "dateTime(2020, 9, 30, 0, 0, 0, '%Y-%m-%w') - timeDelta(18, 0, 0, 0, 0, 0, '%Y-%m-%w') <= dateTime(kinderen .// geboortedatum, '%Y-%m-%w')"
         }
         rules = [rule]
         print("HALLO", _apply_rule(self.user_data, rule, compound_rules))
