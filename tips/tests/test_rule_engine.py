@@ -1,4 +1,4 @@
-#codinhg: pythonql
+
 from unittest import TestCase
 
 import objectpath
@@ -251,6 +251,7 @@ class RuleEngineTest(TestCase):
             apply_rules(self.test_data, rules, compound_rules)
 
     def test_date(self):
+        #coding: pythonql
         print("HALLO", self.user_data)
         rule = {
             "type": "rule",
