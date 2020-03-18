@@ -1,7 +1,8 @@
-
+import pandas as pd
 from unittest import TestCase
 
 import objectpath
+
 
 from tips.generator.rule_engine import apply_rules, _apply_rule
 
@@ -176,7 +177,7 @@ class RuleEngineTest(TestCase):
             ]
         }
         self.test_data = objectpath.Tree(_test_data)
-        self.user_data = objectpath.Tree(_user_data)
+        self.user_data = _user_data
 
     def test_apply_rules_simple(self):
         rules = [
@@ -251,10 +252,12 @@ class RuleEngineTest(TestCase):
             apply_rules(self.test_data, rules, compound_rules)
 
     def test_date(self):
+        
+        data = str(self.user_data)
         rule = {
             "type": "rule",
             # "rule": "dateTime($.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(2020, 9, 30, 0, 0, 0)"
-            "rule": "dateTime(2020, 9, 30, 0, 0, 0, '%Y-%m-%w') - timeDelta(18, 0, 0, 0, 0, 0, '%Y-%m-%w') <= dateTime(kinderen .// geboortedatum, '%Y-%m-%w')"
+            "rule": data.query("dateTime(2020, 9, 30, 0, 0, 0, '%Y-%m-%w') - timeDelta(18, 0, 0, 0, 0, 0, '%Y-%m-%w') <= dateTime(kinderen.geboortedatum, '%Y-%m-%w')", inplace = True)
         }
         rules = [rule]
         print("HALLO", _apply_rule(self.user_data, rule, compound_rules))
