@@ -253,7 +253,7 @@ class RuleEngineTest(TestCase):
     def test_date(self):
         
         data = self.user_data
-        print(datetime.datetime(today()))
+        print(datetime.datetime(2020, 9, 30, 0, 0, 0) - datetime.date(18, 0, 0))
         rule = {
             "type": "rule",
             # "rule": "dateTime($.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(2020, 9, 30, 0, 0, 0)"
