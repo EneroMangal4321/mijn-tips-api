@@ -58,7 +58,7 @@
     "rules": [
       {
         "type": "rule",
-        "rule": "dateTime(2020, 9, 30, 0, 0, 0, '%Y-%m-%w') - timeDelta(18, 0, 0, 0, 0, 0, '%Y-%m-%w') = dateTime($.brp.kinderen.geboortedatum, '%Y-%m-%w')"
+        "rule": "dateTime(2020, 9, 30, 0, 0, 0, '%Y-%m-%w') - timeDelta(18, 0, 0, 0, 0, 0, '%Y-%m-%w') <= dateTime($.brp.kinderen.geboortedatum, '%Y-%m-%w')"
       }
     ]
   }
