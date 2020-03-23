@@ -256,7 +256,7 @@ class RuleEngineTest(TestCase):
         # print(datetime.datetime(2020, 9, 30, 0, 0, 0, '%Y-%m-%w') - datetime.timedelta(18, 0, 0, 0, 0, 0, '%Y-%m-%w'))
         rule = {
             "type": "rule",
-            # "rule": "dateTime($.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(2020, 9, 30, 0, 0, 0)"
+            
             "rule": " dateTime($.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(2020, 9, 30, 0, 0, 0)"
         }
         rules = [rule]
