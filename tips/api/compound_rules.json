@@ -55,11 +55,11 @@
   },
   "7": {
     "name": "Kind is op 30 september 2020 geen 18",
-    "info": "2020-09-30",
+    "info": "2020-09-30T00:00:00Z",
     "rules": [
       {
         "type": "rule",
-        "rule": "dateTime($.brp.kinderen.geboortedatum, '%Y-%m-%w') + timeDelta(18, 0, 0, 0, 0, 0, '%Y-%m-%w') > dateTime($.info, '%Y-%m-%w')"
+        "rule": "dateTime($.brp.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) > dateTime($.info)"
       }
     ]
   }

@@ -1,7 +1,6 @@
 from unittest import TestCase
-import datetime
+
 import objectpath
-import rule_engine
 
 from tips.generator.rule_engine import apply_rules, _apply_rule
 

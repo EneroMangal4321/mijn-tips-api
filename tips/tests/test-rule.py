@@ -11,4 +11,4 @@ inputData = {
 treedata = Tree(inputData)
 
 rule = 'dateTime($.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) > dateTime($.info)'
-print(treedata.execute(rule))
+print("WAT IS DIT", treedata.execute(rule))
