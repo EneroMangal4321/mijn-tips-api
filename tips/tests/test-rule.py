@@ -1,12 +1,14 @@
 from objectpath import Tree
 
 inputData = {
-    "geboortedatum": "2000-01-01",
-    "datumInToekomst": "2018-01-01",
+    "info": "2020-09-30",
+    "kinderen" : {
+        "geboortedatum": "2019-01-01"
+    }
 }
 
 
 treedata = Tree(inputData)
 
-rule = 'dateTime($.datumInToekomst) - timeDelta(18, 0, 0, 0, 0, 0) > dateTime($.geboortedatum)'
+rule = 'dateTime($.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) > dateTime($.info)'
 print(treedata.execute(rule))

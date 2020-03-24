@@ -251,11 +251,10 @@ class RuleEngineTest(TestCase):
             apply_rules(self.test_data, rules, compound_rules)
 
     def test_date(self):
-        data = self.user_data
-        # print(datetime.datetime(2020, 9, 30, 0, 0, 0, '%Y-%m-%w') - datetime.timedelta(18, 0, 0, 0, 0, 0, '%Y-%m-%w'))
         rule = {
-            "type": "rule",      
-            "rule": "dateTime($.kinderen.geboortedatum) + dateTime(18, 0, 0, 0, 0, 0) <= dateTime(2020, 9, 30, 0, 0, 0)"
+            "type": "rule",     
+            "info": "2020-09-30",
+            "rule": "dateTime($.kinderen.geboortedatum) + dateTime(18, 0, 0, 0, 0, 0) > dateTime($.info)"
         }
         rules = [rule]
         print("HALLO", _apply_rule(self.user_data, rule, compound_rules))
