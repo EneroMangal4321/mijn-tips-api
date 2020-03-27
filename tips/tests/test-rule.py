@@ -12,11 +12,11 @@ inputData = {
         }
     ]
 }
-
+rule = 'dateTime($.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) > dateTime($.info)'
 for geboortedatum in "kinderen":
-    
+    treedata = Tree(inputData)
+    print("WAT IS DIT", treedata.execute(rule))
 
-treedata = Tree(inputData)
 
-rule = 'for geboortedatum in kinderen dateTime($.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) > dateTime($.info)'
-print("WAT IS DIT", treedata.execute(rule))
+
+
