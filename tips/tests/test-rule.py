@@ -1,16 +1,20 @@
 from objectpath import Tree
-import os
+
 
 inputData = {
-    "info": "2020-09-30"
-    # "kinderen" : {
-    #     "geboortedatum": "2019-01-01"
-    # }
+    "info": "2020-09-30",
+    "kinderen": [
+        {
+            "geboortedatum": "1995-01-01"
+        },
+        {
+            "geboortedatum": "1999-01-01"
+        }
+    ]
 }
 
-BRP = os.path.join(PROJECT_PATH, 'tests', 'fixtures', 'data', 'brp.json')
 
 treedata = Tree(inputData)
 
-rule = 'dateTime($.brp.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) > dateTime($.info)'
+rule = 'for geboortedatum in kinderen dateTime($.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) > dateTime($.info)'
 print("WAT IS DIT", treedata.execute(rule))
