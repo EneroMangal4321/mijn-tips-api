@@ -8,11 +8,11 @@ inputData = {
             "geboortedatum": "1995-01-01"
         },
         {
-            "geboortedatum": "1999-01-01"
+            "geboortedatum": "2005-01-01"
         }
     ]
 }
-rule = 'dateTime($.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) > dateTime($.info)'
+rule = 'dateTime($.kinderen.geboortedatum[1]) + timeDelta(18, 0, 0, 0, 0, 0) > dateTime($.info)'
 treedata = Tree(inputData)
 for geboortedatum in inputData:
     print(geboortedatum)
