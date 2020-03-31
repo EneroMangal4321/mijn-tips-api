@@ -129,6 +129,7 @@ def tips_generator(user_data, tips=None):
     if tips is None:
         tips = tips_pool
 
+
     # add source tips
     source_tips = get_tips_from_user_data(user_data)
     if source_tips:
@@ -138,7 +139,6 @@ def tips_generator(user_data, tips=None):
         user_data_prepared = Tree(user_data['data'])
     else:
         user_data_prepared = Tree({})
-
     tips = [tip for tip in tips if tip_filter(tip, user_data_prepared)]
     tips = [clean_tip(tip) for tip in tips]
     for tip in tips:

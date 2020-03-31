@@ -2,7 +2,8 @@ from unittest import TestCase
 
 import objectpath
 
-from tips.generator.rule_engine import apply_rules
+from tips.generator.rule_engine import apply_rules, _apply_rule
+
 
 
 def get_fixture_stadspas():
@@ -163,7 +164,15 @@ class RuleEngineTest(TestCase):
             'persoon': {
                 'geboortedatum': '1950-01-01T00:00:00Z'
             },
-            'foo': _test_data
+            'foo': _test_data,
+            "kinderen": [
+                {
+                    "geboortedatum": "2019-07-08T09:14:58.963Z"
+                },
+                {
+                    "geboortedatum": "2019-07-08T09:14:58.963Z"
+                }
+            ]
         }
         self.test_data = objectpath.Tree(_test_data)
         self.user_data = objectpath.Tree(_user_data)
@@ -239,3 +248,15 @@ class RuleEngineTest(TestCase):
         rules = [{"type": "ref", "ref_id": "1"}]
         with self.assertRaises(RecursionError):
             apply_rules(self.test_data, rules, compound_rules)
+
+    def test_date(self):
+        rule = {
+            "type": "rule",     
+            "info": "2020-09-30",
+            "rule": "dateTime($.kinderen.geboortedatum) + dateTime(18, 0, 0, 0, 0, 0) > dateTime($.info)"
+        }
+        rules = [rule]
+        print("HALLO", _apply_rule(self.user_data, rule, compound_rules))
+        dingetje = _apply_rule(self.user_data, rule, compound_rules)
+        
+        

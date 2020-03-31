@@ -15,5 +15,5 @@ def _apply_rule(userdata, rule, compound_rules):
 
     if rule['type'] == "ref":
         compound_rule = compound_rules[rule['ref_id']]
-        return apply_rules(userdata, compound_rule['rules'], compound_rules)
+        return apply_rules(userdata, compound_rule['rules'], compound_rules)  
     return False
