@@ -10,6 +10,7 @@ We willen een plek maken op Mijn Amsterdam genoemd Persoonlijke Inkomens Omgevin
 ### informatie
 * Welke tips zijn er
 * Wat zijn de regels van de tips
+* gebruik van libraries
 ### Tools
 * Editor
 * browser 
@@ -26,5 +27,5 @@ We willen een plek maken op Mijn Amsterdam genoemd Persoonlijke Inkomens Omgevin
     10. PyYAML
 Deze als voorbeeld maar er zijn er nog meer.
 * command prompt 
-
+* GitHub
 
