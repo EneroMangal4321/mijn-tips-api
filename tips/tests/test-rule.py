@@ -22,5 +22,3 @@ print("WAT IS DIT", treedata.execute(rule))
 
 
 def test_rule(inputData):
-
-
