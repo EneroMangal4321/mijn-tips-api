@@ -20,6 +20,6 @@ for geboortedatum in inputData:
 print("WAT IS DIT", treedata.execute(rule))
 
 
-def rule(inputData):
+# def rule(inputData):
 
 
