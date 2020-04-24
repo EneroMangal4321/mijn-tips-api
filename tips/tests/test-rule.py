@@ -18,8 +18,6 @@ def test_rule():
     }
     rule = 'dateTime($.kinderen.geboortedatum[1]) + timeDelta(18, 0, 0, 0, 0, 0) > dateTime($.info)'
     treedata = Tree(inputData)
-    for geboortedatum in inputData:
-        print(geboortedatum)
 
     print("WAT IS DIT", treedata.execute(rule))
 
