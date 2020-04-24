@@ -1,9 +1,6 @@
 from objectpath import Tree
 from unittest import TestCase
 
-
-
-
 def test_rule():
     inputData = {
         "info": "2020-09-30",
