@@ -22,3 +22,8 @@ def test_rule():
         print(geboortedatum)
 
     print("WAT IS DIT", treedata.execute(rule))
+
+
+if __name__ == "__main__":
+    test_rule()
+    print("OK")
