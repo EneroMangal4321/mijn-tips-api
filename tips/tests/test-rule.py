@@ -18,9 +18,9 @@ def test_rule():
     }
     rule = 'dateTime($.kinderen.geboortedatum[1]) + timeDelta(18, 0, 0, 0, 0, 0) > dateTime($.info)'
     treedata = Tree(inputData)
-
     print("WAT IS DIT", treedata.execute(rule))
-
+    som = 'dateTime($.kinderen.geboortedatum[1]) + timeDelta(18, 0, 0, 0, 0, 0)'
+    print(treedata.execute(som))
 
 if __name__ == "__main__":
     test_rule()
