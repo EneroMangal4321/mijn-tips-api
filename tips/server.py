@@ -1,10 +1,17 @@
 import connexion
 import sentry_sdk
+import os
+import json
+
+from tips.config import PROJECT_PATH
 from flask import request, send_from_directory
 from sentry_sdk.integrations.flask import FlaskIntegration
 
 from tips.api.tip_generator import tips_generator
 from tips.config import get_sentry_dsn, get_photo_path
+
+PERSOONLIJK_INKOMENS_TIPS_FILE = os.path.join(PROJECT_PATH, 'api', 'persoonlijk_inkomens_tips.json')
+
 
 app = connexion.FlaskApp(__name__, specification_dir='openapi/')
 
@@ -30,6 +37,7 @@ def get_income_tips():
         persoonlijk_inkomens_tips = json.load(fp)
     tips_data = tips_generator(request.get_json(),persoonlijk_inkomens_tips)
     return tips_data
+
 
 @app.route('/tips/static/tip_images/<path:filename>')
 def download_file(filename):
