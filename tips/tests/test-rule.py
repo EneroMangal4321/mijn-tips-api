@@ -19,7 +19,13 @@ def test_rule():
     print("WAT IS DIT", treedata.execute(rule))
     som = 'dateTime($.kinderen.geboortedatum[1]) + timeDelta(18, 0, 0, 0, 0, 0)'
     print(treedata.execute(som))
+    return inputData
+
+def test_loop(inputData):
+    jsonData = json.loads(inputData)
+    print("HSHSH", jsonData)
 
 if __name__ == "__main__":
     test_rule()
+    test_loop(inputData)
     print("OK")
