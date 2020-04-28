@@ -20,10 +20,10 @@ def test_rule():
     som = 'dateTime($.kinderen.geboortedatum[1]) + timeDelta(18, 0, 0, 0, 0, 0)'
     print(treedata.execute(som))
 
-    jsonData = json.dumps(inputData)
+    jsonData = json.dumps(inputData["kinderen"])
     print("HSHSH", jsonData)
-    geboorte_datum_kinderen = jsonData["kinderen"]["geboortedatum"]
-    print("JSJDJ", geboorte_datum_kinderen)
+    geboorte_datum_kinderen = dict(jsonData)
+    print("JSJDJ", geboorte_datum_kinderen_list)
 
     return inputData
 
