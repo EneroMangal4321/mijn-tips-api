@@ -1,5 +1,6 @@
 from objectpath import Tree
 from unittest import TestCase
+import json
 
 def test_rule():
     inputData = {
