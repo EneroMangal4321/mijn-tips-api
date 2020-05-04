@@ -197,11 +197,6 @@ class RuleEngineTest(TestCase):
         ]
         self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
 
-        rules = [
-            {"type": "ref", "ref_id": "1"}
-        ]
-        self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
-
     def test_apply_rules_recursing(self):
         compound_rules = {
             "1": {
