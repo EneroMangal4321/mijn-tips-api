@@ -4,7 +4,7 @@ import objectpath
 
 from tips.generator.rule_engine import apply_rules
 
-from fixtures.fixture import get_fixture
+from tips.tests.fixtures.fixture import get_fixture
 
 
 def get_fixture_stadspas():
