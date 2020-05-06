@@ -149,8 +149,6 @@ compound_rules = {
 }
 
 
-geboortedatum
-
 class RuleEngineTest(TestCase):
     def setUp(self) -> None:
         _test_data = {
