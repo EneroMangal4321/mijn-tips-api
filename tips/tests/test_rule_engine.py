@@ -4,6 +4,8 @@ import objectpath
 
 from tips.generator.rule_engine import apply_rules
 
+from fixtures import fixture
+
 
 def get_fixture_stadspas():
     return {
@@ -146,6 +148,8 @@ compound_rules = {
     }
 }
 
+
+geboortedatum
 
 class RuleEngineTest(TestCase):
     def setUp(self) -> None:
