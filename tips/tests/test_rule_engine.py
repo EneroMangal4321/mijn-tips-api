@@ -281,3 +281,12 @@ class RuleEngineTest(TestCase):
         rules = [{"type": "ref", "ref_id": "1"}]
         with self.assertRaises(RecursionError):
             apply_rules(self.test_data, rules, compound_rules)
+
+    def test_compound_rules(self):
+        rules = {}
+
+        print("HDBHDB", compound_rules)
+
+        self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
+
+        #self.assertFalse(apply_rules(self.test_data, rules, compound_rules))
