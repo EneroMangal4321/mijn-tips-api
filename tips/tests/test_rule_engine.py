@@ -4,7 +4,7 @@ import objectpath
 
 from tips.generator.rule_engine import apply_rules
 
-from fixtures import fixture
+from fixtures.fixture import fixture
 
 
 def get_fixture_stadspas():
@@ -143,6 +143,52 @@ compound_rules = {
             {
                 'type': 'rule',
                 'rule': 'true'
+            }
+        ]
+    },
+    "4": {
+        "name": "Woont in gemeente Amsterdam",
+        "rules": [
+            {
+                "type": "rule",
+                "rule": "$.brp.persoon.mokum is true"
+            }
+        ]
+    },
+    "5": {
+        "name": "Heeft kinderen",
+        "rules": [
+            {
+                "type": "rule",
+                "rule": "$.brp.kinderen is true"
+            }
+        ]
+    },
+    "6": {
+        "name": "Is ingeschreven in Amsterdam",
+        "rules": [
+            {
+                "type": "rule",
+                "rule" : "$.brp@gemeentenaamInschrijving is Amsterdam"
+            }
+        ]
+    },
+    "7": {
+        "name": "Kind is tussen 2 en 18 jaar",
+        "rules": [
+            {
+                "type": "rule",
+                "rule": "dateTime($.brp.kinderen.geboortedatum) - timeDelta(2, 0, 0, 0, 0, 0) => now() and dateTime($.brp.kinderen.geboortedatum) - timeDelta(18, 0, 0, 0, 0, 0) <= now()"
+            }
+        ]
+    },
+    "8": {
+        "name": "Kind is op 30 september 2020 geen 18",
+        "info": "2020-09-30T00:00:00Z",
+        "rules": [
+            {
+                "type": "rule",
+                "rule": "dateTime($.brp.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) > dateTime($.info)"
             }
         ]
     }
