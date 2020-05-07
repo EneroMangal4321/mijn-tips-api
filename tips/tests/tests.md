@@ -34,10 +34,19 @@
 ##### Als de geboortedatum van het kind 10-6-2007 is, dan komt er True uit.
 ##### Als de geboortedatum van het kind 10-6-2000 is, dan komt er False uit.
 
+### Is kind 10, 11 of 12 jaar
+##### Als de geboortedatum 1-1-2009 is en de huidige datum 1-1-2020, dan moet er True uitkomen.
+##### Als de geboortedatum 1-1-2005 is en de huidige datum 1-1-2020, dan moet er False uitkomen.
 
+### Is 66 of ouder
+##### Als de geboortedatum 1-1-1950 is en de huidige datum 1-1-2020, dan moet er True uitkomen.
+##### Als de geboortedatum 1-1-1980 is en de huidige datum 1-1-2020, dan moet er False uitkomen.
 
-### Ik wil de rules testen. 
-##### Als ik A invul dan wil ik B krijgen, ik wil dat dit goed werkt.
+### Is Nederlandse
+##### Als $.brp.persoon.nationaliteiten@omschrijving Nederlandse is, dan moet er True uitkomen.
+##### Als $.brp.persoon.nationaliteiten@omschrijving niet Nederlandse is, dan moet er False uitkomen.
+
 
 ### ik wil ook het geheel testen, of alles samen werkt.
 ##### Als ik verschillende geboortedatums invul wil ik een verschillende selectie van tips zien.
+
