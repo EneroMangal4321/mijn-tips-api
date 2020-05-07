@@ -46,6 +46,9 @@
 ##### Als $.brp.persoon.nationaliteiten@omschrijving Nederlandse is, dan moet er True uitkomen.
 ##### Als $.brp.persoon.nationaliteiten@omschrijving niet Nederlandse is, dan moet er False uitkomen.
 
+### Is 21
+##### Als de geboortdatum 1-1-1990 is en de huidige datum 1-1-2020, dan moet er True uitkomen.
+##### Als de geboortdatum 1-1-2002 is en de huidige datum 1-1-2020, dan moet er False uitkomen.
 
 ### ik wil ook het geheel testen, of alles samen werkt.
 ##### Als ik verschillende geboortedatums invul wil ik een verschillende selectie van tips zien.
