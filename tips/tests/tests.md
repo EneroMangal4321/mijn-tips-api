@@ -1,7 +1,7 @@
 # Hoeveel tests moet ik maken.
 
 ### ik wil voor elke rule een test maken. 
-##### Dat zijn 11 tests die gemaakt moeten worden.
+##### Dat zijn 22 tests die gemaakt moeten worden.
 
 
 # Wat moet ik gaan testen.
