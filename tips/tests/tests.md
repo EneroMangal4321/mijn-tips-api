@@ -53,3 +53,6 @@
 ### ik wil ook het geheel testen, of alles samen werkt.
 ##### Als ik verschillende geboortedatums invul wil ik een verschillende selectie van tips zien.
 
+##### Als elk kind ouder is dan 18, wat kom er dan uit?
+##### Als er 2 kinderen zijn en 1 is ouder dan 18, wat komt er dan uit?
+
