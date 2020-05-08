@@ -198,7 +198,7 @@ compound_rules = {
 class RuleEngineTest(TestCase):
     def setUp(self) -> None:
         _test_data = {
-            'a': [
+            'a': [ 
                 1, 2, 3
             ],
             'b': [
@@ -208,8 +208,15 @@ class RuleEngineTest(TestCase):
             ]
         }
 
-        self.test_data = objectpath.Tree(_test_data)
+        _user_data = {
+            'persoon': {
+                'geboortedatum': '1950-01-01T00:00:00Z'
+            },
+            'foo': _test_data
+        }
 
+        self.test_data = objectpath.Tree(_test_data)
+        self.user_data = objectpath.Tree(_user_data)
     def test_apply_rules_simple(self):
         rules = [
             {"type": "rule", "rule": "2 > 1"}
