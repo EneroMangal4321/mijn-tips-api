@@ -7,6 +7,7 @@ from tips.generator.rule_engine import apply_rules
 from tips.tests.fixtures.fixture import get_fixture
 
 
+
 def get_fixture_stadspas():
     return {
         "focus": [
@@ -117,82 +118,6 @@ tips_pool = [
     }
 ]
 
-
-compound_rules = {
-    "1": {
-        "name": "Heeft geldige stadspas",
-        "rules": [
-            {
-                'type': 'rule',
-                'rule': '$.focus.*[@.soortProduct is "Minimafonds" and @.typeBesluit is "Toekenning"]'
-            }
-        ]
-    },
-    "2": {
-        "name": "is 18",
-        "rules": [
-            {
-                'type': 'rule',
-                'rule': 'dateTime($.brp.persoon.geboortedatum) - timeDelta(18, 0, 0, 0, 0, 0) <= now()'
-            }
-        ]
-    },
-    "3": {
-        "name": "Leeft nog",
-        "rules": [
-            {
-                'type': 'rule',
-                'rule': 'true'
-            }
-        ]
-    },
-    "4": {
-        "name": "Woont in gemeente Amsterdam",
-        "rules": [
-            {
-                "type": "rule",
-                "rule": "$.brp.persoon.mokum is true"
-            }
-        ]
-    },
-    "5": {
-        "name": "Heeft kinderen",
-        "rules": [
-            {
-                "type": "rule",
-                "rule": "$.brp.kinderen is true"
-            }
-        ]
-    },
-    "6": {
-        "name": "Is ingeschreven in Amsterdam",
-        "rules": [
-            {
-                "type": "rule",
-                "rule" : "$.brp@gemeentenaamInschrijving is Amsterdam"
-            }
-        ]
-    },
-    "7": {
-        "name": "Kind is tussen 2 en 18 jaar",
-        "rules": [
-            {
-                "type": "rule",
-                "rule": "dateTime($.brp.kinderen.geboortedatum) - timeDelta(2, 0, 0, 0, 0, 0) => now() and dateTime($.brp.kinderen.geboortedatum) - timeDelta(18, 0, 0, 0, 0, 0) <= now()"
-            }
-        ]
-    },
-    "8": {
-        "name": "Kind is op 30 september 2020 geen 18",
-        "info": "2020-09-30T00:00:00Z",
-        "rules": [
-            {
-                "type": "rule",
-                "rule": "dateTime($.brp.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) > dateTime($.info)"
-            }
-        ]
-    }
-}
 
 
 class RuleEngineTest(TestCase):
