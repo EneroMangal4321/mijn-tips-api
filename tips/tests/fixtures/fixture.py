@@ -36,6 +36,6 @@ def get_fixture(optin=False):
             "wmo": wmo,
             "erfpacht": True,
             "belasting": belasting,
-            "compound_rules": compound_rules,
+            # "compound_rules": compound_rules,
         }
     }
