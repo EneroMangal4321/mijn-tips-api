@@ -221,4 +221,3 @@ class RuleEngineTest(TestCase):
 
         self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
 
-        #self.assertFalse(apply_rules(self.test_data, rules, compound_rules))
