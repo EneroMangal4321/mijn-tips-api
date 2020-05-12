@@ -6,7 +6,6 @@ from tips.generator.rule_engine import apply_rules
 
 from tips.tests.fixtures.fixture import get_fixture
 
-
 class RuleEngineTest(TestCase):
     def setUp(self) -> None:
         _test_data = {
@@ -107,4 +106,3 @@ class RuleEngineTest(TestCase):
         print("HDBHDB", compound_rules)
 
         self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
-
