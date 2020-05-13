@@ -20,6 +20,7 @@ class RuleEngineTest(TestCase):
             ]
         }
 
+        # Als line 7 niet werkt met objectpath
         _user_data = {
             'persoon': {
                 'geboortedatum': '1950-01-01T00:00:00Z'
