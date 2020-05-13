@@ -6,8 +6,6 @@ from tips.generator.rule_engine import apply_rules
 
 from tips.tests.fixtures.fixture import get_fixture
 
-with open(COMPUND_RULES) as compound_rules_file:
-    compund_rules = json.load(compound_rules_file)
 
 class RuleEngineTest(TestCase):
     def setUp(self) -> None:
