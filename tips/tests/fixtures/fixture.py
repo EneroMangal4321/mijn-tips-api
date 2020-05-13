@@ -9,7 +9,6 @@ BRP = os.path.join(_FIXTURE_PATH, "brp.json")
 FOCUS = os.path.join(_FIXTURE_PATH, "focus.json")
 WMO = os.path.join(_FIXTURE_PATH, "wmo.json")
 BELASTING = os.path.join(_FIXTURE_PATH, "belasting.json")
-COMPOUND_RULES = os.path.join(_FIXTURE_PATH, "compound_rules.json")
 
 
 def get_fixture(optin=False):
@@ -25,8 +24,6 @@ def get_fixture(optin=False):
     with open(BELASTING) as belasting_file:
         belasting = json.load(belasting_file)
 
-    with open(COMPOUND_RULES) as compound_rules_file:
-        compound_rules = json.load(compound_rules_file)
 
     return {
         "optin": optin,
@@ -36,6 +33,5 @@ def get_fixture(optin=False):
             "wmo": wmo,
             "erfpacht": True,
             "belasting": belasting,
-            # "compound_rules": compound_rules,
         }
     }
