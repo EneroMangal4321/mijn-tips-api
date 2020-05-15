@@ -1,10 +1,14 @@
 from unittest import TestCase
 
 import objectpath
+import json
 
 from tips.generator.rule_engine import apply_rules
 
 from tips.tests.fixtures.fixture import get_fixture
+
+with open("mijn-tips-api/tips/api/compound_rules.json") as compound_rules_file:
+    compound_rules = json.load(compound_rules_file)
 
 
 class RuleEngineTest(TestCase):
