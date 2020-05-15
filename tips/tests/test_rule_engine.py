@@ -106,9 +106,7 @@ class RuleEngineTest(TestCase):
         with self.assertRaises(RecursionError):
             apply_rules(self.test_data, rules, compound_rules)
 
-    def test_compound_rules(self):
-        rules = {}
-
+    def test_stadspas(self):
         print("HDBHDB", compound_rules)
 
         self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
