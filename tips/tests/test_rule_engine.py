@@ -110,17 +110,15 @@ class RuleEngineTest(TestCase):
             apply_rules(self.test_data, rules, compound_rules)
 
     def test_stadspas(self):
-        compound_rules = {
-            "1" :{
-                "name": "stadspas_rule",
-                "rules": [
-                    {"type": "rule", "rule": "$.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning']"}
-                ]
-            }
-        }
-        rules = [{"type": "rule", "rule": "$.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning']"}]
-        
-        self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
+        fixture = get_fixture()
+        user_data = fixture['data']            
+        rules = [
+            {"type": "ref", "ref_id": "1"} # ID 1 is the stadspas rule
+        ]            
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))            
+        # Change birth date so test will assert differently
+        user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'            
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
     def test_is_18(self):
         is_18_rule = "dateTime($.brp.persoon.geboortedatum) - timeDelta(18, 0, 0, 0, 0, 0) <= now()"
