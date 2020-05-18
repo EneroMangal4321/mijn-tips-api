@@ -108,6 +108,5 @@ class RuleEngineTest(TestCase):
 
     def test_stadspas(self):
         print("HDBHDB", compound_rules)
-
+        stadspas_rule = compound_rules{"1"}
         self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
-        
