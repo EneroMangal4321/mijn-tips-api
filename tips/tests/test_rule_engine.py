@@ -110,10 +110,16 @@ class RuleEngineTest(TestCase):
             apply_rules(self.test_data, rules, compound_rules)
 
     def test_stadspas(self):
-        
-        stadspas_rule = "$.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning']"
-
+        compound_rules = {
+            "1" :{
+                "name": "stadspas_rule",
+                "rules": [
+                    {"type": "rule", "rule": "$.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning']"}
+                ]
+            }
+        }
         rules = [{"type": "rule", "rule": "$.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning']"}]
+        
         self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
 
     def test_is_18(self):
