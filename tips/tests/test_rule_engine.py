@@ -116,4 +116,22 @@ class RuleEngineTest(TestCase):
         rules = {}
         self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
 
-    def test_is18()
+    def test_is_18(self):
+        is_18_rule = "dateTime($.brp.persoon.geboortedatum) - timeDelta(18, 0, 0, 0, 0, 0) <= now()"
+        rules = {}
+
+        self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
+
+    def test_woont_in_gemeente_Amsterdam(self):
+
+
+    def test_heeft_kinderen(self):
+
+
+    def test_is_ingeschreven_in_Amsterdam(self):
+
+
+    def test_kind_is_tussen_2_en_18_jaar(self):
+
+
+    def test_kind_is_op_30_september_2020_geen_18(self):
