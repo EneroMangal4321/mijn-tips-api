@@ -10,6 +10,9 @@ from tips.tests.fixtures.fixture import get_fixture
 with open("C:/xampp/htdocs/Stage_Amsterdam/mijn-tips-api/tips/api/compound_rules.json") as compound_rules_file:
     compound_rules = json.load(compound_rules_file)
 
+# with open("C:/xampp/htdocs/Stage_Amsterdam/mijn-tips-api/tips/api/persoonlijk_inkomens_tips.json") as rules_file:
+#     rules = json.load(rules_file)
+
 
 class RuleEngineTest(TestCase):
     def setUp(self) -> None:
@@ -107,6 +110,10 @@ class RuleEngineTest(TestCase):
             apply_rules(self.test_data, rules, compound_rules)
 
     def test_stadspas(self):
-        print("HDBHDB", compound_rules)
-        stadspas_rule = compound_rules{"1"}
+        
+        stadspas_rule = "$.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning']"
+
+        rules = {}
         self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
+
+    def test_is18()
