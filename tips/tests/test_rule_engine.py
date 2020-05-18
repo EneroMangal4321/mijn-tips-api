@@ -111,13 +111,13 @@ class RuleEngineTest(TestCase):
 
     def test_stadspas(self):
         fixture = get_fixture()
-        user_data = fixture['data']            
+        user_data = fixture['data']
         rules = [
             {"type": "ref", "ref_id": "1"} # ID 1 is the stadspas rule
-        ]            
-        self.assertTrue(apply_rules(user_data, rules, compound_rules))            
+        ]
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
-        user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'            
+        user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
     def test_is_18(self):
