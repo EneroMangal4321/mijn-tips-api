@@ -111,7 +111,7 @@ class RuleEngineTest(TestCase):
 
     def test_stadspas(self):
         fixture = get_fixture()
-        user_data = fixture['data']
+        user_data = fixture['data']['brp']
         rules = [
             {"type": "ref", "ref_id": "1"} # ID 1 is the stadspas rule
         ]
