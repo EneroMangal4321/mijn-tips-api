@@ -123,15 +123,28 @@ class RuleEngineTest(TestCase):
         self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
 
     def test_woont_in_gemeente_Amsterdam(self):
+        woont_amsterdam_rule = "$.brp.persoon.mokum is true"
+        rules = {}
 
+        self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
 
     def test_heeft_kinderen(self):
+        heeft_kinderen_rules = "$.brp.kinderen is true"
+        rules = {}
 
+        self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
 
     def test_is_ingeschreven_in_Amsterdam(self):
+        rules = {}
 
+        self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
 
     def test_kind_is_tussen_2_en_18_jaar(self):
+        rules = {}
 
+        self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
 
     def test_kind_is_op_30_september_2020_geen_18(self):
+        rules = {}
+
+        self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
