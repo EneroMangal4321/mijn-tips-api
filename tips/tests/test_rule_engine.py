@@ -2,6 +2,7 @@ from unittest import TestCase
 
 import objectpath
 import json
+from pprint import pprint
 
 from tips.generator.rule_engine import apply_rules
 
@@ -111,7 +112,8 @@ class RuleEngineTest(TestCase):
 
     def test_stadspas(self):
         fixture = get_fixture()
-        user_data = fixture
+        user_data = objectpath.Tree(fixture)
+
         rules = [
             {"type": "ref", "ref_id": "1"} # ID 1 is the stadspas rule
         ]
@@ -122,13 +124,20 @@ class RuleEngineTest(TestCase):
 
     def test_is_18(self):
         fixture = get_fixture()
-        user_data = fixture
+        user_data = objectpath.Tree(fixture["data"])
+        # pprint(fixture)
         rules = [
             {"type": "ref", "ref_id": "2"} 
         ]
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
+        
         # Change birth date so test will assert differently
-        user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
+        fixture["data"]['brp']['persoon']['geboortedatum'] = '2002-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
+        fixture["data"]['brp']['persoon']['geboortedatum'] = '2018-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
     def test_woont_in_gemeente_Amsterdam(self):
