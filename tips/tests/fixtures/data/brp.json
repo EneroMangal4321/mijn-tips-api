@@ -15,13 +15,14 @@
     "geboortelandnaam": "Nederland",
     "geboorteplaatsnaam": "Lochem",
     "gemeentenaamInschrijving": "Amsterdam",
+    "mokum": "True",
     "geslachtsnaam": "Beemsterboer",
     "nationaliteiten": [
       {
         "omschrijving": "Nederlandse"
       }
     ],
-    "omschrijvingBurgerlijkeStaat": "Gehuwd",
+    "omschrijvingBurgerlijkeStaat": "Gehuwd", 
     "omschrijvingGeslachtsaanduiding": "Man",
     "opgemaakteNaam": "W. Beemsterboer",
     "voornamen": "Wesley",
