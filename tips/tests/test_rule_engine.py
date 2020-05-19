@@ -124,7 +124,7 @@ class RuleEngineTest(TestCase):
         fixture = get_fixture()
         user_data = fixture
         rules = [
-            {"type": "ref", "ref_id": "2"} # ID 1 is the stadspas rule
+            {"type": "ref", "ref_id": "2"} 
         ]
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
@@ -135,7 +135,7 @@ class RuleEngineTest(TestCase):
         fixture = get_fixture()
         user_data = fixture
         rules = [
-            {"type": "ref", "ref_id": "3"} # ID 1 is the stadspas rule
+            {"type": "ref", "ref_id": "3"} 
         ]
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
@@ -146,7 +146,7 @@ class RuleEngineTest(TestCase):
         fixture = get_fixture()
         user_data = fixture["data"] ["brp"]
         rules = [
-            {"type": "ref", "ref_id": "4"} # ID 1 is the stadspas rule
+            {"type": "ref", "ref_id": "4"} 
         ]
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
@@ -157,7 +157,7 @@ class RuleEngineTest(TestCase):
         fixture = get_fixture()
         user_data = fixture
         rules = [
-            {"type": "ref", "ref_id": "5"} # ID 1 is the stadspas rule
+            {"type": "ref", "ref_id": "5"}
         ]
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
@@ -168,7 +168,7 @@ class RuleEngineTest(TestCase):
         fixture = get_fixture()
         user_data = fixture
         rules = [
-            {"type": "ref", "ref_id": "6"} # ID 1 is the stadspas rule
+            {"type": "ref", "ref_id": "6"}
         ]
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
@@ -179,7 +179,7 @@ class RuleEngineTest(TestCase):
         fixture = get_fixture()
         user_data = fixture
         rules = [
-            {"type": "ref", "ref_id": "7"} # ID 1 is the stadspas rule
+            {"type": "ref", "ref_id": "7"}
         ]
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
