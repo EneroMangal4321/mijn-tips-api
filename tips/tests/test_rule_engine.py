@@ -118,7 +118,7 @@ class RuleEngineTest(TestCase):
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
         user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
-        self.assertFalse(apply_rules(user_data, rules, compound_rules))
+        self.assertFalse(apply_rules(self.user_data, rules, compound_rules))
 
     def test_is_18(self):
         is_18_rule = "dateTime($.brp.persoon.geboortedatum) - timeDelta(18, 0, 0, 0, 0, 0) <= now()"
