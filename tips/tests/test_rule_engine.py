@@ -115,10 +115,10 @@ class RuleEngineTest(TestCase):
         rules = [
             {"type": "ref", "ref_id": "1"} # ID 1 is the stadspas rule
         ]
-        self.assertTrue(apply_rules(self.user_data, rules, compound_rules))
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
         user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
-        self.assertFalse(apply_rules(self.user_data, rules, compound_rules))
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
     def test_is_18(self):
         fixture = get_fixture()
@@ -126,10 +126,10 @@ class RuleEngineTest(TestCase):
         rules = [
             {"type": "ref", "ref_id": "2"} # ID 1 is the stadspas rule
         ]
-        self.assertTrue(apply_rules(self.user_data, rules, compound_rules))
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
         user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
-        self.assertFalse(apply_rules(self.user_data, rules, compound_rules))
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
     def test_woont_in_gemeente_Amsterdam(self):
         fixture = get_fixture()
@@ -137,10 +137,10 @@ class RuleEngineTest(TestCase):
         rules = [
             {"type": "ref", "ref_id": "3"} # ID 1 is the stadspas rule
         ]
-        self.assertTrue(apply_rules(self.user_data, rules, compound_rules))
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
         user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
-        self.assertFalse(apply_rules(self.user_data, rules, compound_rules))
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
     def test_heeft_kinderen(self):
         fixture = get_fixture()
@@ -148,10 +148,10 @@ class RuleEngineTest(TestCase):
         rules = [
             {"type": "ref", "ref_id": "4"} # ID 1 is the stadspas rule
         ]
-        self.assertTrue(apply_rules(self.user_data, rules, compound_rules))
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
         user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
-        self.assertFalse(apply_rules(self.user_data, rules, compound_rules))
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
     def test_is_ingeschreven_in_Amsterdam(self):
         fixture = get_fixture()
@@ -159,10 +159,10 @@ class RuleEngineTest(TestCase):
         rules = [
             {"type": "ref", "ref_id": "5"} # ID 1 is the stadspas rule
         ]
-        self.assertTrue(apply_rules(self.user_data, rules, compound_rules))
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
         user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
-        self.assertFalse(apply_rules(self.user_data, rules, compound_rules))
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
     def test_kind_is_tussen_2_en_18_jaar(self):
         fixture = get_fixture()
@@ -170,10 +170,10 @@ class RuleEngineTest(TestCase):
         rules = [
             {"type": "ref", "ref_id": "6"} # ID 1 is the stadspas rule
         ]
-        self.assertTrue(apply_rules(self.user_data, rules, compound_rules))
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
         user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
-        self.assertFalse(apply_rules(self.user_data, rules, compound_rules))
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
     def test_kind_is_op_30_september_2020_geen_18(self):
         fixture = get_fixture()
@@ -181,7 +181,7 @@ class RuleEngineTest(TestCase):
         rules = [
             {"type": "ref", "ref_id": "7"} # ID 1 is the stadspas rule
         ]
-        self.assertTrue(apply_rules(self.user_data, rules, compound_rules))
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
         user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
-        self.assertFalse(apply_rules(self.user_data, rules, compound_rules))
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
