@@ -144,7 +144,7 @@ class RuleEngineTest(TestCase):
 
     def test_heeft_kinderen(self):
         fixture = get_fixture()
-        user_data = fixture
+        user_data = fixture["data"] ["brp"]
         rules = [
             {"type": "ref", "ref_id": "4"} # ID 1 is the stadspas rule
         ]
