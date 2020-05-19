@@ -111,47 +111,77 @@ class RuleEngineTest(TestCase):
 
     def test_stadspas(self):
         fixture = get_fixture()
-        user_data = fixture['data']['brp']
+        user_data = fixture
         rules = [
             {"type": "ref", "ref_id": "1"} # ID 1 is the stadspas rule
         ]
-        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+        self.assertTrue(apply_rules(self.user_data, rules, compound_rules))
         # Change birth date so test will assert differently
         user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
         self.assertFalse(apply_rules(self.user_data, rules, compound_rules))
 
     def test_is_18(self):
-        is_18_rule = "dateTime($.brp.persoon.geboortedatum) - timeDelta(18, 0, 0, 0, 0, 0) <= now()"
-        rules = [{"type": "rule", "rule": "dateTime($.brp.persoon.geboortedatum) - timeDelta(18, 0, 0, 0, 0, 0) <= now()"}]
-
-        self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
+        fixture = get_fixture()
+        user_data = fixture
+        rules = [
+            {"type": "ref", "ref_id": "2"} # ID 1 is the stadspas rule
+        ]
+        self.assertTrue(apply_rules(self.user_data, rules, compound_rules))
+        # Change birth date so test will assert differently
+        user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
+        self.assertFalse(apply_rules(self.user_data, rules, compound_rules))
 
     def test_woont_in_gemeente_Amsterdam(self):
-        woont_amsterdam_rule = "$.brp.persoon.mokum is true"
-        rules = [{"type": "rule", "rule": "$.brp.persoon.mokum is true"}]
-
-        self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
+        fixture = get_fixture()
+        user_data = fixture
+        rules = [
+            {"type": "ref", "ref_id": "3"} # ID 1 is the stadspas rule
+        ]
+        self.assertTrue(apply_rules(self.user_data, rules, compound_rules))
+        # Change birth date so test will assert differently
+        user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
+        self.assertFalse(apply_rules(self.user_data, rules, compound_rules))
 
     def test_heeft_kinderen(self):
-        heeft_kinderen_rule = "$.brp.kinderen is true"
-        rules = [{"type": "rule", "rule": "$.brp.kinderen is true"}]
-
-        self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
+        fixture = get_fixture()
+        user_data = fixture
+        rules = [
+            {"type": "ref", "ref_id": "4"} # ID 1 is the stadspas rule
+        ]
+        self.assertTrue(apply_rules(self.user_data, rules, compound_rules))
+        # Change birth date so test will assert differently
+        user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
+        self.assertFalse(apply_rules(self.user_data, rules, compound_rules))
 
     def test_is_ingeschreven_in_Amsterdam(self):
-        ingeschreven_amsterdam_rule = "$.brp@gemeentenaamInschrijving is Amsterdam"
-        rules = [{"type": "rule", "rule": "$.brp@gemeentenaamInschrijving is Amsterdam"}]
-
-        self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
+        fixture = get_fixture()
+        user_data = fixture
+        rules = [
+            {"type": "ref", "ref_id": "5"} # ID 1 is the stadspas rule
+        ]
+        self.assertTrue(apply_rules(self.user_data, rules, compound_rules))
+        # Change birth date so test will assert differently
+        user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
+        self.assertFalse(apply_rules(self.user_data, rules, compound_rules))
 
     def test_kind_is_tussen_2_en_18_jaar(self):
-        kind_tussen_2_en_18_rule = "dateTime($.brp.kinderen.geboortedatum) - timeDelta(2, 0, 0, 0, 0, 0) => now() and dateTime($.brp.kinderen.geboortedatum) - timeDelta(18, 0, 0, 0, 0, 0) <= now()"
-        rules = [{"type": "rule", "rule": "dateTime($.brp.kinderen.geboortedatum) - timeDelta(2, 0, 0, 0, 0, 0) => now() and dateTime($.brp.kinderen.geboortedatum) - timeDelta(18, 0, 0, 0, 0, 0) <= now()"}]
-
-        self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
+        fixture = get_fixture()
+        user_data = fixture
+        rules = [
+            {"type": "ref", "ref_id": "6"} # ID 1 is the stadspas rule
+        ]
+        self.assertTrue(apply_rules(self.user_data, rules, compound_rules))
+        # Change birth date so test will assert differently
+        user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
+        self.assertFalse(apply_rules(self.user_data, rules, compound_rules))
 
     def test_kind_is_op_30_september_2020_geen_18(self):
-        kind_op_30_september_2020_geen_18_rule = "dateTime($.brp.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) > dateTime($.info)"
-        rules = [{"type": "rule", "rule": "dateTime($.brp.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) > dateTime($.info)"}]
-
-        self.assertTrue(apply_rules(self.test_data, rules, compound_rules))
+        fixture = get_fixture()
+        user_data = fixture
+        rules = [
+            {"type": "ref", "ref_id": "7"} # ID 1 is the stadspas rule
+        ]
+        self.assertTrue(apply_rules(self.user_data, rules, compound_rules))
+        # Change birth date so test will assert differently
+        user_data['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
+        self.assertFalse(apply_rules(self.user_data, rules, compound_rules))
