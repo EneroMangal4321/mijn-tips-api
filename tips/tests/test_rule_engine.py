@@ -159,6 +159,7 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
+    
     def test_heeft_kinderen(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
