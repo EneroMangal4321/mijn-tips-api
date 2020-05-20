@@ -47,7 +47,7 @@
     "description": "Bekijk hoe u gratis een geveltuin kunt aanvragen bij uw stadsdeel. Of hoe u de geveltuin kunt laten verwijderen.",
     "link": {
       "title": "Meer informatie",
-      "to": "https://www.amsterdam.nl/veelgevraagd/?productid=%7B2214F853-B9F5-41F6-934B-B1616D8E0949%7D#%7B7E4E60A9-F809-4FC9-B7EB-9C06B3DB4513%7D"
+      "to": "https://www.amsterdam.nl/wonen-leefomgeving/medebeheer/geveltuin-aanvragen/"
     },
     "imgUrl": "api/tips/static/tip_images/geveltuin.jpg"
   },
