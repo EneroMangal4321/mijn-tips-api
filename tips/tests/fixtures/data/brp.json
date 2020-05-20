@@ -15,7 +15,7 @@
     "geboortelandnaam": "Nederland",
     "geboorteplaatsnaam": "Lochem",
     "gemeentenaamInschrijving": "Amsterdam",
-    "mokum": "True",
+    "mokum": true,
     "geslachtsnaam": "Beemsterboer",
     "nationaliteiten": [
       {
