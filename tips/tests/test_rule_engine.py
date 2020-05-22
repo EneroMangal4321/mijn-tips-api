@@ -126,7 +126,6 @@ class RuleEngineTest(TestCase):
     def test_is_18(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
-        # pprint(fixture)
         rules = [
             {"type": "ref", "ref_id": "2"} 
         ]
