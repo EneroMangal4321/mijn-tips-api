@@ -139,7 +139,7 @@ class RuleEngineTest(TestCase):
         fixture["data"]['brp']['persoon']['geboortedatum'] = '2018-01-01T00:00:00Z'
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
-
+ 
     #This test works
     def test_woont_in_gemeente_Amsterdam(self):
         fixture = get_fixture()
