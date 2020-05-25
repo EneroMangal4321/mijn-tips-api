@@ -40,7 +40,7 @@
     "rules": [
       {
         "type": "rule",
-        "rule" : "$.brp.persoon@gemeentenaamInschrijving is Amsterdam"
+        "rule" : "$.brp.persoon.gemeentenaamInschrijving is Amsterdam"
       }
     ]
   },
