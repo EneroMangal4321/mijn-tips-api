@@ -119,7 +119,7 @@ class RuleEngineTest(TestCase):
         print(user_data.execute("$.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning']"))
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
-        fixture["data"]['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
+        fixture["data"]['focus'][1]['soortProduct'] = 'Participatiewet'
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
     #This test works
