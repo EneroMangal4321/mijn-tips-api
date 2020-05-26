@@ -49,7 +49,7 @@
     "rules": [
       {
         "type": "rule",
-        "rule": "dateTime($.brp.kinderen.geboortedatum) - timeDelta(2, 0, 0, 0, 0, 0) => now() and dateTime($.brp.kinderen.geboortedatum) - timeDelta(18, 0, 0, 0, 0, 0) <= now()"
+        "rule": "dateTime($.brp.kinderen.geboortedatum) + timeDelta(2, 0, 0, 0, 0, 0) => now() and dateTime($.brp.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) <= now()"
       }
     ]
   },
