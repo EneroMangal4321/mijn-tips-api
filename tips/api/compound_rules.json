@@ -4,7 +4,7 @@
     "rules": [
       {
         "type": "rule",
-        "rule": "len($.focus).*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning']"
+        "rule": "$.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning']"
       }
     ]
   },
