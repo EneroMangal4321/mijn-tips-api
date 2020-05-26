@@ -119,7 +119,8 @@ class RuleEngineTest(TestCase):
         print(user_data.execute("$.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning']"))
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
-        fixture["data"]['focus'][1]['soortProduct'] = 'Participatiewet'
+        fixture["data"]['focus'][0]['soortProduct'] = 'Participatiewet'
+        user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
     #This test works
@@ -163,11 +164,12 @@ class RuleEngineTest(TestCase):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
         rules = [
-            {"type": "ref", "ref_id": "4"} 
+            {"type": "ref", "ref_id": "4"}
         ]
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
-        fixture["data"]['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
+        fixture["data"]['brp']['kinderen'] = []
+        print("HSHDNEND", fixture['data']['brp'])
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
@@ -195,11 +197,11 @@ class RuleEngineTest(TestCase):
         rules = [
             {"type": "ref", "ref_id": "6"}
         ]
-        self.assertTrue(apply_rules(user_data, rules, compound_rules))
-        # Change birth date so test will assert differently
-        fixture["data"]['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
-        user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
+        # Change birth date so test will assert differently
+        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2012-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
     def test_kind_is_op_30_september_2020_geen_18(self):
         fixture = get_fixture()
