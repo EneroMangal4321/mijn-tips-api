@@ -116,10 +116,10 @@ class RuleEngineTest(TestCase):
         rules = [
             {"type": "ref", "ref_id": "1"} # ID 1 is the stadspas rule
         ]
-        print(user_data.execute("$.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning']"))
+        # print(user_data.execute("lent($.focus).*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning']"))
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
-        fixture["data"]['focus'][0]['soortProduct'] = 'Participatiewet'
+        fixture["data"]['focus'][len(fixture['focus'])]['soortProduct'] = 'Participatiewet'
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
@@ -214,3 +214,25 @@ class RuleEngineTest(TestCase):
         fixture["data"]['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
+
+    def test_list_assertion(self):
+        test_data = objectpath.Tree({
+            "brp": {
+                "kinderen": [{ "naam": "Kind 1" }, { "naam": "Kind 2" }]
+            }
+        })
+        compound_rules = {
+            "1": {
+                "name": "rule 1",
+                "rules": [
+                    {
+                        "type": "rule",
+                        "rule": "len($.brp.kinderen) > 1"
+                    }
+                ]
+            }
+        }
+        rules = [
+            {"type": "ref", "ref_id": "1"}
+        ]
+        self.assertTrue(apply_rules(test_data, rules, compound_rules))
