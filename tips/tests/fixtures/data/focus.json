@@ -343,5 +343,45 @@
     },
     "soortProduct":"Participatiewet",
     "typeBesluit":"Buiten Behandeling"
+  },
+  {
+    "_id": "2-1",
+    "_meest_recent": "beslissing",
+    "dienstverleningstermijn": 56,
+    "naam": "Stadspas",
+    "processtappen": {
+      "aanvraag": {
+        "_id": 0,
+        "datum": "2019-01-01T03:00:00+02:00",
+        "document": [
+          {
+            "$ref": "focus/document?id=1234567&isBulk=true&isDms=false",
+            "id": 1234567,
+            "isBulk": true,
+            "isDms": false,
+            "omschrijving": "Aanvraag Stadspas (balie)"
+          }
+        ]
+      },
+      "beslissing": {
+        "_id": 3,
+        "datum": "2019-01-01T03:00:00+02:00",
+        "document": []
+      },
+      "bezwaar": null,
+      "herstelTermijn": {
+        "_id": 2,
+        "aantalDagenHerstelTermijn": "20",
+        "datum": "2019-01-01T03:00:00+02:00",
+        "document": []
+      },
+      "inBehandeling": {
+        "_id": 1,
+        "datum": "2019-01-01T03:00:00+02:00",
+        "document": []
+      }
+    },
+    "soortProduct": "Minimafonds",
+    "typeBesluit": "Toekenning"
   }
 ]
