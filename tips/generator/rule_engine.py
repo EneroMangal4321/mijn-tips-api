@@ -3,9 +3,6 @@ from objectpath.core import ITER_TYPES, generator
 
 def apply_rules(userdata, rules, compound_rules):
     """ returns True when it matches the rules. """
-    he = [_apply_rule(userdata, r, compound_rules) for r in rules]
-    print(">>", he)
-    return all(he)
     return all([_apply_rule(userdata, r, compound_rules) for r in rules])
 
 
@@ -21,8 +18,5 @@ def _apply_rule(userdata, rule, compound_rules):
 
     if rule['type'] == "ref":
         compound_rule = compound_rules[rule['ref_id']]
-        ha = apply_rules(userdata, compound_rule['rules'], compound_rules)
-        print(">>>>", ha)
-        return ha
         return apply_rules(userdata, compound_rule['rules'], compound_rules)
     return False
