@@ -110,16 +110,23 @@ class RuleEngineTest(TestCase):
         with self.assertRaises(RecursionError):
             apply_rules(self.test_data, rules, compound_rules)
 
+    #This test works
     def test_stadspas(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
         rules = [
             {"type": "ref", "ref_id": "1"} # ID 1 is the stadspas rule
         ]
-        # print(user_data.execute("lent($.focus).*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning']"))
+        ret = user_data.execute("$.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning']")
+        print(json.dumps(list(ret), indent=True))
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
         # Change birth date so test will assert differently
-        fixture["data"]['focus'][len(fixture['focus'])]['soortProduct'] = 'Participatiewet'
+        fixture["data"]['focus'][7]['typeBesluit'] = 'Afwijzing'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
+
+        fixture["data"]['focus'][7]['soortProduct'] = 'Participatiewet'
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
@@ -169,7 +176,7 @@ class RuleEngineTest(TestCase):
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
         fixture["data"]['brp']['kinderen'] = []
-        print("HSHDNEND", fixture['data']['brp'])
+        pprint(fixture["data"]['brp'])
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
@@ -199,7 +206,7 @@ class RuleEngineTest(TestCase):
         ]
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
-        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2012-01-01T00:00:00Z'
+        fixture["data"]['brp']['kinderen'][0,1]['geboortedatum'] = '2012-01-01T00:00:00Z'
         user_data = objectpath.Tree(fixture["data"])
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
