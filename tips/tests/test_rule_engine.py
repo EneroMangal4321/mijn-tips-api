@@ -177,7 +177,6 @@ class RuleEngineTest(TestCase):
 
         # Change birth date so test will assert differently
         fixture["data"]['brp']['kinderen'] = []
-        pprint(fixture["data"]['brp'])
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
