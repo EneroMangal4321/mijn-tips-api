@@ -166,7 +166,7 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
-
+    #This test works
     def test_heeft_kinderen(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
@@ -174,6 +174,7 @@ class RuleEngineTest(TestCase):
             {"type": "ref", "ref_id": "4"}
         ]
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
         # Change birth date so test will assert differently
         fixture["data"]['brp']['kinderen'] = []
         pprint(fixture["data"]['brp'])
