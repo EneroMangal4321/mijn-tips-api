@@ -31,7 +31,7 @@
     "rules": [
       {
         "type": "rule",
-        "rule": "$.brp@kinderen is true"
+        "rule": "len($.brp.kinderen) >= 1"
       }
     ]
   },
