@@ -630,7 +630,7 @@
   "rules": [
     {
       "type": "rule",
-      "rule": "dateTime($.brp.persoon.geboortedatum) - timeDelta(21, 0, 0, 0, 0, 0) <= now()"
+      "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(21, 0, 0, 0, 0, 0) => now()"
     }
   ],
   "isPersonalized": true,
