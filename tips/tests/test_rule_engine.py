@@ -257,7 +257,7 @@ class RuleEngineTest(TestCase):
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
     def test_nationaliteit(self):
-                fixture = get_fixture()
+        fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
         compund_rules = {
                 "1": {
@@ -273,8 +273,8 @@ class RuleEngineTest(TestCase):
         ]
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
-        def test_is_21(self):
-                fixture = get_fixture()
+    def test_is_21(self):
+        fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
         compund_rules = {
                 "1": {
@@ -289,6 +289,11 @@ class RuleEngineTest(TestCase):
             {"type": "ref", "ref_id": "1"}
         ]
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
+        # Change birth date so test will assert differently
+        fixture["data"]['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
     def test_list_assertion(self):
         test_data = objectpath.Tree({
