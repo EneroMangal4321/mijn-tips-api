@@ -117,8 +117,8 @@ class RuleEngineTest(TestCase):
         rules = [
             {"type": "ref", "ref_id": "1"} # ID 1 is the stadspas rule
         ]
-        ret = user_data.execute("$.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning']")
-        print(json.dumps(list(ret), indent=True))
+        # ret = user_data.execute("$.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning']")
+        # print(json.dumps(list(ret), indent=True))
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
         # Change birth date so test will assert differently
@@ -221,6 +221,74 @@ class RuleEngineTest(TestCase):
         fixture["data"]['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
+    
+    def test_kind_is_10_11_12(self):
+        fixture = get_fixture()
+        user_data = objectpath.Tree(fixture["data"])
+        compund_rules = {
+                "1": {
+                "name": "kind is 10,11 of 12",
+                "rules": [
+                    {"type": "rule", 
+                    "rule": "now() - dateTime($.brp.kinderen.geboortedatum) = 10 or now() - dateTime($.brp.kinderen.geboortedatum) = 11 or now() - dateTime($.brp.kinderen.geboortedatum) = 12"}
+                ]
+            }
+        }
+        rules = [
+            {"type": "ref", "ref_id": "1"}
+        ]
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
+    def test_is_66(self):
+        fixture = get_fixture()
+        user_data = objectpath.Tree(fixture["data"])
+        compund_rules = {
+                "1": {
+                "name": "is 66",
+                "rules": [
+                    {"type": "rule", 
+                    "rule": "dateTime($.brp.persoon.geboortedatum) - timeDelta(66, 4, 0, 0, 0, 0) <= now()"}
+                ]
+            }
+        }
+        rules = [
+            {"type": "ref", "ref_id": "1"}
+        ]
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
+    def test_nationaliteit(self):
+                fixture = get_fixture()
+        user_data = objectpath.Tree(fixture["data"])
+        compund_rules = {
+                "1": {
+                "name": "is 66",
+                "rules": [
+                    {"type": "rule", 
+                    "rule": "$.brp.persoon.nationaliteiten@omschrijving is Nederlandse"}
+                ]
+            }
+        }
+        rules = [
+            {"type": "ref", "ref_id": "1"}
+        ]
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
+        def test_is_21(self):
+                fixture = get_fixture()
+        user_data = objectpath.Tree(fixture["data"])
+        compund_rules = {
+                "1": {
+                "name": "is 66",
+                "rules": [
+                    {"type": "rule", 
+                    "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(21, 0, 0, 0, 0, 0) => now()"}
+                ]
+            }
+        }
+        rules = [
+            {"type": "ref", "ref_id": "1"}
+        ]
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
     def test_list_assertion(self):
         test_data = objectpath.Tree({
