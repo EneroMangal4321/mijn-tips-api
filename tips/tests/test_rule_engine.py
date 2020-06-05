@@ -204,8 +204,9 @@ class RuleEngineTest(TestCase):
         rules = [
             {"type": "ref", "ref_id": "6"}
         ]
-        
-        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+        ret = user_data.execute("len($.brp.kinderen.*[dateTime(geboortedatum) + timeDelta(2, 0, 0, 0, 0, 0) => now() and @.dateTime(geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) <= now()]) >= 1")
+        print(json.dumps(list(ret), indent=True))
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
         fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2012-01-01T00:00:00Z'
         pprint(fixture["data"]["brp"])
