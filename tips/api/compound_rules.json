@@ -49,7 +49,7 @@
     "rules": [
       {
         "type": "rule",
-        "rule": "len($.brp.kinderen[dateTime(@.geboortedatum) + timeDelta(2, 0, 0, 0, 0, 0) >= now() and dateTime(@.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) <= now()]) >= 1"
+        "rule": "len($.brp.kinderen[now() - timeDelta(2, 0, 0, 0, 0, 0) >= dateTime(@.geboortedatum) and now() - timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(@.geboortedatum)]) >= 1"
       }
     ]
   },
@@ -59,7 +59,7 @@
     "rules": [
       {
         "type": "rule",
-        "rule": "dateTime($.brp.kinderen.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) > dateTime($.info)"
+        "rule":"len($.brp.kinderen[dateTime(2020-09-30T00:00:00Z) - timeDelta(18, 0, 0, 0, 0, 0) >= dateTime(@.geboortedatum)]) >= 1"
       }
     ]
   }

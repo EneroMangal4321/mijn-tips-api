@@ -204,12 +204,16 @@ class RuleEngineTest(TestCase):
         rules = [
             {"type": "ref", "ref_id": "6"}
         ]
-        ret = user_data.execute("len($.brp.kinderen[dateTime(@.geboortedatum) + timeDelta(2, 0, 0, 0, 0, 0) >= now() and dateTime(@.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) <= now()]) >= 1")
-        print(json.dumps(list(ret), indent=True))
+        # ret = user_data.execute("len($.brp.kinderen[now() - timeDelta(2, 0, 0, 0, 0, 0) >= dateTime(@.geboortedatum) and now() - timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(@.geboortedatum)]) >= 1")
+        # print(ret)
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
         fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2012-01-01T00:00:00Z'
-        pprint(fixture["data"]["brp"])
+        # pprint(fixture["data"]["brp"])
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
+        fixture["data"]['brp']['kinderen'][1]['geboortedatum'] = '2012-01-01T00:00:00Z'
         user_data = objectpath.Tree(fixture["data"])
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
@@ -301,7 +305,24 @@ class RuleEngineTest(TestCase):
     def test_list_assertion(self):
         test_data = objectpath.Tree({
             "brp": {
-                "kinderen": [{ "naam": "Kind 1" }, { "naam": "Kind 2" }]
+                "kinderen": [{
+                    "bsn": None,
+                    "geboortedatum": "2006-07-08T09:14:58.963Z",
+                    "geslachtsaanduiding": "M",
+                    "geslachtsnaam": "Kosterijk",
+                    "overlijdensdatum": None,
+                    "voornamen": "Yassine",
+                    "voorvoegselGeslachtsnaam": None
+                },
+                    {
+                    "bsn": None,
+                    "geboortedatum": "2018-06-04T09:14:58.963Z",
+                    "geslachtsaanduiding": "M",
+                    "geslachtsnaam": "Kosterijk",
+                    "overlijdensdatum": None,
+                    "voornamen": "Marwan",
+                    "voorvoegselGeslachtsnaam": None
+                }]
             }
         })
         compound_rules = {
@@ -310,12 +331,12 @@ class RuleEngineTest(TestCase):
                 "rules": [
                     {
                         "type": "rule",
-                        "rule": "len($.brp.kinderen) > 1"
+                        "rule": "len($.brp.kinderen[now() - timeDelta(2, 0, 0, 0, 0, 0) >= dateTime(@.geboortedatum) and now() - timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(@.geboortedatum)]) >= 1"
                     }
                 ]
             }
         }
         rules = [
             {"type": "ref", "ref_id": "1"}
-        ]
+        ]        
         self.assertTrue(apply_rules(test_data, rules, compound_rules))
