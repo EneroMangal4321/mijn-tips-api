@@ -197,7 +197,8 @@ class RuleEngineTest(TestCase):
         fixture["data"]['brp']['persoon']['gemeentenaamInschrijving'] = 'Utrecht'
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
-
+    
+    #This test works
     def test_kind_is_tussen_2_en_18_jaar(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
@@ -223,6 +224,8 @@ class RuleEngineTest(TestCase):
         rules = [
             {"type": "ref", "ref_id": "7"}
         ]
+        ret = user_data.execute("len($.brp.kinderen[dateTime(info) - timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(@.geboortedatum)]) >= 1")
+        print(ret)
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
         fixture["data"]['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'

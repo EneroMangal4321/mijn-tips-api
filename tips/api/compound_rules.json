@@ -59,7 +59,7 @@
     "rules": [
       {
         "type": "rule",
-        "rule":"len($.brp.kinderen[dateTime(2020-09-30T00:00:00Z) - timeDelta(18, 0, 0, 0, 0, 0) >= dateTime(@.geboortedatum)]) >= 1"
+        "rule":"len($.brp.kinderen[dateTime(info) - timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(@.geboortedatum)]) >= 1"
       }
     ]
   }
