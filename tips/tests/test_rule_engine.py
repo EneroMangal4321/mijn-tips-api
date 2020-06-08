@@ -226,6 +226,7 @@ class RuleEngineTest(TestCase):
         ]
         ret = user_data.execute("len($.brp.kinderen[dateTime(info) - timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(@.geboortedatum)]) >= 1")
         print(json.dumps(ret, indent=True))
+        print(fixture["data"]["brp"]["kinderen"])
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
         fixture["data"]['brp']['persoon'][0]['geboortedatum'] = '2012-01-01T00:00:00Z'
