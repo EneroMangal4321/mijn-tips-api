@@ -229,7 +229,12 @@ class RuleEngineTest(TestCase):
         print(fixture["data"]["brp"]["kinderen"])
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
-        fixture["data"]['brp']['persoon'][0]['geboortedatum'] = '2012-01-01T00:00:00Z'
+        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2000-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
+        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2000-01-01T00:00:00Z'
+        fixture["data"]['brp']['kinderen'][1]['geboortedatum'] = '2000-01-01T00:00:00Z'
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
     
