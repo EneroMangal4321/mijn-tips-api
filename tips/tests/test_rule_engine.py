@@ -233,6 +233,7 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
     
+    #This test works
     def test_kind_is_10_11_12(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
@@ -241,14 +242,35 @@ class RuleEngineTest(TestCase):
                 "name": "kind is 10,11 of 12",
                 "rules": [
                     {"type": "rule", 
-                    "rule": "now() - dateTime($.brp.kinderen.geboortedatum) = 10 or now() - dateTime($.brp.kinderen.geboortedatum) = 11 or now() - dateTime($.brp.kinderen.geboortedatum) = 12"}
+                    "rule": "len($.brp.kinderen[now() - timeDelta(10, 0, 0, 0, 0, 0) >= dateTime(@.geboortedatum) and now() - timeDelta(12, 0, 0, 0, 0, 0) <= dateTime(@.geboortedatum)]) >= 1"}
                 ]
             }
         }
         rules = [
-            {"type": "ref", "ref_id": "1"}
+            {"type": "rule", 
+            "rule": "len($.brp.kinderen[now() - timeDelta(10, 0, 0, 0, 0, 0) >= dateTime(@.geboortedatum) and now() - timeDelta(13, 0, 0, 0, 0, 0) < dateTime(@.geboortedatum)]) >= 1"}
         ]
+        self.assertFalse(apply_rules(user_data, rules, rule))
+
+        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2010-01-01T00:00:00Z'
+        fixture["data"]['brp']['kinderen'][1]['geboortedatum'] = '2010-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
         self.assertTrue(apply_rules(user_data, rules, rule))
+
+        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2009-01-01T00:00:00Z'
+        fixture["data"]['brp']['kinderen'][1]['geboortedatum'] = '2009-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, rule))
+
+        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2008-01-01T00:00:00Z'
+        fixture["data"]['brp']['kinderen'][1]['geboortedatum'] = '2008-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, rule))
+
+        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2007-01-01T00:00:00Z'
+        fixture["data"]['brp']['kinderen'][1]['geboortedatum'] = '2007-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertFalse(apply_rules(user_data, rules, rule))
 
     #This test works
     def test_is_66_of_ouder(self):

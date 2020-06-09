@@ -94,7 +94,7 @@
   "rules": [
     {
       "type": "rule",
-      "rule": "now() - dateTime($.brp.kinderen.geboortedatum) = 10 or now() - dateTime($.brp.kinderen.geboortedatum) = 11 or now() - dateTime($.brp.kinderen.geboortedatum) = 12 "
+      "rule": "len($.brp.kinderen[now() - timeDelta(10, 0, 0, 0, 0, 0) >= dateTime(@.geboortedatum) and now() - timeDelta(13, 0, 0, 0, 0, 0) < dateTime(@.geboortedatum)]) >= 1"
     },
     {
         "type": "ref",
