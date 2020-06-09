@@ -106,7 +106,6 @@ class RuleEngineTest(TestCase):
         with self.assertRaises(RecursionError):
             apply_rules(self.test_data, rules, compound_rules)
 
-    #This test works
     def test_stadspas(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
@@ -126,7 +125,6 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
-    #This test works
     def test_is_18_of_ouder(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
@@ -144,7 +142,6 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
  
-    #This test works
     def test_woont_in_gemeente_Amsterdam(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
@@ -162,7 +159,6 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
-    #This test works
     def test_heeft_kinderen(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
@@ -176,7 +172,6 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
-    #This test works
     def test_is_ingeschreven_in_Amsterdam(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
@@ -194,7 +189,6 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
     
-    #This test works
     def test_kind_is_tussen_2_en_18_jaar(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
@@ -211,7 +205,6 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
-    #This test works
     def test_kind_is_op_30_september_2020_geen_18(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
@@ -229,7 +222,6 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
     
-    #This test works
     def test_kind_is_10_11_12(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
@@ -273,7 +265,6 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, rule))
 
-    #This test works
     def test_is_66_of_ouder(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
@@ -300,7 +291,6 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, rule))
 
-    #This test works
     def test_nationaliteit(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
@@ -327,7 +317,6 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, rule))
 
-    #This test works
     def test_is_21_of_ouder(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
