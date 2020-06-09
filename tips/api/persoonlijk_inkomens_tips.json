@@ -370,7 +370,7 @@
     },
     {
       "type": "rule",
-      "rule": "$.brp.persoon.nationaliteiten@omschrijving is Nederlandse"
+      "rule": "$.brp.persoon.nationaliteiten[@.omschrijving is Nederlandse]"
     },
     {
       "type": "ref",

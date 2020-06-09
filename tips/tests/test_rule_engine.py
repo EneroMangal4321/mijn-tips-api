@@ -277,6 +277,7 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, rule))
 
+    #This test works
     def test_nationaliteit(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
@@ -285,17 +286,21 @@ class RuleEngineTest(TestCase):
                 "name": "is 66",
                 "rules": [
                     {"type": "rule", 
-                    "rule": "$.brp.persoon.nationaliteiten.omschrijving is Nederlandse"}
+                    "rule": "$.brp.persoon.nationaliteiten[@.omschrijving is Nederlandse]"}
                 ]
             }
         }
         rules = [
             {"type": "rule", 
-            "rule": "$.brp.persoon.nationaliteiten.omschrijving is Nederlandse"}
+            "rule": "$.brp.persoon.nationaliteiten[@.omschrijving is Nederlandse]"}
         ]
         self.assertTrue(apply_rules(user_data, rules, rule))
 
-        fixture["data"]['brp']['persoon']["nationaliteiten"][0] = 'Amerikaans'
+        fixture["data"]['brp']['persoon']["nationaliteiten"][0] = {"omschrijving": "Nederlandse"}
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, rule))
+
+        fixture["data"]['brp']['persoon']["nationaliteiten"][0] = {"omschrijving": "Amerikaanse"}
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, rule))
 
