@@ -131,7 +131,7 @@ class RuleEngineTest(TestCase):
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
     #This test works
-    def test_is_18(self):
+    def test_is_18_of_ouder(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
         rules = [
@@ -236,7 +236,7 @@ class RuleEngineTest(TestCase):
     def test_kind_is_10_11_12(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
-        compund_rules = {
+        rule = {
                 "1": {
                 "name": "kind is 10,11 of 12",
                 "rules": [
@@ -248,9 +248,10 @@ class RuleEngineTest(TestCase):
         rules = [
             {"type": "ref", "ref_id": "1"}
         ]
-        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+        self.assertTrue(apply_rules(user_data, rules, rule))
 
-    def test_is_66(self):
+    #This test works
+    def test_is_66_of_ouder(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
         rule = {
@@ -268,6 +269,10 @@ class RuleEngineTest(TestCase):
         ]
         self.assertTrue(apply_rules(user_data, rules, rule))
 
+        fixture["data"]['brp']['persoon']['geboortedatum'] = '1950-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, rule))
+
         fixture["data"]['brp']['persoon']['geboortedatum'] = '2000-01-01T00:00:00Z'
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, rule))
@@ -275,41 +280,48 @@ class RuleEngineTest(TestCase):
     def test_nationaliteit(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
-        compund_rules = {
+        rule = {
                 "1": {
                 "name": "is 66",
                 "rules": [
                     {"type": "rule", 
-                    "rule": "$.brp.persoon.nationaliteiten@omschrijving is Nederlandse"}
+                    "rule": "$.brp.persoon.nationaliteiten.omschrijving is Nederlandse"}
                 ]
             }
         }
         rules = [
-            {"type": "ref", "ref_id": "1"}
+            {"type": "rule", 
+            "rule": "$.brp.persoon.nationaliteiten.omschrijving is Nederlandse"}
         ]
-        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+        self.assertTrue(apply_rules(user_data, rules, rule))
 
-    def test_is_21(self):
+        fixture["data"]['brp']['persoon']["nationaliteiten"][0] = 'Amerikaans'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertFalse(apply_rules(user_data, rules, rule))
+
+    #This test works
+    def test_is_21_of_ouder(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
-        compund_rules = {
+        rule = {
                 "1": {
                 "name": "is 66",
                 "rules": [
                     {"type": "rule", 
-                    "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(21, 0, 0, 0, 0, 0) => now()"}
+                    "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(21, 0, 0, 0, 0, 0) <= now()"}
                 ]
             }
         }
         rules = [
-            {"type": "ref", "ref_id": "1"}
+            {"type": "rule", 
+            "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(21, 0, 0, 0, 0, 0) <= now()"}
         ]
-        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+        self.assertTrue(apply_rules(user_data, rules, rule))
 
         # Change birth date so test will assert differently
         fixture["data"]['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
         user_data = objectpath.Tree(fixture["data"])
-        self.assertFalse(apply_rules(user_data, rules, compound_rules))
+        self.assertFalse(apply_rules(user_data, rules, rule))
 
     def test_list_assertion(self):
         test_data = objectpath.Tree({
