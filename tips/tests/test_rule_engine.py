@@ -224,7 +224,7 @@ class RuleEngineTest(TestCase):
         rules = [
             {"type": "ref", "ref_id": "7"}
         ]
-        ret = user_data.execute("len($.brp.kinderen[dateTime(info) - timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(@.geboortedatum)]) >= 1")
+        ret = user_data.execute("len($.brp.kinderen[dateTime(@.geboortedatum) => dateTime('2002-09-30T00:00:00Z')]) >= 1")
         print(json.dumps(ret, indent=True))
         print(fixture["data"]["brp"]["kinderen"])
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
