@@ -112,11 +112,8 @@ class RuleEngineTest(TestCase):
         rules = [
             {"type": "ref", "ref_id": "1"} # ID 1 is the stadspas rule
         ]
-        # ret = user_data.execute("$.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning']")
-        # print(json.dumps(list(ret), indent=True))
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
-        # Change birth date so test will assert differently
         fixture["data"]['focus'][7]['typeBesluit'] = 'Afwijzing'
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
@@ -133,7 +130,6 @@ class RuleEngineTest(TestCase):
         ]
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
         
-        # Change birth date so test will assert differently
         fixture["data"]['brp']['persoon']['geboortedatum'] = '2002-01-01T00:00:00Z'
         user_data = objectpath.Tree(fixture["data"])
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
@@ -154,7 +150,6 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
-        # Change birth date so test will assert differently
         fixture["data"]['brp']['persoon']['mokum'] = False
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
@@ -167,7 +162,6 @@ class RuleEngineTest(TestCase):
         ]
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
-        # Change birth date so test will assert differently
         fixture["data"]['brp']['kinderen'] = []
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
@@ -184,7 +178,6 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
-        # Change birth date so test will assert differently
         fixture["data"]['brp']['persoon']['gemeentenaamInschrijving'] = 'Utrecht'
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
@@ -196,7 +189,7 @@ class RuleEngineTest(TestCase):
             {"type": "ref", "ref_id": "6"}
         ]
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
-        # Change birth date so test will assert differently
+
         fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2012-01-01T00:00:00Z'
         user_data = objectpath.Tree(fixture["data"])
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
@@ -212,7 +205,7 @@ class RuleEngineTest(TestCase):
             {"type": "ref", "ref_id": "7"}
         ]
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
-        # Change birth date so test will assert differently
+
         fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2000-01-01T00:00:00Z'
         user_data = objectpath.Tree(fixture["data"])
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
@@ -335,7 +328,6 @@ class RuleEngineTest(TestCase):
         ]
         self.assertTrue(apply_rules(user_data, rules, rule))
 
-        # Change birth date so test will assert differently
         fixture["data"]['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, rule))
