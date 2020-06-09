@@ -205,12 +205,9 @@ class RuleEngineTest(TestCase):
         rules = [
             {"type": "ref", "ref_id": "6"}
         ]
-        # ret = user_data.execute("len($.brp.kinderen[now() - timeDelta(2, 0, 0, 0, 0, 0) >= dateTime(@.geboortedatum) and now() - timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(@.geboortedatum)]) >= 1")
-        # print(ret)
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
         fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2012-01-01T00:00:00Z'
-        # pprint(fixture["data"]["brp"])
         user_data = objectpath.Tree(fixture["data"])
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
@@ -218,15 +215,13 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
+    #This test works
     def test_kind_is_op_30_september_2020_geen_18(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
         rules = [
             {"type": "ref", "ref_id": "7"}
         ]
-        ret = user_data.execute("len($.brp.kinderen[dateTime('2020-09-30T00:00:00Z') - timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(@.geboortedatum)]) >= 1")
-        print(json.dumps(ret, indent=True))
-        print(fixture["data"]["brp"]["kinderen"])
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
         # Change birth date so test will assert differently
         fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2000-01-01T00:00:00Z'
@@ -258,19 +253,24 @@ class RuleEngineTest(TestCase):
     def test_is_66(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
-        compund_rules = {
+        rule = {
                 "1": {
                 "name": "is 66",
                 "rules": [
                     {"type": "rule", 
-                    "rule": "dateTime($.brp.persoon.geboortedatum) - timeDelta(66, 4, 0, 0, 0, 0) <= now()"}
+                    "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(66, 4, 0, 0, 0, 0) <= now()"}
                 ]
             }
         }
         rules = [
-            {"type": "ref", "ref_id": "1"}
+            {"type": "rule", 
+            "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(66, 4, 0, 0, 0, 0) <= now()"}
         ]
-        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+        self.assertTrue(apply_rules(user_data, rules, rule))
+
+        fixture["data"]['brp']['persoon']['geboortedatum'] = '2000-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertFalse(apply_rules(user_data, rules, rule))
 
     def test_nationaliteit(self):
         fixture = get_fixture()
