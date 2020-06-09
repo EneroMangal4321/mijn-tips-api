@@ -272,6 +272,11 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, rule))
 
+        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '20011-01-01T00:00:00Z'
+        fixture["data"]['brp']['kinderen'][1]['geboortedatum'] = '20011-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertFalse(apply_rules(user_data, rules, rule))
+
     #This test works
     def test_is_66_of_ouder(self):
         fixture = get_fixture()
