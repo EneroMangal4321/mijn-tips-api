@@ -14,7 +14,7 @@ with open("C:/xampp/htdocs/Stage_Amsterdam/mijn-tips-api/tips/api/compound_rules
 class RuleEngineTest(TestCase):
     def setUp(self) -> None:
         _test_data = {
-            'a': [ 
+            'a': [
                 1, 2, 3
             ],
             'b': [
@@ -24,7 +24,6 @@ class RuleEngineTest(TestCase):
             ]
         }
 
-        # Als line 7 niet werkt met objectpath
         _user_data = {
             'persoon': {
                 'geboortedatum': '1950-01-01T00:00:00Z'
