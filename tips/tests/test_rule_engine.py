@@ -15,7 +15,6 @@ print(">>", COMPOUND_RULES_FILE)
 def get_compound_rules():
     with open(COMPOUND_RULES_FILE) as compound_rules_file:
         compound_rules = json.load(compound_rules_file)
-        compound_rules = tips_generator(request.get_json(),compound_rules)
     return compound_rules
 
 compound_rules = get_compound_rules()
