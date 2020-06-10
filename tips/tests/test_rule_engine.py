@@ -245,6 +245,11 @@ class RuleEngineTest(TestCase):
         user_data = objectpath.Tree(fixture["data"])
         self.assertTrue(apply_rules(user_data, rules, rule))
 
+        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2010-01-01T00:00:00Z'
+        fixture["data"]['brp']['kinderen'][1]['geboortedatum'] = '2002-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, rule))
+
         fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2009-01-01T00:00:00Z'
         fixture["data"]['brp']['kinderen'][1]['geboortedatum'] = '2009-01-01T00:00:00Z'
         user_data = objectpath.Tree(fixture["data"])
