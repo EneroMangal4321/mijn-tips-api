@@ -181,7 +181,7 @@ class RuleEngineTest(TestCase):
         ]
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
-        fixture["data"]['brp']['persoon']['geboortedatum'] = 'Amsterdam'
+        fixture["data"]['brp']['persoon']['gemeentenaamInschrijving'] = 'Amsterdam'
         user_data = objectpath.Tree(fixture["data"])
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
