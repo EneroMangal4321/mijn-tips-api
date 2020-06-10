@@ -10,13 +10,15 @@ from tips.config import PROJECT_PATH
 from tips.tests.fixtures.fixture import get_fixture
 from tips.api.tip_generator import tips_generator
 
-COMPOUND_RULES_FILE = os.path.join(PROJECT_PATH, 'api', 'compound rules.json')
-
+COMPOUND_RULES_FILE = os.path.join(PROJECT_PATH, 'api', 'compound_rules.json')
+print(">>", COMPOUND_RULES_FILE)
 def get_compound_rules():
     with open(COMPOUND_RULES_FILE) as compound_rules_file:
         compound_rules = json.load(compound_rules_file)
         compound_rules = tips_generator(request.get_json(),compound_rules)
     return compound_rules
+
+compound_rules = get_compound_rules()
 
 class RuleEngineTest(TestCase):
     def setUp(self) -> None:
