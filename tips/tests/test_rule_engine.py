@@ -10,7 +10,7 @@ from tips.config import PROJECT_PATH
 from tips.tests.fixtures.fixture import get_fixture
 from tips.api.tip_generator import tips_generator
 
-COMPOUND_RULES_FILE = os.path.join(PROJECT_PATH, 'api', 'persoonlijk_inkomens_tips.json')
+COMPOUND_RULES_FILE = os.path.join(PROJECT_PATH, 'api', 'compound rules.json')
 
 def get_compound_rules():
     with open(COMPOUND_RULES_FILE) as compound_rules_file:
