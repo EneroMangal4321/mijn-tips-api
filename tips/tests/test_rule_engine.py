@@ -11,7 +11,7 @@ from tips.tests.fixtures.fixture import get_fixture
 from tips.api.tip_generator import tips_generator
 
 COMPOUND_RULES_FILE = os.path.join(PROJECT_PATH, 'api', 'compound_rules.json')
-print(">>", COMPOUND_RULES_FILE)
+
 def get_compound_rules():
     with open(COMPOUND_RULES_FILE) as compound_rules_file:
         compound_rules = json.load(compound_rules_file)
@@ -33,7 +33,7 @@ class RuleEngineTest(TestCase):
         }
 
         self.test_data = objectpath.Tree(_test_data)
-        
+
     def test_apply_rules_simple(self):
         rules = [
             {"type": "rule", "rule": "2 > 1"}
