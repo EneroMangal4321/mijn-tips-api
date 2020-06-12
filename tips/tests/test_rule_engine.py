@@ -112,7 +112,7 @@ class RuleEngineTest(TestCase):
         rules = [
             {"type": "ref", "ref_id": "1"} # ID 1 is the stadspas rule
         ]
-        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
         fixture["data"]['focus'][7]['typeBesluit'] = 'Afwijzing'
         user_data = objectpath.Tree(fixture["data"])
@@ -121,6 +121,10 @@ class RuleEngineTest(TestCase):
         fixture["data"]['focus'][7]['soortProduct'] = 'Participatiewet'
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
+
+        fixture["data"]['focus'][7]['processtappen']['beslissing']['datum'] = "2020-01-01T03:00:00+02:00"
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
     def test_is_18_of_ouder(self):
         fixture = get_fixture()
