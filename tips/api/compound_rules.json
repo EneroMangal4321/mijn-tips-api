@@ -35,15 +35,6 @@
       }
     ]
   },
-  "5": {
-    "name": "Is ingeschreven in Amsterdam",
-    "rules": [
-      {
-        "type": "rule",
-        "rule" : "$.brp.persoon.gemeentenaamInschrijving is Amsterdam"
-      }
-    ]
-  },
   "6": {
     "name": "Kind is tussen 2 en 18 jaar",
     "rules": [

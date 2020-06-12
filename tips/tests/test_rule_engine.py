@@ -165,22 +165,6 @@ class RuleEngineTest(TestCase):
         fixture["data"]['brp']['kinderen'] = []
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
-
-    def test_is_ingeschreven_in_Amsterdam(self):
-        fixture = get_fixture()
-        user_data = objectpath.Tree(fixture["data"])
-        rules = [
-            {"type": "ref", "ref_id": "5"}
-        ]
-        self.assertTrue(apply_rules(user_data, rules, compound_rules))
-
-        fixture["data"]['brp']['persoon']['gemeentenaamInschrijving'] = 'Amsterdam'
-        user_data = objectpath.Tree(fixture["data"])
-        self.assertTrue(apply_rules(user_data, rules, compound_rules))
-
-        fixture["data"]['brp']['persoon']['gemeentenaamInschrijving'] = 'Utrecht'
-        user_data = objectpath.Tree(fixture["data"])
-        self.assertFalse(apply_rules(user_data, rules, compound_rules))
     
     def test_kind_is_tussen_2_en_18_jaar(self):
         fixture = get_fixture()
