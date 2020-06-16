@@ -114,6 +114,13 @@ class RuleEngineTest(TestCase):
         ]
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
+        fixture["data"]['focus'][7]['processtappen']['beslissing']['datum'] = "2020-01-01T03:00:00+02:00"
+        print(">>", fixture["data"]['focus'][7])
+        user_data = objectpath.Tree(fixture["data"])
+        ret = user_data.execute("$.focus.*[now() - timeDelta(1, 0, 0, 0, 0, 0) <= dateTime(@.processtappen.beslissing.datum)]")
+        print(json.dumps(list(ret), indent=True))
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
         fixture["data"]['focus'][7]['typeBesluit'] = 'Afwijzing'
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
@@ -121,13 +128,6 @@ class RuleEngineTest(TestCase):
         fixture["data"]['focus'][7]['soortProduct'] = 'Participatiewet'
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
-
-        fixture["data"]['focus'][7]['processtappen']['beslissing']['datum'] = "2020-01-01T03:00:00+02:00"
-        print(">>", fixture["data"]['focus'][7])
-        user_data = objectpath.Tree(fixture["data"])
-        ret = user_data.execute("$.focus.*[now() - timeDelta(1, 0, 0, 0, 0, 0) <= dateTime(@.processtappen.beslissing.datum)]")
-        print(json.dumps(list(ret), indent=True))
-        self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
     def test_is_18_of_ouder(self):
         fixture = get_fixture()
