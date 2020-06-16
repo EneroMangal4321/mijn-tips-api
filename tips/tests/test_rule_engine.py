@@ -366,3 +366,26 @@ class RuleEngineTest(TestCase):
             {"type": "ref", "ref_id": "1"}
         ]        
         self.assertTrue(apply_rules(test_data, rules, compound_rules))
+
+        user_data = objectpath.Tree({
+            "focus": [{
+                "typeBesluit": "Toekenning",
+                "soortProduct": "Minimafonds",
+                "processtappen": {
+                    "beslissing": {
+                        "datum": "2020-04-15T00:00:00+02:00"
+                    }
+                }
+            }]
+        })        
+        ret = user_data.execute("len($.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning'])")
+        print('ret1:',ret)        
+        ret2 = user_data.execute("now() - timeDelta(1, 0, 0, 0, 0, 0)")
+        print('ret2:', ret2);        
+        ret3 = user_data.execute("now() - timeDelta(1, 0, 0, 0, 0, 0) <= dateTime($.focus[0].processtappen.beslissing.datum)")
+        print('ret3:', ret3)        
+        ret4 = user_data.execute("$.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning' and now() - timeDelta(1, 0, 0, 0, 0, 0) <= dateTime(@.processtappen.beslissing.datum)]")
+        print('ret4:', json.dumps(list(ret4), indent=4))        
+        ret5 = user_data.execute("len($.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning' and now() - timeDelta(1, 0, 0, 0, 0, 0) <= dateTime(@.processtappen.beslissing.datum)]) >= 1")
+        print('ret5:', ret5);
+        self.assertTrue(ret5)
