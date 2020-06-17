@@ -375,9 +375,5 @@ class RuleEngineTest(TestCase):
                 }
             }]
         })        
-        ret = user_data.execute("len($.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning'])")
-        ret2 = user_data.execute("now() - timeDelta(1, 0, 0, 0, 0, 0)")
-        ret3 = user_data.execute("now() - timeDelta(1, 0, 0, 0, 0, 0) <= dateTime($.focus[0].processtappen.beslissing.datum)")
-        ret4 = user_data.execute("$.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning' and now() - timeDelta(1, 0, 0, 0, 0, 0) <= dateTime(@.processtappen.beslissing.datum)]")
         ret5 = user_data.execute("len($.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning' and now() - timeDelta(1, 0, 0, 0, 0, 0) <= dateTime(@.processtappen.beslissing.datum)]) >= 1")
         self.assertTrue(ret5)
