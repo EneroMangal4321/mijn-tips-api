@@ -5,7 +5,7 @@
     "priority": 50,
     "datePublished": "2019-07-24",
     "title": "Geen telefoon op de fiets",
-    "description": "U mag geen telefoon meer vasthouden op de fiets",
+    "description": "U mag geen telefoon meer vasthouden op de fiets.",
     "link": {
       "title": "Meer informatie",
       "to": "https://www.rijksoverheid.nl/onderwerpen/fiets/vraag-en-antwoord/mag-ik-bellen-en-naar-muziek-luisteren-op-de-fiets"
@@ -18,7 +18,7 @@
     "priority": 20,
     "datePublished": "2019-07-24",
     "title": "Vrijwilliger worden?",
-    "description": "Er is altijd vrijwilligerswerk dat bij u past. Bekijk de vacatures",
+    "description": "Er is altijd vrijwilligerswerk dat bij u past. Bekijk de vacatures.",
     "link": {
       "title": "Vrijwilligerscentrale Amsterdam",
       "to": "https://www.vca.nu/vacaturebank/"
@@ -31,7 +31,7 @@
     "priority": 25,
     "datePublished": "2019-07-24",
     "title": "Grofvuil",
-    "description": "Op een Afvalpunt kunt u uw grofvuil, klein chemisch afval en tweedehands spullen inleveren",
+    "description": "Op een Afvalpunt kunt u uw grofvuil, klein chemisch afval en tweedehands spullen inleveren.",
     "link": {
       "title": "Adressen Afvalpunten",
       "to": "https://www.amsterdam.nl/afval/grofvuil/grofvuil-wegbrengen/"
@@ -57,7 +57,7 @@
     "priority": 20,
     "datePublished": "2019-07-24",
     "title": "Vaccinaties",
-    "description": "De GGD geeft advies en alle vaccinaties die u nodig hebt voor uw vakantie naar het buitenland",
+    "description": "De GGD geeft advies en alle vaccinaties die u nodig hebt voor uw vakantie naar het buitenland.",
     "link": {
       "title": "Meer informatie",
       "to": "https://www.ggd.amsterdam.nl/infectieziekten/reizigersvaccinatie/"
@@ -70,7 +70,7 @@
     "priority": 40,
     "datePublished": "2019-07-24",
     "title": "Nieuw in Mijn Amsterdam",
-    "description": "U vindt nu ook gemeentelijke belastinginformatie in Mijn Amsterdam",
+    "description": "U vindt nu ook gemeentelijke belastinginformatie in Mijn Amsterdam.",
     "rules": [
       {"type": "rule", "rule": "now() < datetime(2019, 9, 1)"}
     ],
@@ -86,7 +86,7 @@
     "priority": 20,
     "datePublished": "2019-07-24",
     "title": "Kom snel terug",
-    "description": "U vindt hier steeds weer nieuwe onderwerpen! Bekijk de nieuwe onderwerpen",
+    "description": "U vindt hier steeds weer nieuwe onderwerpen! Bekijk de nieuwe onderwerpen.",
     "link": {
       "title": "Bekijk de nieuwe onderwerpen",
       "to": "/"
@@ -99,7 +99,7 @@
     "priority": 70,
     "datePublished": "2019-07-24",
     "title": "Eeuwigdurende erfpacht",
-    "description": "Tot 1 januari 2020 kunt u gebruik maken van de gunstige voorwaarden",
+    "description": "Tot 1 januari 2020 kunt u gebruik maken van de gunstige voorwaarden.",
     "rules": [
       {"type": "rule", "rule": "datetime.now() < datetime(2020, 1, 1)"},
       {"type": "rule", "rule": "$.erfpacht is true"}
@@ -117,7 +117,7 @@
     "priority": 40,
     "datePublished": "2019-08-18",
     "title": "Mijn buurt",
-    "description": "Kijk waar het dichtstbijzijnde Afvalpunt is. En welke vergunningen de gemeente heeft uitgegeven in uw buurt",
+    "description": "Kijk waar het dichtstbijzijnde Afvalpunt is. En welke vergunningen de gemeente heeft uitgegeven in uw buurt.",
     "rules": [],
     "link": {
       "title": "Kijk op de kaart",
@@ -131,7 +131,7 @@
     "priority": 70,
     "datePublished": "2019-08-18",
     "title": "Bekijk de afvalpunten in de buurt ",
-    "description": "Kijk waar het dichtstbijzijnde Afvalpunt is. En welke vergunningen de gemeente heeft uitgegeven in uw buurt",
+    "description": "Kijk waar het dichtstbijzijnde Afvalpunt is. En welke vergunningen de gemeente heeft uitgegeven in uw buurt.",
     "rules": [
       {
         "type": "rule",
@@ -151,7 +151,7 @@
     "priority": 70,
     "datePublished": "2019-10-22",
     "title": "Wat kan ik doen met mijn Stadspas?",
-    "description": "U hebt een Stadspas",
+    "description": "U hebt een Stadspas.",
     "rules": [{"type": "ref", "ref_id": "1"}],
     "isPersonalized": true,
     "link": {
@@ -187,7 +187,7 @@
     "priority": 70,
     "datePublished": "2020-06-15",
     "title": "Gratis energieadvies",
-    "description": "Werkt u thuis? Dan neemt uw energieverbruik toe. Wij geven gratis energieadvies aan woningeigenaren",
+    "description": "Werkt u thuis? Dan neemt uw energieverbruik toe. Wij geven gratis energieadvies aan woningeigenaren.",
     "rules": [],
     "isPersonalized": false,
     "link": {
@@ -223,7 +223,7 @@
     "priority": 70,
     "datePublished": "2020-06-15",
     "title": "Gratis uw fiets laten graveren",
-    "description": "Voorkom diefstal van uw fiets en laat een code in uw frame graveren",
+    "description": "Voorkom diefstal van uw fiets en laat een code in uw frame graveren.",
     "rules": [],
     "isPersonalized": false,
     "link": {
