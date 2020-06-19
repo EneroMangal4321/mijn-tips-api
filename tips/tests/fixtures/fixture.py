@@ -9,6 +9,7 @@ FOCUS = os.path.join(_FIXTURE_PATH, "focus.json")
 WMO = os.path.join(_FIXTURE_PATH, "wmo.json")
 BELASTING = os.path.join(_FIXTURE_PATH, "belasting.json")
 
+
 def get_fixture(optin=False):
     with open(BRP) as brp_file:
         brp = json.load(brp_file)
