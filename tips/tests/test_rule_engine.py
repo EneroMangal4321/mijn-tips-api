@@ -3,21 +3,22 @@ from unittest import TestCase
 import objectpath
 import json
 import os
-from pprint import pprint
 
 from tips.generator.rule_engine import apply_rules
 from tips.config import PROJECT_PATH
 from tips.tests.fixtures.fixture import get_fixture
-from tips.api.tip_generator import tips_generator
 
 COMPOUND_RULES_FILE = os.path.join(PROJECT_PATH, 'api', 'compound_rules.json')
+
 
 def get_compound_rules():
     with open(COMPOUND_RULES_FILE) as compound_rules_file:
         compound_rules = json.load(compound_rules_file)
     return compound_rules
 
+
 compound_rules = get_compound_rules()
+
 
 class RuleEngineTest(TestCase):
     def setUp(self) -> None:
@@ -63,7 +64,7 @@ class RuleEngineTest(TestCase):
                 ]
             }
         }
-        
+
         rules = [
             {"type": "ref", "ref_id": "1"}
         ]
@@ -110,7 +111,7 @@ class RuleEngineTest(TestCase):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
         rules = [
-            {"type": "ref", "ref_id": "1"} # ID 1 is the stadspas rule
+            {"type": "ref", "ref_id": "1"}  # ID 1 is the stadspas rule
         ]
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
@@ -130,10 +131,10 @@ class RuleEngineTest(TestCase):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
         rules = [
-            {"type": "ref", "ref_id": "2"} 
+            {"type": "ref", "ref_id": "2"}
         ]
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
-        
+
         fixture["data"]['brp']['persoon']['geboortedatum'] = '2002-01-01T00:00:00Z'
         user_data = objectpath.Tree(fixture["data"])
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
@@ -141,12 +142,12 @@ class RuleEngineTest(TestCase):
         fixture["data"]['brp']['persoon']['geboortedatum'] = '2018-01-01T00:00:00Z'
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
- 
+
     def test_woont_in_gemeente_Amsterdam(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
         rules = [
-            {"type": "ref", "ref_id": "3"} 
+            {"type": "ref", "ref_id": "3"}
         ]
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
@@ -169,7 +170,7 @@ class RuleEngineTest(TestCase):
         fixture["data"]['brp']['kinderen'] = []
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
-    
+
     def test_kind_is_tussen_2_en_18_jaar(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
@@ -202,22 +203,22 @@ class RuleEngineTest(TestCase):
         fixture["data"]['brp']['kinderen'][1]['geboortedatum'] = '2000-01-01T00:00:00Z'
         user_data = objectpath.Tree(fixture["data"])
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
-    
+
     def test_kind_is_10_11_12(self):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
         pio_rule = {
-                "1": {
+            "1": {
                 "name": "kind is 10,11 of 12",
                 "rules": [
-                    {"type": "rule", 
-                    "rule": "len($.brp.kinderen[now() - timeDelta(10, 0, 0, 0, 0, 0) >= dateTime(@.geboortedatum) and now() - timeDelta(12, 0, 0, 0, 0, 0) <= dateTime(@.geboortedatum)]) >= 1"}
+                    {"type": "rule",
+                     "rule": "len($.brp.kinderen[now() - timeDelta(10, 0, 0, 0, 0, 0) >= dateTime(@.geboortedatum) and now() - timeDelta(12, 0, 0, 0, 0, 0) <= dateTime(@.geboortedatum)]) >= 1"}
                 ]
             }
         }
         rules = [
-            {"type": "rule", 
-            "rule": "len($.brp.kinderen[now() - timeDelta(10, 0, 0, 0, 0, 0) >= dateTime(@.geboortedatum) and now() - timeDelta(13, 0, 0, 0, 0, 0) < dateTime(@.geboortedatum)]) >= 1"}
+            {"type": "rule",
+             "rule": "len($.brp.kinderen[now() - timeDelta(10, 0, 0, 0, 0, 0) >= dateTime(@.geboortedatum) and now() - timeDelta(13, 0, 0, 0, 0, 0) < dateTime(@.geboortedatum)]) >= 1"}
         ]
         self.assertFalse(apply_rules(user_data, rules, pio_rule))
 
@@ -255,17 +256,17 @@ class RuleEngineTest(TestCase):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
         pio_rule = {
-                "1": {
+            "1": {
                 "name": "is 66",
                 "rules": [
-                    {"type": "rule", 
-                    "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(66, 4, 0, 0, 0, 0) <= now()"}
+                    {"type": "rule",
+                     "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(66, 4, 0, 0, 0, 0) <= now()"}
                 ]
             }
         }
         rules = [
-            {"type": "rule", 
-            "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(66, 4, 0, 0, 0, 0) <= now()"}
+            {"type": "rule",
+             "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(66, 4, 0, 0, 0, 0) <= now()"}
         ]
         self.assertTrue(apply_rules(user_data, rules, pio_rule))
 
@@ -281,17 +282,17 @@ class RuleEngineTest(TestCase):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
         pio_rule = {
-                "1": {
+            "1": {
                 "name": "is 66",
                 "rules": [
-                    {"type": "rule", 
-                    "rule": "$.brp.persoon.nationaliteiten[@.omschrijving is Nederlandse]"}
+                    {"type": "rule",
+                     "rule": "$.brp.persoon.nationaliteiten[@.omschrijving is Nederlandse]"}
                 ]
             }
         }
         rules = [
-            {"type": "rule", 
-            "rule": "$.brp.persoon.nationaliteiten[@.omschrijving is Nederlandse]"}
+            {"type": "rule",
+             "rule": "$.brp.persoon.nationaliteiten[@.omschrijving is Nederlandse]"}
         ]
         self.assertTrue(apply_rules(user_data, rules, pio_rule))
 
@@ -307,17 +308,17 @@ class RuleEngineTest(TestCase):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
         pio_rule = {
-                "1": {
+            "1": {
                 "name": "is 66",
                 "rules": [
-                    {"type": "rule", 
-                    "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(21, 0, 0, 0, 0, 0) <= now()"}
+                    {"type": "rule",
+                     "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(21, 0, 0, 0, 0, 0) <= now()"}
                 ]
             }
         }
         rules = [
-            {"type": "rule", 
-            "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(21, 0, 0, 0, 0, 0) <= now()"}
+            {"type": "rule",
+             "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(21, 0, 0, 0, 0, 0) <= now()"}
         ]
         self.assertTrue(apply_rules(user_data, rules, pio_rule))
 
@@ -361,7 +362,7 @@ class RuleEngineTest(TestCase):
         }
         rules = [
             {"type": "ref", "ref_id": "1"}
-        ]        
+        ]
         self.assertTrue(apply_rules(test_data, rules, compound_rules))
 
         user_data = objectpath.Tree({
@@ -374,6 +375,6 @@ class RuleEngineTest(TestCase):
                     }
                 }
             }]
-        })        
+        })
         ret5 = user_data.execute("len($.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning' and now() - timeDelta(1, 0, 0, 0, 0, 0) <= dateTime(@.processtappen.beslissing.datum)]) >= 1")
         self.assertTrue(ret5)
