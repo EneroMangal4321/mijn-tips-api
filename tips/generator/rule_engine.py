@@ -1,6 +1,7 @@
 from objectpath import ExecutionError
 from objectpath.core import ITER_TYPES, generator
 
+
 def apply_rules(userdata, rules, compound_rules):
     """ returns True when it matches the rules. """
     return all([_apply_rule(userdata, r, compound_rules) for r in rules])
@@ -8,7 +9,7 @@ def apply_rules(userdata, rules, compound_rules):
 
 def _apply_rule(userdata, rule, compound_rules):
     if rule['type'] == "rule":
-        try:            
+        try:
             result = userdata.execute(rule['rule'])
             if type(result) == generator:
                 return list(result)
