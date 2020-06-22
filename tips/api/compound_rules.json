@@ -35,7 +35,7 @@
       }
     ]
   },
-  "6": {
+  "5": {
     "name": "Kind is tussen 2 en 18 jaar",
     "rules": [
       {
@@ -44,7 +44,7 @@
       }
     ]
   },
-  "7": {
+  "6": {
     "name": "Kind is op 30 september 2020 geen 18",
     "rules": [
       {

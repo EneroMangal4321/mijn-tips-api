@@ -175,7 +175,7 @@ class RuleEngineTest(TestCase):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
         rules = [
-            {"type": "ref", "ref_id": "6"}
+            {"type": "ref", "ref_id": "5"}
         ]
         self.assertFalse(apply_rules(user_data, rules, compound_rules))
 
@@ -191,7 +191,7 @@ class RuleEngineTest(TestCase):
         fixture = get_fixture()
         user_data = objectpath.Tree(fixture["data"])
         rules = [
-            {"type": "ref", "ref_id": "7"}
+            {"type": "ref", "ref_id": "6"}
         ]
         self.assertTrue(apply_rules(user_data, rules, compound_rules))
 
