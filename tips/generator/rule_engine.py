@@ -1,5 +1,5 @@
 from objectpath import ExecutionError
-from objectpath.core import ITER_TYPES, generator
+from objectpath.core import generator
 
 
 def apply_rules(userdata, rules, compound_rules):
