@@ -26,10 +26,8 @@ class ApiTests(TestCase):
         response = self.client.post('/tips/gettips', json=self._get_client_data())
 
         data = response.get_json()
-        print(">>>>", data)
         tips = data['items']
-        print(">>", tips)
-        self.assertEqual(6, len(tips))
+        self.assertEqual(1, len(tips))
 
     def test_images(self):
         for tip in tips_pool:
