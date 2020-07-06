@@ -27,8 +27,8 @@ class ApiTests(TestCase):
 
         data = response.get_json()
         tips = data['items']
-
-        self.assertEqual(2, len(tips))
+        self.assertEqual(1, len(tips))
+        self.assertEqual(tips[0]['title'], 'Bekijk de afvalpunten in de buurt')
 
         self.assertEqual(tips[0]['reason'], ["Afgelopen 3 maanden verhuisd"])
         self.assertEqual(tips[1]['reason'], ["Heeft een geldige stadspas"])

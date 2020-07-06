@@ -4,17 +4,53 @@
     "rules": [
       {
         "type": "rule",
-        "rule": "$.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning']"
+        "rule": "len($.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning' and now() - timeDelta(1, 0, 0, 0, 0, 0) <= dateTime(@.processtappen.beslissing.datum)]) >= 1"
       }
     ],
     "reason": "Heeft een geldige stadspas"
   },
   "2": {
-    "name": "Is 18",
+    "name": "Is 18 of ouder",
     "rules": [
       {
         "type": "rule",
-        "rule": "dateTime($.brp.persoon.geboortedatum) - timeDelta(18, 0, 0, 0, 0, 0) <= now()"
+        "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(18, 0, 0, 0, 0, 0) <= now()"
+      }
+    ]
+  },
+  "3": {
+    "name": "Woont in gemeente Amsterdam",
+    "rules": [
+      {
+        "type": "rule",
+        "rule": "$.brp.persoon.mokum is true"
+      }
+    ]
+  },
+  "4": {
+    "name": "Heeft kinderen",
+    "rules": [
+      {
+        "type": "rule",
+        "rule": "len($.brp.kinderen) >= 1"
+      }
+    ]
+  },
+  "5": {
+    "name": "Kind is tussen 2 en 18 jaar",
+    "rules": [
+      {
+        "type": "rule",
+        "rule": "len($.brp.kinderen[now() - timeDelta(2, 0, 0, 0, 0, 0) >= dateTime(@.geboortedatum) and now() - timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(@.geboortedatum)]) >= 1"
+      }
+    ]
+  },
+  "6": {
+    "name": "Kind is op 30 september 2020 geen 18",
+    "rules": [
+      {
+        "type": "rule",
+        "rule": "len($.brp.kinderen[dateTime('2020-09-30T00:00:00Z') - timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(@.geboortedatum)]) >= 1"
       }
     ],
     "reason": "Is ouder dan 18 jaar"

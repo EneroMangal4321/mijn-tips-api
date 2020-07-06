@@ -1,4 +1,5 @@
 from objectpath import ExecutionError
+from objectpath.core import generator
 
 
 def apply_rules(userdata, rules, compound_rules):
@@ -9,7 +10,10 @@ def apply_rules(userdata, rules, compound_rules):
 def _apply_rule(userdata, rule, compound_rules):
     if rule['type'] == "rule":
         try:
-            return userdata.execute(rule['rule'])
+            result = userdata.execute(rule['rule'])
+            if type(result) == generator:
+                return list(result)
+            return result
         except ExecutionError:
             return False
 
