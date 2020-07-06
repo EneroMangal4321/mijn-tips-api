@@ -27,7 +27,7 @@ class ApiTests(TestCase):
 
         data = response.get_json()
         tips = data['items']
-        
+
         self.assertEqual(1, len(tips))
 
     def test_images(self):
