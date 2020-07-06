@@ -28,7 +28,7 @@ class ApiTests(TestCase):
         data = response.get_json()
         tips = data['items']
         self.assertEqual(1, len(tips))
-        assertEqualtips[0]['title'], 'Bekijk de afvalpunten in de buurt')
+        self.assertEqual(tips[0]['title'], 'Bekijk de afvalpunten in de buurt')
 
     def test_images(self):
         for tip in tips_pool:
