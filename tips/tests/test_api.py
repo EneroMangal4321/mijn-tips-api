@@ -6,7 +6,7 @@ from tips.api.tip_generator import tips_pool
 from tips.config import PROJECT_PATH
 from tips.server import application
 from tips.tests.fixtures.fixture import get_fixture
-
+from pprint import pprint
 
 class ApiTests(TestCase):
     def create_app(self):
@@ -29,6 +29,14 @@ class ApiTests(TestCase):
         tips = data['items']
         self.assertEqual(1, len(tips))
         self.assertEqual(tips[0]['title'], 'Bekijk de afvalpunten in de buurt')
+
+    def test_income_tips(self):
+        response = self.client.post('/tips/getincometips', json=self._get_client_data())
+
+        data = response.get_json()
+        tips = data['items']
+        self.assertEqual(1, len(tips))
+        
 
     def test_images(self):
         for tip in tips_pool:
