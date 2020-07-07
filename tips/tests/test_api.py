@@ -6,7 +6,7 @@ from tips.api.tip_generator import tips_pool
 from tips.config import PROJECT_PATH
 from tips.server import application
 from tips.tests.fixtures.fixture import get_fixture
-from pprint import pprint
+
 
 class ApiTests(TestCase):
     def create_app(self):
@@ -36,7 +36,6 @@ class ApiTests(TestCase):
         data = response.get_json()
         tips = data['items']
         self.assertEqual(24, len(tips))
-        
 
     def test_images(self):
         for tip in tips_pool:
