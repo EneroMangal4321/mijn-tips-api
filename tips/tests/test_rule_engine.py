@@ -1,150 +1,23 @@
 from unittest import TestCase
 
 import objectpath
+import json
+import os
 
 from tips.generator.rule_engine import apply_rules
+from tips.config import PROJECT_PATH
+from tips.tests.fixtures.fixture import get_fixture
+
+COMPOUND_RULES_FILE = os.path.join(PROJECT_PATH, 'api', 'compound_rules.json')
 
 
-def get_fixture_stadspas():
-    return {
-        "focus": [
-            {
-                "_id": "1-0",
-                "_meest_recent": "beslissing",
-                "dienstverleningstermijn": 56,
-                "naam": "Stadspas",
-                "processtappen": {
-                    "aanvraag": {
-                        "_id": 0,
-                        "datum": "2019-04-08T15:05:52+02:00",
-                        "document": []
-                    },
-                    "beslissing": {
-                        "_id": 3,
-                        "datum": "2019-04-28T00:00:00+02:00",
-                        "document": [],
-                        "reden": "Test Stadspas"
-                    },
-                    "bezwaar": None,
-                    "herstelTermijn": None,
-                    "inBehandeling": {
-                        "_id": 1,
-                        "datum": "2019-04-10T15:05:52+02:00",
-                        "document": []
-                    }
-                },
-                "soortProduct": "Minimafonds",
-                "typeBesluit": "Afwijzing"
-            },
-            {
-                "_id": "1-1",
-                "_meest_recent": "beslissing",
-                "dienstverleningstermijn": 56,
-                "naam": "Stadspas",
-                "processtappen": {
-                    "aanvraag": {
-                        "_id": 0,
-                        "datum": "2019-05-08T15:05:52+02:00",
-                        "document": [
-                            {
-                                "$ref": "focus/document?id=4400000013&isBulk=true&isDms=false",
-                                "id": 4400000013,
-                                "isBulk": True,
-                                "isDms": False,
-                                "omschrijving": "Aanvraag Stadspas (balie)"
-                            }
-                        ]
-                    },
-                    "beslissing": {
-                        "_id": 3,
-                        "datum": "2019-06-07T15:05:52+02:00",
-                        "document": []
-                    },
-                    "bezwaar": None,
-                    "herstelTermijn": {
-                        "_id": 2,
-                        "aantalDagenHerstelTermijn": "20",
-                        "datum": "2019-05-17T15:05:52+02:00",
-                        "document": []
-                    },
-                    "inBehandeling": {
-                        "_id": 1,
-                        "datum": "2019-05-10T15:05:52+02:00",
-                        "document": []
-                    }
-                },
-                "soortProduct": "Minimafonds",
-                "typeBesluit": "Toekenning"
-            }
-        ]
-    }
+def get_compound_rules():
+    with open(COMPOUND_RULES_FILE) as compound_rules_file:
+        compound_rules = json.load(compound_rules_file)
+    return compound_rules
 
 
-tips_pool = [
-    {
-        "id": "mijn-1",
-        "active": True,
-        "priority": 50,
-        "datePublished": "2019-07-24",
-        "title": "Geen telefoon op de fiets",
-        "description": "U mag geen telefoon meer vasthouden op de fiets",
-        "link": {
-            "title": "Meer informatie",
-            "to": "https://www.rijksoverheid.nl/onderwerpen/fiets/vraag-en-antwoord/mag-ik-bellen-en-naar-muziek-luisteren-op-de-fiets"
-        },
-        "imgUrl": "api/tips/static/tip_images/bellenopfiets.jpg"
-
-    },
-    {
-        "id": "mijn-11",
-        "active": True,
-        "priority": 70,
-        "datePublished": "2019-10-22",
-        "title": "Wat kan ik doen met mijn Stadspas?",
-        "description": "U hebt een Stadspas",
-        "rules": [
-            {"type": "ref", "ref_id": "3"},
-            {"type": "ref", "ref_id": "1"},
-        ],
-        "isPersonalized": True,
-        "link": {
-            "title": "Bekijk de aanbiedingen",
-            "to": "https://www.amsterdam.nl/toerisme-vrije-tijd/stadspas/"
-        },
-        "imgUrl": "/api/tips/static/tip_images/stadspas.jpg"
-    }
-]
-
-
-compound_rules = {
-    "1": {
-        "name": "Heeft geldige stadspas",
-        "rules": [
-            {
-                'type': 'rule',
-                'rule': '$.focus.*[@.soortProduct is "Minimafonds" and @.typeBesluit is "Toekenning"]'
-            }
-        ]
-    },
-    "2": {
-        "name": "is 18",
-        "rules": [
-            {
-                'type': 'rule',
-                'rule': 'dateTime($.brp.persoon.geboortedatum) - timeDelta(18, 0, 0, 0, 0, 0) <= now()'
-            }
-        ]
-    },
-    "3": {
-        "name": "Leeft nog",
-        "rules": [
-            {
-                'type': 'rule',
-                'rule': 'true'
-            }
-        ]
-    }
-}
+compound_rules = get_compound_rules()
 
 
 class RuleEngineTest(TestCase):
@@ -159,14 +32,8 @@ class RuleEngineTest(TestCase):
                 {'x': False, 'y': True}
             ]
         }
-        _user_data = {
-            'persoon': {
-                'geboortedatum': '1950-01-01T00:00:00Z'
-            },
-            'foo': _test_data
-        }
+
         self.test_data = objectpath.Tree(_test_data)
-        self.user_data = objectpath.Tree(_user_data)
 
     def test_apply_rules_simple(self):
         rules = [
@@ -239,3 +106,275 @@ class RuleEngineTest(TestCase):
         rules = [{"type": "ref", "ref_id": "1"}]
         with self.assertRaises(RecursionError):
             apply_rules(self.test_data, rules, compound_rules)
+
+    def test_stadspas(self):
+        fixture = get_fixture()
+        user_data = objectpath.Tree(fixture["data"])
+        rules = [
+            {"type": "ref", "ref_id": "1"}  # ID 1 is the stadspas rule
+        ]
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
+
+        fixture["data"]['focus'][7]['processtappen']['beslissing']['datum'] = "2020-01-01T03:00:00+02:00"
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
+        fixture["data"]['focus'][7]['typeBesluit'] = 'Afwijzing'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
+
+        fixture["data"]['focus'][7]['soortProduct'] = 'Participatiewet'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
+
+    def test_is_18_of_ouder(self):
+        fixture = get_fixture()
+        user_data = objectpath.Tree(fixture["data"])
+        rules = [
+            {"type": "ref", "ref_id": "2"}
+        ]
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
+        fixture["data"]['brp']['persoon']['geboortedatum'] = '2002-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
+        fixture["data"]['brp']['persoon']['geboortedatum'] = '2018-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
+
+    def test_woont_in_gemeente_Amsterdam(self):
+        fixture = get_fixture()
+        user_data = objectpath.Tree(fixture["data"])
+        rules = [
+            {"type": "ref", "ref_id": "3"}
+        ]
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
+        fixture["data"]['brp']['persoon']['mokum'] = True
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
+        fixture["data"]['brp']['persoon']['mokum'] = False
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
+
+    def test_heeft_kinderen(self):
+        fixture = get_fixture()
+        user_data = objectpath.Tree(fixture["data"])
+        rules = [
+            {"type": "ref", "ref_id": "4"}
+        ]
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
+        fixture["data"]['brp']['kinderen'] = []
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
+
+    def test_kind_is_tussen_2_en_18_jaar(self):
+        fixture = get_fixture()
+        user_data = objectpath.Tree(fixture["data"])
+        rules = [
+            {"type": "ref", "ref_id": "5"}
+        ]
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
+
+        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2012-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
+        fixture["data"]['brp']['kinderen'][1]['geboortedatum'] = '2012-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
+    def test_kind_is_op_30_september_2020_geen_18(self):
+        fixture = get_fixture()
+        user_data = objectpath.Tree(fixture["data"])
+        rules = [
+            {"type": "ref", "ref_id": "6"}
+        ]
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
+        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2000-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, compound_rules))
+
+        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2000-01-01T00:00:00Z'
+        fixture["data"]['brp']['kinderen'][1]['geboortedatum'] = '2000-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertFalse(apply_rules(user_data, rules, compound_rules))
+
+    def test_kind_is_10_11_12(self):
+        fixture = get_fixture()
+        user_data = objectpath.Tree(fixture["data"])
+        pio_rule = {
+            "1": {
+                "name": "kind is 10,11 of 12",
+                "rules": [
+                    {"type": "rule",
+                     "rule": "len($.brp.kinderen[now() - timeDelta(10, 0, 0, 0, 0, 0) >= dateTime(@.geboortedatum) and now() - timeDelta(12, 0, 0, 0, 0, 0) <= dateTime(@.geboortedatum)]) >= 1"}
+                ]
+            }
+        }
+        rules = [
+            {"type": "rule",
+             "rule": "len($.brp.kinderen[now() - timeDelta(10, 0, 0, 0, 0, 0) >= dateTime(@.geboortedatum) and now() - timeDelta(13, 0, 0, 0, 0, 0) < dateTime(@.geboortedatum)]) >= 1"}
+        ]
+        self.assertFalse(apply_rules(user_data, rules, pio_rule))
+
+        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2010-01-01T00:00:00Z'
+        fixture["data"]['brp']['kinderen'][1]['geboortedatum'] = '2010-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, pio_rule))
+
+        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2010-01-01T00:00:00Z'
+        fixture["data"]['brp']['kinderen'][1]['geboortedatum'] = '2002-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, pio_rule))
+
+        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2009-01-01T00:00:00Z'
+        fixture["data"]['brp']['kinderen'][1]['geboortedatum'] = '2009-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, pio_rule))
+
+        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2008-01-01T00:00:00Z'
+        fixture["data"]['brp']['kinderen'][1]['geboortedatum'] = '2008-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, pio_rule))
+
+        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '2007-01-01T00:00:00Z'
+        fixture["data"]['brp']['kinderen'][1]['geboortedatum'] = '2007-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertFalse(apply_rules(user_data, rules, pio_rule))
+
+        fixture["data"]['brp']['kinderen'][0]['geboortedatum'] = '20011-01-01T00:00:00Z'
+        fixture["data"]['brp']['kinderen'][1]['geboortedatum'] = '20011-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertFalse(apply_rules(user_data, rules, pio_rule))
+
+    def test_is_66_of_ouder(self):
+        fixture = get_fixture()
+        user_data = objectpath.Tree(fixture["data"])
+        pio_rule = {
+            "1": {
+                "name": "is 66",
+                "rules": [
+                    {"type": "rule",
+                     "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(66, 4, 0, 0, 0, 0) <= now()"}
+                ]
+            }
+        }
+        rules = [
+            {"type": "rule",
+             "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(66, 4, 0, 0, 0, 0) <= now()"}
+        ]
+        self.assertTrue(apply_rules(user_data, rules, pio_rule))
+
+        fixture["data"]['brp']['persoon']['geboortedatum'] = '1950-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, pio_rule))
+
+        fixture["data"]['brp']['persoon']['geboortedatum'] = '2000-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertFalse(apply_rules(user_data, rules, pio_rule))
+
+    def test_nationaliteit(self):
+        fixture = get_fixture()
+        user_data = objectpath.Tree(fixture["data"])
+        pio_rule = {
+            "1": {
+                "name": "is 66",
+                "rules": [
+                    {"type": "rule",
+                     "rule": "$.brp.persoon.nationaliteiten[@.omschrijving is Nederlandse]"}
+                ]
+            }
+        }
+        rules = [
+            {"type": "rule",
+             "rule": "$.brp.persoon.nationaliteiten[@.omschrijving is Nederlandse]"}
+        ]
+        self.assertTrue(apply_rules(user_data, rules, pio_rule))
+
+        fixture["data"]['brp']['persoon']["nationaliteiten"][0] = {"omschrijving": "Nederlandse"}
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertTrue(apply_rules(user_data, rules, pio_rule))
+
+        fixture["data"]['brp']['persoon']["nationaliteiten"][0] = {"omschrijving": "Amerikaanse"}
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertFalse(apply_rules(user_data, rules, pio_rule))
+
+    def test_is_21_of_ouder(self):
+        fixture = get_fixture()
+        user_data = objectpath.Tree(fixture["data"])
+        pio_rule = {
+            "1": {
+                "name": "is 66",
+                "rules": [
+                    {"type": "rule",
+                     "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(21, 0, 0, 0, 0, 0) <= now()"}
+                ]
+            }
+        }
+        rules = [
+            {"type": "rule",
+             "rule": "dateTime($.brp.persoon.geboortedatum) + timeDelta(21, 0, 0, 0, 0, 0) <= now()"}
+        ]
+        self.assertTrue(apply_rules(user_data, rules, pio_rule))
+
+        fixture["data"]['brp']['persoon']['geboortedatum'] = '2012-01-01T00:00:00Z'
+        user_data = objectpath.Tree(fixture["data"])
+        self.assertFalse(apply_rules(user_data, rules, pio_rule))
+
+    def test_list_assertion(self):
+        test_data = objectpath.Tree({
+            "brp": {
+                "kinderen": [{
+                    "bsn": None,
+                    "geboortedatum": "2006-07-08T09:14:58.963Z",
+                    "geslachtsaanduiding": "M",
+                    "geslachtsnaam": "Kosterijk",
+                    "overlijdensdatum": None,
+                    "voornamen": "Yassine",
+                    "voorvoegselGeslachtsnaam": None
+                },
+                    {
+                    "bsn": None,
+                    "geboortedatum": "2018-06-04T09:14:58.963Z",
+                    "geslachtsaanduiding": "M",
+                    "geslachtsnaam": "Kosterijk",
+                    "overlijdensdatum": None,
+                    "voornamen": "Marwan",
+                    "voorvoegselGeslachtsnaam": None
+                }]
+            }
+        })
+        compound_rules = {
+            "1": {
+                "name": "rule 1",
+                "rules": [
+                    {
+                        "type": "rule",
+                        "rule": "len($.brp.kinderen[now() - timeDelta(2, 0, 0, 0, 0, 0) >= dateTime(@.geboortedatum) and now() - timeDelta(18, 0, 0, 0, 0, 0) <= dateTime(@.geboortedatum)]) >= 1"
+                    }
+                ]
+            }
+        }
+        rules = [
+            {"type": "ref", "ref_id": "1"}
+        ]
+        self.assertTrue(apply_rules(test_data, rules, compound_rules))
+
+        user_data = objectpath.Tree({
+            "focus": [{
+                "typeBesluit": "Toekenning",
+                "soortProduct": "Minimafonds",
+                "processtappen": {
+                    "beslissing": {
+                        "datum": "2020-04-15T00:00:00+02:00"
+                    }
+                }
+            }]
+        })
+        ret5 = user_data.execute("len($.focus.*[@.soortProduct is 'Minimafonds' and @.typeBesluit is 'Toekenning' and now() - timeDelta(1, 0, 0, 0, 0, 0) <= dateTime(@.processtappen.beslissing.datum)]) >= 1")
+        self.assertTrue(ret5)

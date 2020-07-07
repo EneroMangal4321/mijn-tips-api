@@ -3,7 +3,6 @@ import os
 
 _FIXTURE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
 
-
 # these fixtures are copied from the frontend
 BRP = os.path.join(_FIXTURE_PATH, "brp.json")
 FOCUS = os.path.join(_FIXTURE_PATH, "focus.json")
