@@ -104,6 +104,7 @@
       {"type": "rule", "rule": "datetime.now() < datetime(2020, 1, 1)"},
       {"type": "rule", "rule": "$.erfpacht is true"}
     ],
+    "reason": "Heeft erfpacht",
     "isPersonalized": true,
     "link": {
       "title": "Ga naar het overstapportaal",
@@ -138,6 +139,7 @@
         "rule": "dateTime($.brp.adres.begindatumVerblijf) + timeDelta(0, 3, 0, 0, 0, 0) <= now()"
       }
     ],
+    "reason": "Afgelopen 3 maanden verhuisd",
     "isPersonalized": true,
     "link": {
       "title": "Kijk op de kaart",
@@ -231,5 +233,29 @@
       "to": "https://www.amsterdam.nl/parkeren-verkeer/fiets/fietsdepot/fiets-graveren/"
     },
     "imgUrl": "/api/tips/static/tip_images/fietsgraveren.jpg"
+  },
+  {
+    "id": "mijn-16",
+    "owner": "",
+    "dateActiveStart": null,
+    "dateActiveEnd": null,
+    "active": false,
+    "priority": 70,
+    "datePublished": "2020-07-03",
+    "title": "Welkom in Amsterdam",
+    "description": "U bent net in Amsterdam komen wonen, welkom! Blijf op de hoogte van actualiteiten in uw stadseel.",
+    "rules": [
+      {
+        "type": "rule",
+        "rule": "dateTime($.brp.adres.begindatumVerblijf) + timeDelta(0, 6, 0, 0, 0, 0) <= now()"
+      }
+    ],
+    "reason": "Afgelopen 6 maanden verhuisd",
+    "isPersonalized": true,
+    "link": {
+      "title": "Lees meer in deze nieuwsbrief",
+      "to": "https://www.amsterdam.nl/nieuwsbrief/"
+    },
+    "imgUrl": "/api/tips/static/tip_images/nieuwinamsterdam.jpg"
   }
 ]
